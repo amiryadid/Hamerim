@@ -8,13 +8,13 @@
 .mynavbar{
     display: flex; 
     flex-direction: row;
-    height: 80px;
+    height: 125px;
     align-items: center;
     padding: 0px 30px;
     background-color: rgba(0, 0, 0, 0.72);
 }
 
-#manager-tab{
+#managerTab{
     margin-right: auto;
     margin-left: 0px;
 }
@@ -27,4 +27,9 @@
 
 .content {
     color: pink;
+}
+
+.logoImg { 
+    width: 156px;
+    height: 99px;
 }
