@@ -80,8 +80,8 @@ C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\bin\System.Web.WebPages.Razor.
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\bin\Newtonsoft.Json.xml
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\bin\Antlr3.Runtime.pdb
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.csprojAssemblyReference.cache
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.csproj.CoreCompileInputs.cache
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.csproj.CopyComplete
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.dll
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.pdb
+C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.csprojAssemblyReference.cache
