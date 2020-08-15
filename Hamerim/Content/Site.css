@@ -1,24 +1,24 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿
+.mynavbar{
+    display: flex; 
+    flex-direction: row;
+    height: 80px;
+    align-items: center;
+    padding: 0px 30px;
+    background-color: black;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+#manager-tab{
+    margin-right: auto;
+    margin-left: 0px;
+}
+.mytab{
+    color: white;
+    font-weight: bold;
+    font-size: 28px;
+    margin-left: 60px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.content {
+    color: pink;
 }
