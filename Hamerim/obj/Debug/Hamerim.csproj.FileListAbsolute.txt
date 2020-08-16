@@ -85,3 +85,5 @@ C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.csproj.CopyC
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.dll
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.pdb
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.csprojAssemblyReference.cache
+C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.Migrations.Initial.resources
+C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.csproj.GenerateResource.cache

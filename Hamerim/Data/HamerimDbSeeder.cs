@@ -1,30 +1,34 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using Hamerim.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace Hamerim.Data
 {
-    public class HamerimDbInitializer : DropCreateDatabaseAlways<HamerimDbContext>
+    public class HamerimDbSeeder
     {
-        protected override void Seed(HamerimDbContext context)
+        static HamerimDbSeeder()
+        {
+            Seeder = new HamerimDbSeeder();
+        }
+
+        public static HamerimDbSeeder Seeder { get; }
+
+        public void Seed(HamerimDbContext context)
         {
             SeedServiceCategories(context);
             SeedServices(context);
             SeedClubs(context);
             SeedClubAddresses(context);
             SeedOrders(context);
-            base.Seed(context);
         }
 
         private void SeedServiceCategories(HamerimDbContext context)
         {
-            ICollection<ServiceCategory> serviceCategories = new List<ServiceCategory>()
-            {
+            ServiceCategory[] serviceCategories = {
                 new ServiceCategory()
                 {
                     Id = 1,
@@ -34,49 +38,66 @@ namespace Hamerim.Data
                 {
                     Id = 2,
                     Title = "Food"
+                },
+                new ServiceCategory()
+                {
+                    Id = 3,
+                    Title = "Additional Services"
                 }
             };
 
-            context.ServiceCategories.AddRange(serviceCategories);
+            context.ServiceCategories.AddOrUpdate(serviceCategories);
             context.SaveChanges();
         }
 
         private void SeedServices(HamerimDbContext context)
         {
             IList<ServiceCategory> categories = context.ServiceCategories.ToList();
-            ICollection<Service> services = new List<Service>()
-            {
+            Service[] services = {
                 new Service()
                 {
                     Id = 1,
-                    Category = categories.First(category => category.Title=="Drinks"), 
-                    Cost = 50, 
+                    Category = categories.First(category => category.Title=="Drinks"),
+                    Cost = 50,
                     Title = "Light Drinks Fridge"
                 },
                 new Service()
                 {
                     Id = 2,
-                    Category = categories.First(category => category.Title=="Drinks"), 
-                    Cost = 100, 
+                    Category = categories.First(category => category.Title=="Drinks"),
+                    Cost = 100,
                     Title = "Alcohol Bar"
                 },
                 new Service()
                 {
                     Id = 3,
+                    Category = categories.First(category => category.Title=="Drinks"),
+                    Cost = 170,
+                    Title = "Premium Alcohol Bar"
+                },
+                new Service()
+                {
+                    Id = 4,
                     Category = categories.First(category => category.Title=="Food"),
                     Cost = 200,
                     Title = "Fish & Chips Stand"
+                },
+                new Service()
+                {
+                    Id = 5,
+                    Category = categories.First(category => category.Title=="Food"),
+                    Cost = 230,
+                    Title = "Sushi Stand"
                 }
             };
 
-            context.Services.AddRange(services);
+            context.Services.AddOrUpdate(services);
             context.SaveChanges();
         }
 
         private void SeedClubs(HamerimDbContext context)
         {
-            ICollection<Club> clubs = new List<Club>()
-            {
+            Club[] clubs = {
                 new Club()
                 {
                     Id = 1,
@@ -91,14 +112,13 @@ namespace Hamerim.Data
                 }
             };
 
-            context.Clubs.AddRange(clubs);
+            context.Clubs.AddOrUpdate(clubs);
             context.SaveChanges();
         }
 
         private void SeedClubAddresses(HamerimDbContext context)
         {
-            ICollection<ClubAddress> clubAddresses = new List<ClubAddress>()
-            {
+            ClubAddress[] clubAddresses = {
                 new ClubAddress()
                 {
                     ClubId = 1,
@@ -115,7 +135,7 @@ namespace Hamerim.Data
                 }
             };
 
-            context.ClubAddresses.AddRange(clubAddresses);
+            context.ClubAddresses.AddOrUpdate(clubAddresses);
             context.SaveChanges();
         }
 
@@ -123,8 +143,7 @@ namespace Hamerim.Data
         {
             IList<Service> services = context.Services.ToList();
             IList<Club> clubs = context.Clubs.ToList();
-            ICollection<Order> orders = new List<Order>()
-            {
+            Order[] orders = {
                 new Order()
                 {
                     Id = 1,
@@ -160,7 +179,7 @@ namespace Hamerim.Data
                 }
             };
 
-            context.Orders.AddRange(orders);
+            context.Orders.AddOrUpdate(orders);
             context.SaveChanges();
         }
     }

@@ -13,7 +13,10 @@ namespace Hamerim.Data
         public HamerimDbContext() : base("HamerimDB")
         {
             bool shouldInitialize = bool.Parse(ConfigurationManager.AppSettings["InitializeDatabase"]);
-            HamerimDbInitializer initializer = shouldInitialize ? new HamerimDbInitializer() : null;
+            IDatabaseInitializer<HamerimDbContext> initializer = shouldInitialize
+                ? new MigrateDatabaseToLatestVersion<HamerimDbContext, Migrations.Configuration>()
+                : null;
+
 
             Database.SetInitializer<HamerimDbContext>(initializer);
         }

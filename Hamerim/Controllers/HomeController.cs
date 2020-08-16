@@ -12,13 +12,6 @@ namespace Hamerim.Controllers
     {
         public ActionResult Index()
         {
-            using (var ctx = new HamerimDbContext())
-            {
-                IList<Order> orders = ctx.Orders.ToList();
-                Console.WriteLine(orders.First().ServicesInOrder);
-                Console.WriteLine(orders.First().Club.ClubOrders);
-            }
-
             return View();
         }
 

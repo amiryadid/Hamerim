@@ -135,10 +135,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\HamerimDbContext.cs" />
-    <Compile Include="Data\HamerimDbInitializer.cs" />
+    <Compile Include="Data\HamerimDbSeeder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008161630489_Initial.cs" />
+    <Compile Include="Migrations\202008161630489_Initial.designer.cs">
+      <DependentUpon>202008161630489_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ClubAddress.cs" />
     <Compile Include="Models\Club.cs" />
     <Compile Include="Models\Order.cs" />
@@ -198,6 +203,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202008161630489_Initial.resx">
+      <DependentUpon>202008161630489_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
