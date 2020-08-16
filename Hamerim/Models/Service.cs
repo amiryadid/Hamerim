@@ -8,6 +8,11 @@ namespace Hamerim.Models
 {
     public class Service
     {
+        public Service()
+        {
+            this.OrdersOfService = new HashSet<Order>();
+        }
+
         public int Id { get; set; }
 
         public string Title { get; set; }
@@ -16,5 +21,7 @@ namespace Hamerim.Models
 
         [Required]
         public virtual ServiceCategory Category { get; set; }
+
+        public virtual ICollection<Order> OrdersOfService { get; set; }
     }
 }

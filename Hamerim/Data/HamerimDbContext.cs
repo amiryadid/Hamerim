@@ -20,5 +20,8 @@ namespace Hamerim.Data
 
         public DbSet<Service> Services { get; set; }
         public DbSet<ServiceCategory> ServiceCategories  { get; set; }
+        public DbSet<Club> Clubs { get; set; }
+        public DbSet<ClubAddress> ClubAddresses { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

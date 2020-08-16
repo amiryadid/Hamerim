@@ -7,6 +7,11 @@ namespace Hamerim.Models
 {
     public class ServiceCategory
     {
+        public ServiceCategory()
+        {
+            this.ServicesInCategory = new HashSet<Service>();
+        }
+
         public int Id { get; set; }
 
         public string Title { get; set; }

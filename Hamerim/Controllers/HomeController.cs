@@ -14,8 +14,9 @@ namespace Hamerim.Controllers
         {
             using (var ctx = new HamerimDbContext())
             {
-                IList<ServiceCategory> categories = ctx.ServiceCategories.ToList();
-                Console.WriteLine(categories.First().ServicesInCategory);
+                IList<Order> orders = ctx.Orders.ToList();
+                Console.WriteLine(orders.First().ServicesInOrder);
+                Console.WriteLine(orders.First().Club.ClubOrders);
             }
 
             return View();
