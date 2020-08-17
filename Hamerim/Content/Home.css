@@ -1,0 +1,59 @@
+﻿@import url("./globals.css");
+
+.createPartyButton {
+    background-color: #E61E45;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    width: 250px;
+    height: 250px;
+    font-size: 49px;
+}
+
+.homeContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.aboutText {
+    color: white;
+    padding: 30px;
+    font-size: 20px;
+}
+
+.fullHeight {
+    height: 100%;
+}
+
+.blackCard {
+    background-color: rgba(18, 18, 18, 0.8);
+    width: 50%;
+}
+.arrowUp{
+    width: 0px;
+    height: 0px;
+    border-left: 50px solid transparent;
+    border-bottom: 50px solid var(--purple)
+}
+
+.aboutTitle {
+    background-color: var(--purple);
+    color: white;
+    height: 50px;
+    font-size: 25px;
+    padding: 10px;
+    padding-right: 20px;
+    width: 200px;
+    line-height: normal;
+}
+
+.aboutHeader {
+    display: flex;
+}
+
+
+
+

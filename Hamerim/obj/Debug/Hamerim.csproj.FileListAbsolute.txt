@@ -84,11 +84,9 @@ C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.csproj.CoreC
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.csproj.CopyComplete
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.dll
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.pdb
-<<<<<<< Updated upstream
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.csprojAssemblyReference.cache
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.Migrations.Initial.resources
 C:\Users\amiry\Documents\Projects\Hamerim\Hamerim\obj\Debug\Hamerim.csproj.GenerateResource.cache
-=======
 C:\Users\אופיר\Documents\לימודים\פיתוח אפליקציות אינטרנטיות\Hamerim\Hamerim\bin\Hamerim.dll.config
 C:\Users\אופיר\Documents\לימודים\פיתוח אפליקציות אינטרנטיות\Hamerim\Hamerim\bin\Hamerim.dll
 C:\Users\אופיר\Documents\לימודים\פיתוח אפליקציות אינטרנטיות\Hamerim\Hamerim\bin\Hamerim.pdb
@@ -176,4 +174,5 @@ C:\Users\אופיר\Documents\לימודים\פיתוח אפליקציות אי�
 C:\Users\אופיר\Documents\לימודים\פיתוח אפליקציות אינטרנטיות\Hamerim\Hamerim\obj\Debug\Hamerim.csproj.CopyComplete
 C:\Users\אופיר\Documents\לימודים\פיתוח אפליקציות אינטרנטיות\Hamerim\Hamerim\obj\Debug\Hamerim.dll
 C:\Users\אופיר\Documents\לימודים\פיתוח אפליקציות אינטרנטיות\Hamerim\Hamerim\obj\Debug\Hamerim.pdb
->>>>>>> Stashed changes
+C:\Users\אופיר\Documents\לימודים\פיתוח אפליקציות אינטרנטיות\Hamerim\Hamerim\obj\Debug\Hamerim.Migrations.Initial.resources
+C:\Users\אופיר\Documents\לימודים\פיתוח אפליקציות אינטרנטיות\Hamerim\Hamerim\obj\Debug\Hamerim.csproj.GenerateResource.cache

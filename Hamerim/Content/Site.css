@@ -1,4 +1,7 @@
-﻿body{
+﻿html{
+ height: 100%;
+}
+body{
     background-image: url('../Content/background.jpg');
     background-size: cover;
     height: 100%;
@@ -8,7 +11,7 @@
 .mynavbar{
     display: flex; 
     flex-direction: row;
-    height: 125px;
+    height: 20%;
     align-items: center;
     padding: 0px 30px;
     background-color: rgba(0, 0, 0, 0.72);
@@ -33,3 +36,9 @@
     width: 156px;
     height: 99px;
 }
+
+.contentContainer {
+    height: 80%;
+    padding: 20px;
+}
+
