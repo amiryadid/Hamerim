@@ -7,13 +7,14 @@ body{
     height: 100%;
     background-repeat: no-repeat;
     background-color: black;
+    font-family: 'Assistant', serif;
 }
 .mynavbar{
     display: flex; 
     flex-direction: row;
-    height: 20%;
+    height: 100px;
     align-items: center;
-    padding: 0px 30px;
+    padding: 10px 30px;
     background-color: rgba(0, 0, 0, 0.72);
 }
 
@@ -28,17 +29,13 @@ body{
     margin-left: 60px;
 }
 
-.content {
-    color: pink;
-}
-
 .logoImg { 
-    width: 156px;
-    height: 99px;
+    width: 120px;
+    height: 80px;
 }
 
 .contentContainer {
-    height: 80%;
+    height: calc(100% - 100px);
     padding: 20px;
 }
 

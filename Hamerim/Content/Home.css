@@ -5,8 +5,8 @@
     color: white;
     border-radius: 50%;
     border: none;
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     font-size: 49px;
 }
 
@@ -21,7 +21,7 @@
 .aboutText {
     color: white;
     padding: 30px;
-    font-size: 20px;
+    font-size: 20px ;
 }
 
 .fullHeight {
@@ -32,15 +32,23 @@
     background-color: rgba(18, 18, 18, 0.8);
     width: 50%;
 }
+
 .arrowUp{
     width: 0px;
     height: 0px;
     border-left: 50px solid transparent;
-    border-bottom: 50px solid var(--purple)
+    border-bottom: 50px solid;
 }
 
-.aboutTitle {
-    background-color: var(--purple);
+.purple.arrowUp{
+    border-bottom-color: var(--purple);
+}
+
+.black.arrowUp{
+    border-bottom-color: rgba(31, 31, 31, 0.83);
+}
+
+.headerTitle {
     color: white;
     height: 50px;
     font-size: 25px;
@@ -49,11 +57,31 @@
     width: 200px;
     line-height: normal;
 }
+.aboutTitle {
+    background-color: var(--purple);
+}
 
-.aboutHeader {
+.lastPartyVideoTitle {
+    background-color: rgba(31, 31, 31, 0.83);
+    width: 300px;
+}
+
+
+.flex {
     display: flex;
 }
 
+.lastPartyVideo{
+    display: flex;
+    flex-direction: column;
+}
+
+.rightSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
 
 
 
