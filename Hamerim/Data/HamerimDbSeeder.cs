@@ -176,6 +176,31 @@ namespace Hamerim.Data
                     ClientName = "Zohar Uzieli",
                     ClientPhone = "052-2568842",
                     Date = new DateTime(2020, 8, 13)
+                },
+                new Order()
+                {
+                    Id = 4,
+                    Club = clubs.First(club => club.Name=="Hangar 11"),
+                    ClientName = "Brad Pitt",
+                    ClientPhone = "052-6667866",
+                    Date = new DateTime(2020, 8, 29),
+                    ServicesInOrder = new HashSet<Service>()
+                    {
+                        services.First(service => service.Title=="Light Drinks Fridge"),
+                        services.First(service => service.Title=="Alcohol Bar")
+                    }
+                },
+                new Order()
+                {
+                    Id = 5,
+                    Club = clubs.First(club => club.Name=="The Forum"),
+                    ClientName = "George Costanza",
+                    ClientPhone = "052-4476623",
+                    Date = new DateTime(2020, 8, 13),
+                    ServicesInOrder = new HashSet<Service>()
+                    {
+                        services.First(service => service.Title=="Light Drinks Fridge")
+                    }
                 }
             };
 

@@ -12,6 +12,7 @@ namespace Hamerim.Controllers
     {
         public ActionResult Index()
         {
+            List<Service> list = MostPopularServices(8);
             return View();
         }
 
