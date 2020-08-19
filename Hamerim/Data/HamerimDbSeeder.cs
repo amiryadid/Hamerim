@@ -24,6 +24,7 @@ namespace Hamerim.Data
             SeedClubs(context);
             SeedClubAddresses(context);
             SeedOrders(context);
+            SeedUsers(context);
         }
 
         private void SeedServiceCategories(HamerimDbContext context)
@@ -205,6 +206,23 @@ namespace Hamerim.Data
             };
 
             context.Orders.AddOrUpdate(orders);
+            context.SaveChanges();
+        }
+
+        private void SeedUsers(HamerimDbContext context)
+        {
+            User[] users =
+            {
+                new User()
+                {
+                    Id = 1,
+                    Username = "Admin",
+                    Password = "123456",
+                    IsAdmin = true
+                }
+            };
+
+            context.Users.AddOrUpdate(users);
             context.SaveChanges();
         }
     }

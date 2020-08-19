@@ -138,12 +138,17 @@
     <Compile Include="Migrations\202008161630489_Initial.designer.cs">
       <DependentUpon>202008161630489_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008191319068_AddedUsers.cs" />
+    <Compile Include="Migrations\202008191319068_AddedUsers.designer.cs">
+      <DependentUpon>202008191319068_AddedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ClubAddress.cs" />
     <Compile Include="Models\Club.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\ServiceCategory.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +208,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202008161630489_Initial.resx">
       <DependentUpon>202008161630489_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008191319068_AddedUsers.resx">
+      <DependentUpon>202008191319068_AddedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
