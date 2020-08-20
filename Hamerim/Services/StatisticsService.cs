@@ -1,23 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using Hamerim.Data;
 using Hamerim.Models;
 
-namespace Hamerim.Controllers
+namespace Hamerim.Services
 {
-    public class StatisticsController : Controller
+    public class StatisticsService : IStatisticsService
     {
-        // GET: Statistics
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        [NonAction]
-        public List<Service> MostPopularServices(int month)
+        public IEnumerable<Service> GetMostPopularServices(int month)
         {
             using (var ctx = new HamerimDbContext())
             {
