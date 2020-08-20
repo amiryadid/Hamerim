@@ -8,5 +8,7 @@ namespace Hamerim.Services
     public interface IPermissionsService
     {
         bool ValidateAdmin(string username, string password);
+
+        bool ValidateUser(string username, string password);
     }
 }

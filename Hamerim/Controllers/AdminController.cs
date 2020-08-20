@@ -7,7 +7,7 @@ namespace Hamerim.Controllers
     public class AdminController : Controller
     {
         readonly IStatisticsService statisticsService;
-        private readonly IPermissionsService permissionsService;
+        readonly IPermissionsService permissionsService;
 
         public AdminController(IStatisticsService statisticsService, IPermissionsService permissionsService)
         {

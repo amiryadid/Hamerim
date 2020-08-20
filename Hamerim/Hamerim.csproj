@@ -164,7 +164,7 @@
     <Compile Include="Models\ServiceCategory.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IPremissionsService.cs" />
+    <Compile Include="Services\IPermissionsService.cs" />
     <Compile Include="Services\IStatisticsService.cs" />
     <Compile Include="Services\PermissionsService.cs" />
     <Compile Include="Services\StatisticsService.cs" />
