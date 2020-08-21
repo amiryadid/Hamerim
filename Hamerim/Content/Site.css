@@ -1,16 +1,20 @@
-﻿body{
+﻿html{
+ height: 100%;
+}
+body{
     background-image: url('../Content/background.jpg');
     background-size: cover;
     height: 100%;
     background-repeat: no-repeat;
     background-color: black;
+    font-family: 'Assistant', serif;
 }
 .mynavbar{
     display: flex; 
     flex-direction: row;
-    height: 125px;
+    height: 100px;
     align-items: center;
-    padding: 0px 30px;
+    padding: 10px 30px;
     background-color: rgba(0, 0, 0, 0.72);
 }
 
@@ -25,11 +29,13 @@
     margin-left: 60px;
 }
 
-.content {
-    color: pink;
+.logoImg { 
+    width: 120px;
+    height: 80px;
 }
 
-.logoImg { 
-    width: 156px;
-    height: 99px;
+.contentContainer {
+    height: calc(100% - 100px);
+    padding: 20px;
 }
+
