@@ -6,18 +6,15 @@ using System.Web;
 
 namespace Hamerim.Models
 {
-    public class ServiceCategory
+    public class User
     {
-        public ServiceCategory()
-        {
-            this.ServicesInCategory = new HashSet<Service>();
-        }
-
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public string Title { get; set; }
+        public string Username { get; set; }
 
-        public virtual ICollection<Service> ServicesInCategory { get; set; }
+        public string Password { get; set; }
+
+        public bool IsAdmin { get; set; }
     }
 }
