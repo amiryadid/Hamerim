@@ -26,7 +26,8 @@ namespace Hamerim
                       "~/Content/bootstrap.css",
                       "~/Content/Site.css",
                       "~/Content/Home.css",
-                      "~/Content/Order.css"));
+                      "~/Content/Order.css",
+                      "~/Content/Login.css"));
         }
     }
 }

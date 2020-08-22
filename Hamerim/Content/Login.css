@@ -1,0 +1,44 @@
+@import url("./globals.css");
+
+.loginContainer{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.formLogin{
+    display: flex;
+    height: 102px;
+}
+
+.inputContainer{
+    background-color: var(--purple);
+    width: 200px;
+    padding: 2px;
+}
+
+.inputLabel{
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    padding: 10px 40px;
+}
+
+.input{
+    border:none;
+    border-bottom: 1px inset white;
+    background-color: transparent;
+    color: white;
+}
+
+.inputBox{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: rgba(31, 31, 31, 0.83);
+}
+
+input:focus{
+    outline: none;
+}
