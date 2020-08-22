@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "AfterChooseClub";
+}
+
+<div class="blackCard">
+    <header class="flex header">
+        <div class="flex headerTitle black">
+            <div class="title">
+                המועדון שלי
+            </div>
+            <div class="arrowUp"></div>
+        </div>
+    </header>
+    <div class="flex contenct">
+        <div class="flex card">
+            <div class="card-body">
+                <p class="card-title">@ViewBag.chosenClub.Name</p>
+                <p class="card-subtitle">@ViewBag.chosenClub.PrintAddress()</p>
+                <p class="card-footer">@String.Format("{0:n0}", ViewBag.chosenClub.Cost)&#8362; לערב</p>
+            </div>
+            <button type="button" class="btn done-btn">בחרתי!</button>
+        </div>
+    </div>
+</div>
