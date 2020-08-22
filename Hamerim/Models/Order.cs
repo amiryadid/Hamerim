@@ -14,6 +14,7 @@ namespace Hamerim.Models
             this.ServicesInOrder = new HashSet<Service>();
         }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required, Column(TypeName="Date")]

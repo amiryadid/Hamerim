@@ -142,8 +142,11 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\OrderController.cs" />
+=======
     <Compile Include="Controllers\LoginController.cs" />
+>>>>>>> 4de3e522f97dbd346dcfc603afd2925297aece9a
     <Compile Include="Data\HamerimDbContext.cs" />
     <Compile Include="Data\HamerimDbSeeder.cs" />
     <Compile Include="Global.asax.cs">
