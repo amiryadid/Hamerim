@@ -176,3 +176,40 @@ C:\Users\אופיר\Documents\לימודים\פיתוח אפליקציות אי�
 C:\Users\אופיר\Documents\לימודים\פיתוח אפליקציות אינטרנטיות\Hamerim\Hamerim\obj\Debug\Hamerim.pdb
 C:\Users\אופיר\Documents\לימודים\פיתוח אפליקציות אינטרנטיות\Hamerim\Hamerim\obj\Debug\Hamerim.Migrations.Initial.resources
 C:\Users\אופיר\Documents\לימודים\פיתוח אפליקציות אינטרנטיות\Hamerim\Hamerim\obj\Debug\Hamerim.csproj.GenerateResource.cache
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\Hamerim.dll.config
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\Hamerim.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\Hamerim.pdb
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\Antlr3.Runtime.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\EntityFramework.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\EntityFramework.SqlServer.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\Microsoft.Configuration.ConfigurationBuilders.Base.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\Microsoft.Web.Infrastructure.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\Newtonsoft.Json.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\System.Web.Helpers.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\System.Web.Mvc.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\System.Web.Optimization.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\System.Web.Razor.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\System.Web.WebPages.Deployment.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\System.Web.WebPages.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\System.Web.WebPages.Razor.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\WebGrease.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\EntityFramework.xml
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\EntityFramework.SqlServer.xml
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\Microsoft.Configuration.ConfigurationBuilders.Base.xml
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.xml
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\System.Web.Helpers.xml
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\System.Web.Mvc.xml
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\System.Web.Optimization.xml
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\System.Web.Razor.xml
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\System.Web.WebPages.xml
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\System.Web.WebPages.Deployment.xml
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\System.Web.WebPages.Razor.xml
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\bin\Newtonsoft.Json.xml
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\obj\Debug\Hamerim.csprojAssemblyReference.cache
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\obj\Debug\Hamerim.Migrations.Initial.resources
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\obj\Debug\Hamerim.csproj.GenerateResource.cache
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\obj\Debug\Hamerim.csproj.CoreCompileInputs.cache
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\obj\Debug\Hamerim.csproj.CopyComplete
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\obj\Debug\Hamerim.dll
+D:\Zohar\Documents\לימודים\ב - ב - פיתוח אפליקציות\Hamerim\Hamerim\obj\Debug\Hamerim.pdb

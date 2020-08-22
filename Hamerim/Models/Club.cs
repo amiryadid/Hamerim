@@ -20,6 +20,11 @@ namespace Hamerim.Models
 
         public virtual ClubAddress Address { get; set; }
 
+        public string PrintAddress()
+        {
+            return this.Address.ToString();                
+        }
+
         public virtual ICollection<Order> ClubOrders { get; set; }
     }
 }

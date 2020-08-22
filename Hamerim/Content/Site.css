@@ -1,7 +1,8 @@
-﻿html{
- height: 100%;
+﻿html {
+    height: 100%;
 }
-body{
+
+body {
     background-image: url('../Content/background.jpg');
     background-size: cover;
     height: 100%;
@@ -9,8 +10,9 @@ body{
     background-color: black;
     font-family: 'Assistant', serif;
 }
-.mynavbar{
-    display: flex; 
+
+.mynavbar {
+    display: flex;
     flex-direction: row;
     height: 100px;
     align-items: center;
@@ -18,18 +20,19 @@ body{
     background-color: rgba(0, 0, 0, 0.72);
 }
 
-#managerTab{
+#managerTab {
     margin-right: auto;
     margin-left: 0px;
 }
-.mytab{
+
+.mytab {
     color: white;
     font-weight: bold;
     font-size: 28px;
     margin-left: 60px;
 }
 
-.logoImg { 
+.logoImg {
     width: 120px;
     height: 80px;
 }
@@ -39,3 +42,76 @@ body{
     padding: 20px;
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: rgba(107, 107, 107, 0.35);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: var(--purple);
+}
+
+.blackCard {
+    background-color: rgba(18, 18, 18, 0.8);
+}
+
+.flex {
+    display: flex;
+}
+
+.header {
+    justify-content: start;
+    flex-direction: row;
+}
+
+.headerTitle {
+    color: white;
+    height: 50px;
+    font-size: 25px;
+    line-height: normal;
+}
+
+.headerTitle .title {
+    padding: 10px 20px 10px 23px;
+}
+
+.arrowUp {
+    width: 0px;
+    height: 0px;
+    border-left: 50px solid transparent;
+    border-bottom: 50px solid;
+}
+
+.headerTitle.purple .title {
+    background-color: var(--purple);
+}
+
+.headerTitle.black .title {
+    background-color: rgba(31, 31, 31, 0.83);
+}
+
+.headerTitle.purple .arrowUp {
+    border-bottom-color: var(--purple);
+}
+
+.headerTitle.black .arrowUp {
+    border-bottom-color: rgba(31, 31, 31, 0.83);
+}
+
+.header .headerLeft {
+    align-self: center;
+    margin-right: auto;
+    margin-left: 2rem;
+}
+
+button:focus {
+    outline: 0 !important;
+}

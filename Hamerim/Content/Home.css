@@ -1,13 +1,14 @@
 ﻿@import url("./globals.css");
 
 .createPartyButton {
-    background-color: #E61E45;
+    background-color: var(--pink);
     color: white;
     border-radius: 50%;
     border: none;
     width: 200px;
     height: 200px;
     font-size: 49px;
+    line-height: 1;
 }
 
 .homeContainer {
@@ -26,49 +27,8 @@
 
 .fullHeight {
     height: 100%;
-}
-
-.blackCard {
-    background-color: rgba(18, 18, 18, 0.8);
-    width: 50%;
-}
-
-.arrowUp{
-    width: 0px;
-    height: 0px;
-    border-left: 50px solid transparent;
-    border-bottom: 50px solid;
-}
-
-.purple.arrowUp{
-    border-bottom-color: var(--purple);
-}
-
-.black.arrowUp{
-    border-bottom-color: rgba(31, 31, 31, 0.83);
-}
-
-.headerTitle {
-    color: white;
-    height: 50px;
-    font-size: 25px;
-    padding: 10px;
-    padding-right: 20px;
-    width: 200px;
-    line-height: normal;
-}
-.aboutTitle {
-    background-color: var(--purple);
-}
-
-.lastPartyVideoTitle {
-    background-color: rgba(31, 31, 31, 0.83);
-    width: 300px;
-}
-
-
-.flex {
-    display: flex;
+    line-height: 2;
+    overflow-y: hidden;
 }
 
 .lastPartyVideo{
@@ -83,5 +43,6 @@
     align-items: center;
 }
 
-
-
+.leftSide {
+    width: 50%;
+}

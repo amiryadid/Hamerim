@@ -24,8 +24,9 @@ namespace Hamerim
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/Home.css"));
+                      "~/Content/Site.css",
+                      "~/Content/Home.css",
+                      "~/Content/Order.css"));
         }
     }
 }
