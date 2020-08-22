@@ -1,7 +1,36 @@
 ﻿
 @{
     ViewBag.Title = "AfterChooseClub";
+
+    //ViewBag.occupiedDates = new List<java.time.LocalDate>() {
+    //        new java.time.LocalDate(2010, 0, 1),
+    //        new java.time.LocalDate(2010, 0, 1),
+    //        new java.time.LocalDate(2010, 0, 1),
+    //        new java.time.LocalDate(2010, 0, 1)
+    //        };
 }
+
+<script>
+    var occupiedDates = ["8-25-2020", "8-30-2020", "9-1-2020", "9-2-2020"];
+
+    function noOccupiedDates(date) {
+        var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+        for (i = 0; i < occupiedDates.length; i++) {
+            if ($.inArray((m + 1) + '-' + d + '-' + y, occupiedDates) != -1 || new Date() > date) {
+                return [false, "occupied", "occ"];
+            }
+        }
+
+        return [true, "", ""];
+    }
+
+    $(document).ready(function () {
+        $("#datepicker").datepicker({
+            beforeShowDay: noOccupiedDates,
+            minDate: new Date()
+        });
+    });
+</script>
 
 <div class="blackCard">
     <header class="flex header">
@@ -20,5 +49,19 @@
                 <p class="card-footer">@String.Format("{0:n0}", ViewBag.chosenClub.Cost)&#8362; לערב</p>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="blackCard">
+    <header class="flex header">
+        <div class="flex headerTitle purple">
+            <div class="title">
+                מתי האירוע?
+            </div>
+            <div class="arrowUp"></div>
+        </div>
+    </header>
+    <div class="flex contenct">
+        <div type="text" id="datepicker">
     </div>
 </div>

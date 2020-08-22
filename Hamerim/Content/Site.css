@@ -61,6 +61,7 @@ body {
 
 .blackCard {
     background-color: rgba(18, 18, 18, 0.8);
+    margin-bottom: 20px;
 }
 
 .flex {
