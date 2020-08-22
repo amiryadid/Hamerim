@@ -15,7 +15,7 @@ namespace Hamerim.Controllers
             return View();
         }
 
-        public ActionResult NewOrder()
+        public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
