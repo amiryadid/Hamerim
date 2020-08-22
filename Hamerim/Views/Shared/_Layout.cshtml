@@ -3,20 +3,21 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+     <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Assistant">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="mynavbar">
+    <nav class="mynavbar">
         <a href="/Home/Index" class="mytab">
-        <img class="logoImg" src="~/Content/logo.png"/>
+            <img class="logoImg" src="~/Content/logo.png"/>
         </a>
-        <a href="/Home/About" class="mytab">הזמן מקום</a>
+        <a href="/Home/NewOrder" class="mytab">הזמן מקום</a>
         <a href="/Home/Contact" class="mytab">ההזמנות שלי</a>
         <a href="/Home/About" class="mytab" id="managerTab">מנהל</a>
-    </div>
-    <div>
+    </nav>
+    <div class="contentContainer">
         @RenderBody()
     </div>
 

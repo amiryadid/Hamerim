@@ -20,5 +20,9 @@ namespace Hamerim.Models
         public int HouseNumber { get; set; }
 
         public virtual Club Club { get; set; }
+        public override string ToString()
+        {
+            return $"{this.City}, {this.Street} {this.HouseNumber}";
+        }
     }
 }
