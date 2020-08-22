@@ -212,12 +212,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-<<<<<<< HEAD
-=======
     <Folder Include="Views\NewOrder\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\Login\" />
->>>>>>> 4de3e522f97dbd346dcfc603afd2925297aece9a
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
