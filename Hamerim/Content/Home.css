@@ -45,4 +45,29 @@
 
 .leftSide {
     width: 50%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.roundedImg {
+    border-radius: 96.5px 96.5px 96.5px 0px;
+}
+
+.imgContainer {
+    position: relative;
+    text-align: center;
+    color: var(--purple);
+    width: 120px;
+    height: 120px;
+}
+
+.textOnImage{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(31, 31, 31, 0.83);;
+}
+
+.images {
+    justify-content: space-around;
 }
