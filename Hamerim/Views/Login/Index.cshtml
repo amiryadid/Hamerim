@@ -1,19 +1,22 @@
 ﻿<div class="loginContainer">
-    <form class="formLogin">
+    <form class="formLogin" asp-controller="Login" asp-action="Index" method="POST">
         <div class="flex formInput">
             <div class="inputContainer">
                 <div class="inputLabel">שם משתמש</div>
                 <div class="inputBox">
-                    <input class="input" type="text" id="userName">
+                    <input class="input" type="text" id="username" name="username">
                 </div>
             </div>
             <div class="inputContainer">
                 <div class="inputLabel">סיסמא</div>
                 <div class="inputBox">
-                    <input class="input" type="text" id="userName">
+                    <input class="input" type="password" id="password" name="password">
                 </div>
             </div>
         </div>
+            @if(ViewBag.ErrorMessage != null) {
+                <div class="errorMessage">@ViewBag.ErrorMessage</div>
+            }
         <button type="submit" class="loginButton">אישור</button>
     </form>
 </div>

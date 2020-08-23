@@ -27,7 +27,7 @@ namespace Hamerim.Controllers
         [HttpPost]
         public ActionResult Index(string username, string password)
         {
-            if (permissionsService.ValidateUser(username, password))
+                if (permissionsService.ValidateUser(username, password))
             {
                 using (var ctx = new HamerimDbContext())
                 {
