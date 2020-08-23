@@ -8,7 +8,9 @@
 
 .formLogin{
     display: flex;
-    height: 102px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;;
 }
 
 .inputContainer{
@@ -41,4 +43,19 @@
 
 input:focus{
     outline: none;
+}
+
+.loginButton{
+    background-color: var(--pink);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    width: 150px;
+    height: 50px;
+    margin-top: 30px;
+    font-size: 20px;;
+}
+
+.formInput{
+    height: 102px;
 }
