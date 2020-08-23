@@ -79,6 +79,6 @@
     padding-right: 20px;
 }
 
-.submitModalButton {
-    background-color: ;
+.buttons {
+    justify-content: space-between;
 }
