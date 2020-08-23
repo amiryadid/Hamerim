@@ -1,0 +1,117 @@
+﻿<div class="adminContainer blackCard">
+   <header class="flex header">
+        <div class="flex headerTitle purple adminHeaderTitle">
+            <div class="title adminTitle">
+                ניהול
+            </div>
+        </div>
+        <div class="flex headerTitle purpleOpacity adminHeaderTitle">
+            <div class="title adminTitle">
+                סטטיסטיקות
+            </div>
+        </div>
+    </header>
+    <div class="flex managmentContainer">
+        <div class="flexColumn entityColumn">
+            <div class="flex manageEntityHeader">
+                <div>מועדונים</div>
+                <i class="material-icons button" data-toggle="modal" data-target="#addClubModal">add_circle</i>   
+            </div>
+            <div class="flexColumn manageEntityList">
+                <div class="flex manageEntity">
+                    <div>טיילר דרדן</div>
+                    <i class="material-icons button">edit</i>   
+                </div>
+                    <div class="flex manageEntity">
+                    <div>טיילר דרדן</div>
+                    <i class="material-icons button">edit</i>   
+                </div>
+                    <div class="flex manageEntity">
+                    <div>טיילר דרדן</div>
+                    <i class="material-icons button">edit</i>   
+                </div>
+
+                @* @foreach (var club in ViewBag.Clubs) {
+                    <div class="manageEntity">@club</div>
+                } *@
+            </div>
+        </div>
+               <div class="flexColumn entityColumn">
+            <div class="flex manageEntityHeader">
+                <div>מועדונים</div>
+                <i class="material-icons button">add_circle</i>   
+            </div>
+            <div class="flexColumn manageEntityList">
+                <div class="flex manageEntity">
+                    <div>טיילר דרדן</div>
+                    <i class="material-icons button">edit</i>   
+                </div>
+                    <div class="flex manageEntity">
+                    <div>טיילר דרדן</div>
+                    <i class="material-icons button">edit</i>   
+                </div>
+                    <div class="flex manageEntity">
+                    <div>טיילר דרדן</div>
+                    <i class="material-icons button">edit</i>   
+                </div>
+
+                @* @foreach (var club in ViewBag.Clubs) {
+                    <div class="manageEntity">@club</div>
+                } *@
+            </div>
+        </div>
+               <div class="flexColumn entityColumn">
+            <div class="flex manageEntityHeader">
+                <div>מועדונים</div>
+                <i class="material-icons">add_circle</i>   
+            </div>
+            <div class="flexColumn manageEntityList">
+                <div class="flex manageEntity">
+                    <div>טיילר דרדן</div>
+                    <i class="material-icons button">edit</i>   
+                </div>
+                    <div class="flex manageEntity">
+                    <div>טיילר דרדן</div>
+                    <i class="material-icons button">edit</i>   
+                </div>
+                    <div class="flex manageEntity">
+                    <div>טיילר דרדן</div>
+                    <i class="material-icons button">edit</i>   
+                </div>
+
+                @* @foreach (var club in ViewBag.Clubs) {
+                    <div class="manageEntity">@club</div>
+                } *@
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addClubModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content myModal">
+        <div class="flex addModalHeader">
+            <div>הוספת מועדון</div>
+            <i class="material-icons button"  data-dismiss="modal">close</i>   
+        </div>
+        <form class="addModalForm">
+            <div class="flex formRow">
+                <div class="inputLabel">שם</div>
+                <input class="inputField" type="text" id="name" name="name">
+            </div>
+            <div class="flex formRow">
+                <div class="inputLabel">מיקום</div>
+                <input class="inputField" type="text" id="name" name="name">
+            </div>
+            <div class="flex formRow">
+                <div class="inputLabel">מחיר</div>
+                <input  class="inputField" type="number" id="name" name="name">
+            </div>
+            <div class="buttons">
+                <button type="button" class="btn btn-secondary closeModalButton" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+@import url("./globals.css");
+
+.adminContainer{
+    height: calc(100% - 30px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.adminHeaderTitle {
+    font-size: 30px;
+    height: 60px;
+}
+
+.adminTitle{
+    width: 180px;
+}
+
+.managmentContainer{
+    margin: 25px;
+}
+
+.manageEntityHeader{
+    font-size: 28px;
+    background-color: #717171;
+    padding: 8px 12px;
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.manageEntityList{
+    flex-direction: column;
+    background-color: rgba(52, 52, 52, 0.86);
+    color: white;
+}
+
+.manageEntity{
+    font-size: 24px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+}
+
+.entityColumn{
+    margin-left: 30px;
+    width: 250px;
+}
+
+.addModalHeader {
+    justify-content: space-between;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.inputField {
+    border-radius: 10px;
+    margin-right: 10px;
+    color: black;
+}
+
+.inputLabel {
+    font-size: 18px;
+    padding: 0px;
+}
+
+.formRow {
+    margin-bottom: 10px;
+}
+
+.myModal {
+    background-color: rgba(142, 17, 195, 0.8);
+    color: white;
+}
+
+.addModalForm {
+    padding-right: 20px;
+}
+
+.submitModalButton {
+    background-color: ;
+}

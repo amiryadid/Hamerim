@@ -11,6 +11,10 @@ body {
     font-family: 'Assistant', serif;
 }
 
+a:hover {
+    text-decoration: none;
+    color: var(--purple);
+}
 .mynavbar {
     display: flex;
     flex-direction: row;
@@ -23,6 +27,12 @@ body {
 #managerTab {
     margin-right: auto;
     margin-left: 0px;
+    display: flex;
+    align-items: center;
+}
+
+.managerIcon {
+    margin-left: 5px;
 }
 
 .mytab {
@@ -67,6 +77,11 @@ body {
     display: flex;
 }
 
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
 .header {
     justify-content: start;
     flex-direction: row;
@@ -94,6 +109,10 @@ body {
     background-color: var(--purple);
 }
 
+.headerTitle.purpleOpacity .title {
+    background-color: var(--purpleOpacity);
+}
+
 .headerTitle.black .title {
     background-color: rgba(31, 31, 31, 0.83);
 }
@@ -115,3 +134,8 @@ body {
 button:focus {
     outline: 0 !important;
 }
+
+.button {
+    cursor: pointer;
+}
+

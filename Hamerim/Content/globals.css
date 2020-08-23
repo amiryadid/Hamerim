@@ -1,4 +1,6 @@
 ﻿:root {
     --purple: #8E11C3;
+    --purpleOpacity: rgba(142, 17, 195, 0.6);
+    --purpleOpacity2: rgba(142, 17, 195, 0.8);
     --pink: #E61E45;
 }
