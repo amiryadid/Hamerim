@@ -147,7 +147,7 @@ namespace Hamerim.Data
             Order[] orders = {
                 new Order()
                 {
-                    Id = 1,
+                    Id = 100000,
                     Club = clubs.First(club => club.Name=="The Forum"),
                     ClientName = "Amir Yadid",
                     ClientPhone = "054-6494205",
@@ -160,7 +160,7 @@ namespace Hamerim.Data
                 },
                 new Order()
                 {
-                    Id = 2,
+                    Id = 100001,
                     Club = clubs.First(club => club.Name=="Hangar 11"),
                     ClientName = "Ofir Tsur",
                     ClientPhone = "054-9720633",
@@ -172,7 +172,7 @@ namespace Hamerim.Data
                 },
                 new Order()
                 {
-                    Id = 3,
+                    Id = 100002,
                     Club = clubs.First(club => club.Name=="Hangar 11"),
                     ClientName = "Zohar Uzieli",
                     ClientPhone = "052-2568842",
@@ -180,7 +180,7 @@ namespace Hamerim.Data
                 },
                 new Order()
                 {
-                    Id = 4,
+                    Id = 100003,
                     Club = clubs.First(club => club.Name=="Hangar 11"),
                     ClientName = "Brad Pitt",
                     ClientPhone = "052-6667866",
@@ -193,7 +193,7 @@ namespace Hamerim.Data
                 },
                 new Order()
                 {
-                    Id = 5,
+                    Id = 100004,
                     Club = clubs.First(club => club.Name=="The Forum"),
                     ClientName = "George Costanza",
                     ClientPhone = "052-4476623",

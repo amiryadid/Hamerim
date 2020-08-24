@@ -1,35 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
+using Hamerim.Data;
+using Hamerim.Models;
+using Hamerim.Services;
+using Microsoft.Ajax.Utilities;
 
 namespace Hamerim.Controllers
 {
     public class OrderController : Controller
     {
-        List<Hamerim.Models.Club> allClubs = new List<Hamerim.Models.Club>() {
-            new Hamerim.Models.Club(){ Id=1, Name="פורום1", Cost=2500, Address=new Hamerim.Models.ClubAddress(){ City="באר שבע", Street="אחד העם", HouseNumber=20 } },
-            new Hamerim.Models.Club(){ Id=2, Name="פורום2", Cost=2500, Address=new Hamerim.Models.ClubAddress(){ City="באר שבע", Street="אחד העם", HouseNumber=20 } },
-            new Hamerim.Models.Club(){ Id=3, Name="פורום3", Cost=2500, Address=new Hamerim.Models.ClubAddress(){ City="באר שבע", Street="אחד העם", HouseNumber=20 } },
-            new Hamerim.Models.Club(){ Id=4, Name="פורום4", Cost=2500, Address=new Hamerim.Models.ClubAddress(){ City="באר שבע", Street="אחד העם", HouseNumber=20 } },
-            new Hamerim.Models.Club(){ Id=5, Name="פורום5", Cost=2500, Address=new Hamerim.Models.ClubAddress(){ City="באר שבע", Street="אחד העם", HouseNumber=20 } },
-            new Hamerim.Models.Club(){ Id=6, Name="פורום1", Cost=2500, Address=new Hamerim.Models.ClubAddress(){ City="באר שבע", Street="אחד העם", HouseNumber=20 } },
-            new Hamerim.Models.Club(){ Id=7, Name="פורום2", Cost=2500, Address=new Hamerim.Models.ClubAddress(){ City="באר שבע", Street="אחד העם", HouseNumber=20 } },
-            new Hamerim.Models.Club(){ Id=8, Name="פורום3", Cost=2500, Address=new Hamerim.Models.ClubAddress(){ City="באר שבע", Street="אחד העם", HouseNumber=20 } },
-            new Hamerim.Models.Club(){ Id=9, Name="פורום4", Cost=2500, Address=new Hamerim.Models.ClubAddress(){ City="באר שבע", Street="אחד העם", HouseNumber=20 } }
-        };
+        readonly IStatisticsService statisticsService;
+
+        public OrderController(IStatisticsService statisticsService)
+        {
+            this.statisticsService = statisticsService;
+        }
 
         // GET: Order
         public ActionResult NewOrder()
         {
-            ViewBag.Clubs = allClubs;
+            using (var ctx = new HamerimDbContext())
+            {
+                ViewBag.Clubs = ctx.Clubs;
+            }
+
             return View();
         }
 
         public ActionResult AfterChooseClub(int Id)
         {
-            ViewBag.chosenClub = allClubs.Where(cl => cl.Id == Id).First();
+            using (var ctx = new HamerimDbContext())
+            {
+                var chosenClub = ctx.Clubs.First(club => club.Id == Id);
+                ViewBag.ChosenClub = chosenClub;
+                ViewBag.UnavailableDates = chosenClub.ClubOrders.Where(club => club.Date >= DateTime.Today)
+                                                                .Select(order => order.Date).ToList();
+                ViewBag.ServiceCategories = 
+                    ctx.ServiceCategories.Include(category => category.ServicesInCategory).ToList();
+            }
+
+            return View();
+        }
+
+        public ActionResult GetPopularServices(int month)
+        {
+            List<Service> services = 
+                this.statisticsService.GetMostPopularServices(month).ToList();
+
+            return Json(services);
+        }
+
+        [HttpPost]
+        public ActionResult BookOrder(Order order)
+        {
+            using (HamerimDbContext ctx = new HamerimDbContext())
+            {
+                ctx.Orders.Add(order);
+                ctx.SaveChanges();
+            }
+
+            return RedirectToAction("FinishedOrder", order.Id);
+        }
+
+        public ActionResult FinishedOrder(int orderNumber)
+        {
+            ViewBag.OrderNumber = orderNumber;
+
             return View();
         }
     }
