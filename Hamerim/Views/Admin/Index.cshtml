@@ -22,7 +22,6 @@
                     {
                         string editId = "editClub" + club.Id;
                         string editIdTarget = "#editClub" + club.Id;
-                        string formId = "formEditClub" + club.Id;
 
                         <div class="flex manageEntity">
                             <div>@club.Name</div>
@@ -77,41 +76,51 @@
                             <div>הוספת מועדון</div>
                             <i class="material-icons button"  data-dismiss="modal">close</i>   
                         </div>
-                        <form id="formClub" class="addModalForm"  class="addModalForm" asp-action="AddClub" asp-controller="Admin" method="POST" enctype="multipart/form-data">
+                        @using (Html.BeginForm("AddClub", "Admin", FormMethod.Post)){
+                        <div class="addModalForm">
                             <div class="flex formRow">
                                 <div class="inputLabel">שם</div>
-                                <input class="inputField" type="text" id="name" name="name">
+                                <input class="inputField" type="text" id="addName" name="name">
                             </div>
                             <div class="flex formRow">
-                                <div class="inputLabel">מיקום</div>
-                                <input class="inputField" type="text" id="name" name="name">
+                                <div class="inputLabel">עיר</div>
+                                <input class="inputField" type="text" id="addCity" name="city">
+                            </div>
+                            <div class="flex formRow">
+                                <div class="inputLabel">רחוב</div>
+                                <input class="inputField" type="text" id="addStreet" name="street">
+                            </div>
+                            <div class="flex formRow">
+                                <div class="inputLabel">מספר בית</div>
+                                <input class="inputField" type="number" id="addHouseNumber" name="houseNumber">
                             </div>
                             <div class="flex formRow">
                                 <div class="inputLabel">מחיר</div>
-                                <input  class="inputField" type="number" id="name" name="name">
+                                <input  class="inputField" type="number" id="addCost" name="cost">
                             </div>
                             <div class="flex buttons">
-                                <button type="submit" form="formClub" class="btn btn-primary addButton">רוצה להוסיף</button>
+                                <button type="submit" class="btn btn-primary addButton">רוצה להוסיף</button>
                             </div>
-                        </form>
+                        </div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
-
-        @* <div class="flexColumn entityColumn">
+ 
+        <div class="flexColumn entityColumn">
             <div class="flex manageEntityHeader">
                 <div>קטגוריות</div>
                 <i class="material-icons button" data-toggle="modal" data-target="#addCategoryModal">add_circle</i>   
             </div>
             <div class="flexColumn manageEntityList">
-                @foreach (var category in ViewBag.Categories as IList<Hamerim.Models.Category>) 
+                @foreach (var category in ViewBag.Categories as IList<Hamerim.Models.ServiceCategory>) 
                     {
-                        string editId = "editCategory" + category.Id;
+                        string editId = "editCategory" +category.Id;
                         string editIdTarget = "#editCategory" + category.Id;
 
                         <div class="flex manageEntity">
-                            <div>@category.Name</div>
+                            <div>@category.Title</div>
                             <i class="material-icons button" data-toggle="modal" data-target="@editIdTarget">edit</i>   
                         </div>
 
@@ -123,22 +132,23 @@
                                         <div>עריכת קטגוריה</div>
                                         <i class="material-icons button"  data-dismiss="modal">close</i>   
                                     </div>
-                                    <form class="addModalForm" asp-action="EditCategory" asp-controller="Admin" asp-route-id="@category.Id" method="PUT" enctype="multipart/form-data">
+                                    @using (Html.BeginForm("EditCategory", "Admin", new { id=@category.Id }, FormMethod.Post)){
+                                    <div class="addModalForm">
                                         <div class="flex formRow">
                                             <div class="inputLabel">שם</div>
-                                            <input class="inputField" type="text" id="name" name="name" value="@category.Name">
+                                            <input class="inputField" type="text" id="title" name="title" value="@category.Title">
                                         </div>
                                         <div class="flex buttons">
                                             <button type="submit" class="btn btn-primary addButton">אישור</button>
                                         </div>
-                                    </form>
+                                    </div> }
                                 </div>
                             </div>
                         </div>
                     }
             </div>
 
-             <!--Add Category Modal -->
+            <!--Add Category Modal --> 
             <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modalContainer" role="document">
                     <div class="modal-content myModal">
@@ -146,19 +156,20 @@
                             <div>הוספת קטגוריה</div>
                             <i class="material-icons button"  data-dismiss="modal">close</i>   
                         </div>
-                        <form class="addModalForm"  class="addModalForm" asp-action="AddCategory" asp-controller="Admin" method="POST" enctype="multipart/form-data">
+                        @using (Html.BeginForm("AddCategory", "Admin", FormMethod.Post)){
+                        <div class="addModalForm">
                             <div class="flex formRow">
                                 <div class="inputLabel">שם</div>
-                                <input class="inputField" type="text" id="name" name="name">
+                                <input class="inputField" type="text" id="addTitle" name="title">
                             </div>
                             <div class="flex buttons">
                                 <button type="submit" class="btn btn-primary addButton">רוצה להוסיף</button>
                             </div>
-                        </form>
+                        </div> }
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
 
         <div class="flexColumn entityColumn">
             <div class="flex manageEntityHeader">
@@ -172,7 +183,7 @@
                         string editIdTarget = "#editService" + service.Id;
 
                         <div class="flex manageEntity">
-                            <div>@service.Name</div>
+                            <div>@service.Title</div>
                             <i class="material-icons button" data-toggle="modal" data-target="@editIdTarget">edit</i>   
                         </div>
 
@@ -184,15 +195,28 @@
                                         <div>עריכת קטגוריה</div>
                                         <i class="material-icons button"  data-dismiss="modal">close</i>   
                                     </div>
-                                    <form class="addModalForm" asp-action="EditService" asp-controller="Admin" asp-route-id="@service.Id" method="PUT" enctype="multipart/form-data">
+                                    @using (Html.BeginForm("EditService", "Admin",  new { id=@service.Id }, FormMethod.Post)){
+                                    <div class="addModalForm">
                                         <div class="flex formRow">
                                             <div class="inputLabel">שם</div>
-                                            <input class="inputField" type="text" id="name" name="name" value="@service.Name">
+                                            <input class="inputField" type="text" id="title" name="title" value="@service.Title">
+                                        </div>
+                                        <div class="flex formRow">
+                                            <div class="inputLabel">קטגוריה</div>
+                                            <select class="inputField" id="category" name="category">
+                                                @foreach (var category in ViewBag.Categories as IList<Hamerim.Models.ServiceCategory>) {
+                                                    @if(category.Id == @service.category.Id) {
+                                                        <option selected>@category.Title</option>
+                                                    } else {
+                                                        <option>@category.Title</option>
+                                                    }
+                                                }
+                                            </select>
                                         </div>
                                         <div class="flex buttons">
                                             <button type="submit" class="btn btn-primary addButton">אישור</button>
                                         </div>
-                                    </form>
+                                    </div> }
                                 </div>
                             </div>
                         </div>
@@ -207,18 +231,19 @@
                             <div>הוספת תוספת</div>
                             <i class="material-icons button"  data-dismiss="modal">close</i>   
                         </div>
-                        <form class="addModalForm"  class="addModalForm" asp-action="AddCategory" asp-controller="Admin" method="POST" enctype="multipart/form-data">
+                        @using (Html.BeginForm("AddCategory", "Admin", FormMethod.Post)){
+                        <div class="addModalForm">
                             <div class="flex formRow">
                                 <div class="inputLabel">שם</div>
-                                <input class="inputField" type="text" id="name" name="name">
+                                <input class="inputField" type="text" id="addTitle" name="title">
                             </div>
                             <div class="flex buttons">
                                 <button type="submit" class="btn btn-primary addButton">רוצה להוסיף</button>
                             </div>
-                        </form>
+                        </div> }
                     </div>
                 </div>
             </div>
-        </div> *@
+        </div>
     </div>
 </div>
