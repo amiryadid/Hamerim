@@ -80,5 +80,20 @@
 }
 
 .buttons {
-    justify-content: space-between;
+    justify-content: flex-end;
+    margin: 10px 20px;
+}
+
+.addButton{
+    background-color: rgba(31, 31, 31, 0.83) ;
+    border-color:  rgba(31, 31, 31, 0.83);
+}
+
+.addButton:hover{
+    background-color: #717171;
+    border-color: #717171;
+}
+
+.modalContainer {
+    width: 400px;
 }
