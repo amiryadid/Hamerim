@@ -80,14 +80,15 @@ namespace Hamerim.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddService(string title, int cost)
+        public ActionResult AddService(string title, int cost, int serviceId)
         {
             using (var ctx = new HamerimDbContext())
             {
                 ctx.Services.Add(new Service()
                 {
                     Title = title,
-                    Cost = cost
+                    Cost = cost,
+                    Category = ctx.ServiceCategories.Find(serviceId)
                 });
                 ctx.SaveChanges();
             }
