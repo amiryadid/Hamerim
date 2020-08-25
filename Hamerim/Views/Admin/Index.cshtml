@@ -22,6 +22,7 @@
                     {
                         string editId = "editClub" + club.Id;
                         string editIdTarget = "#editClub" + club.Id;
+                        string formId = "formEditClub" + club.Id;
 
                         <div class="flex manageEntity">
                             <div>@club.Name</div>
@@ -36,12 +37,13 @@
                                         <div>עריכת מועדון</div>
                                         <i class="material-icons button"  data-dismiss="modal">close</i>   
                                     </div>
-                                    <form class="addModalForm" asp-action="EditClub" asp-controller="Admin" asp-route-id="@club.Id" method="PUT" enctype="multipart/form-data">
+                                    @using (Html.BeginForm("EditClub", "Admin", new { id=@club.Id }, FormMethod.Post)){
+                                    <div class="addModalForm">
                                         <div class="flex formRow">
                                             <div class="inputLabel">שם</div>
                                             <input class="inputField" type="text" id="name" name="name" value="@club.Name">
                                         </div>
-                                        @* <div class="flex formRow">
+                                        <div class="flex formRow">
                                             <div class="inputLabel">עיר</div>
                                             <input class="inputField" type="text" id="name" name="name" value="@club.Address.City">
                                         </div>
@@ -52,15 +54,16 @@
                                         <div class="flex formRow">
                                             <div class="inputLabel">מספר בית</div>
                                             <input class="inputField" type="text" id="name" name="name" value="@club.Address.HouseNumber">
-                                        </div> *@
+                                        </div>
                                         <div class="flex formRow">
                                             <div class="inputLabel">מחיר</div>
-                                            <input  class="inputField" type="number" id="name" name="name" value="@club.Cost">
+                                            <input  class="inputField" type="number" id="cost" name="cost" value="@club.Cost">
                                         </div>
                                         <div class="flex buttons">
                                             <button type="submit" class="btn btn-primary addButton">אישור</button>
                                         </div>
-                                    </form>
+                                    </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -74,7 +77,7 @@
                             <div>הוספת מועדון</div>
                             <i class="material-icons button"  data-dismiss="modal">close</i>   
                         </div>
-                        <form class="addModalForm"  class="addModalForm" asp-action="AddClub" asp-controller="Admin" method="POST" enctype="multipart/form-data">
+                        <form id="formClub" class="addModalForm"  class="addModalForm" asp-action="AddClub" asp-controller="Admin" method="POST" enctype="multipart/form-data">
                             <div class="flex formRow">
                                 <div class="inputLabel">שם</div>
                                 <input class="inputField" type="text" id="name" name="name">
@@ -88,7 +91,7 @@
                                 <input  class="inputField" type="number" id="name" name="name">
                             </div>
                             <div class="flex buttons">
-                                <button type="submit" class="btn btn-primary addButton">רוצה להוסיף</button>
+                                <button type="submit" form="formClub" class="btn btn-primary addButton">רוצה להוסיף</button>
                             </div>
                         </form>
                     </div>

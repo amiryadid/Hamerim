@@ -27,19 +27,6 @@ namespace Hamerim.Controllers
                 filterContext.Result = RedirectToAction("Index", "Login");
         }
 
-        // GET: Admin
-        public ActionResult Index()
-        {
-            using (var ctx = new HamerimDbContext())
-            {
-                ViewBag.Clubs = ctx.Clubs.ToList();
-                ViewBag.Services = ctx.Services.ToList();
-                ViewBag.Categories = ctx.ServiceCategories.ToList();
-                ViewBag.Orders = ctx.Orders.ToList();
-            }
-
-            return View();
-        }
 
         [HttpPost]
         public ActionResult AddClub(string name, int cost, string city, string street, int houseNumber)
@@ -96,18 +83,15 @@ namespace Hamerim.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPut]
-        public ActionResult EditClub(int id, string name, int cost, string city, string street, int houseNumber)
+        [HttpPost]
+        public ActionResult EditClub(int id, string name, int cost)
         {
             using (var ctx = new HamerimDbContext())
             {
-                Club club = ctx.Clubs.Find(id);
-                club.Name = name;
-                club.Cost = cost;
-                club.Address.City = city;
-                club.Address.Street = street;
-                club.Address.HouseNumber = houseNumber;
-                ctx.SaveChanges();
+               Club club = ctx.Clubs.Find(id);
+               club.Name = name;
+               club.Cost = cost;
+               ctx.SaveChanges();
             }
 
             return RedirectToAction("Index");
@@ -149,6 +133,21 @@ namespace Hamerim.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+
+        // GET: Admin
+        public ActionResult Index()
+        {
+            using (var ctx = new HamerimDbContext())
+            {
+                ViewBag.Clubs = ctx.Clubs.ToList();
+                ViewBag.Services = ctx.Services.ToList();
+                ViewBag.Categories = ctx.ServiceCategories.ToList();
+                ViewBag.Orders = ctx.Orders.ToList();
+            }
+
+            return View();
         }
     }
 }
