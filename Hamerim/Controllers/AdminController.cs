@@ -19,7 +19,7 @@ namespace Hamerim.Controllers
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            User currentUser = (User) this.Session["User"];
+            User currentUser = (User)this.Session["User"];
 
             // Validate any request to this controller
             if (currentUser == null ||
@@ -42,11 +42,21 @@ namespace Hamerim.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddClub(Club club)
+        public ActionResult AddClub(string name, int cost, string city, string street, int houseNumber)
         {
             using (var ctx = new HamerimDbContext())
             {
-                ctx.Clubs.Add(club);
+                ctx.Clubs.Add(new Club()
+                {
+                    Name = name,
+                    Cost = cost,
+                    Address = new ClubAddress()
+                    {
+                        City = city,
+                        Street = street,
+                        HouseNumber = houseNumber
+                    }
+                });
                 ctx.SaveChanges();
             }
 
@@ -54,11 +64,15 @@ namespace Hamerim.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddCategory(ServiceCategory category)
+        public ActionResult AddCategory(string title)
         {
             using (var ctx = new HamerimDbContext())
             {
-                ctx.ServiceCategories.Add(category);
+                ctx.ServiceCategories.Add(new ServiceCategory()
+                {
+                    Title = title
+                });
+
                 ctx.SaveChanges();
             }
 
@@ -66,11 +80,16 @@ namespace Hamerim.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddService(Service service)
+        public ActionResult AddService(string title, int cost, int serviceId)
         {
             using (var ctx = new HamerimDbContext())
             {
-                ctx.Services.Add(service);
+                ctx.Services.Add(new Service()
+                {
+                    Title = title,
+                    Cost = cost,
+                    Category = ctx.ServiceCategories.Find(serviceId)
+                });
                 ctx.SaveChanges();
             }
 
@@ -78,11 +97,16 @@ namespace Hamerim.Controllers
         }
 
         [HttpPut]
-        public ActionResult EditClub(Club club)
+        public ActionResult EditClub(int id, string name, int cost, string city, string street, int houseNumber)
         {
             using (var ctx = new HamerimDbContext())
             {
-                ctx.Entry(ctx.Clubs.Find(club.Id)).CurrentValues.SetValues(club);
+                Club club = ctx.Clubs.Find(id);
+                club.Name = name;
+                club.Cost = cost;
+                club.Address.City = city;
+                club.Address.Street = street;
+                club.Address.HouseNumber = houseNumber;
                 ctx.SaveChanges();
             }
 
@@ -90,11 +114,11 @@ namespace Hamerim.Controllers
         }
 
         [HttpPut]
-        public ActionResult EditCategory(ServiceCategory category)
+        public ActionResult EditCategory(int id, string title)
         {
             using (var ctx = new HamerimDbContext())
             {
-                ctx.Entry(ctx.ServiceCategories.Find(category.Id)).CurrentValues.SetValues(category);
+                ctx.ServiceCategories.Find(id).Title = title;
                 ctx.SaveChanges();
             }
 
@@ -102,11 +126,13 @@ namespace Hamerim.Controllers
         }
 
         [HttpPut]
-        public ActionResult EditService(Service service)
+        public ActionResult EditService(int id, string title, int cost)
         {
             using (var ctx = new HamerimDbContext())
             {
-                ctx.Entry(ctx.Services.Find(service.Id)).CurrentValues.SetValues(service);
+                Service service = ctx.Services.Find(id);
+                service.Title = title;
+                service.Cost = cost;
                 ctx.SaveChanges();
             }
 
@@ -114,11 +140,11 @@ namespace Hamerim.Controllers
         }
 
         [HttpDelete]
-        public ActionResult DeleteOrder(Order order)
+        public ActionResult DeleteOrder(int id)
         {
             using (var ctx = new HamerimDbContext())
             {
-                ctx.Orders.Remove(order);
+                ctx.Orders.Remove(ctx.Orders.Find(id));
                 ctx.SaveChanges();
             }
 
