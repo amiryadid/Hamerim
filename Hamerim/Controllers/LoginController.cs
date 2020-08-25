@@ -27,19 +27,24 @@ namespace Hamerim.Controllers
         [HttpPost]
         public ActionResult Index(string username, string password)
         {
-                if (permissionsService.ValidateUser(username, password))
+            if (permissionsService.ValidateUser(username, password))
             {
+                User connectedUser;
+
                 using (var ctx = new HamerimDbContext())
                 {
-                    Session["User"] = ctx.Users.First(user => user.Username == username &&
-                                                              user.Password == password);
+                    connectedUser = ctx.Users.First(user => user.Username == username &&
+                                                            user.Password == password);
+                    Session["User"] = connectedUser;
                 }
 
-                return RedirectToAction("Index", "Home");
+                return connectedUser.IsAdmin ? 
+                    RedirectToAction("Index", "Admin") : 
+                    RedirectToAction("Index", "Home");
             }
             else
             {
-                ViewBag.ErrorMessage = "Invalid Credentials";
+                ViewBag.ErrorMessage = "פרטי ההתחברות אינם נכונים";
                 return View();
             }
         }
