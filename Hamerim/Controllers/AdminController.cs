@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 using Hamerim.Data;
 using Hamerim.Models;
@@ -32,7 +33,7 @@ namespace Hamerim.Controllers
         {
             using (var ctx = new HamerimDbContext())
             {
-                ViewBag.Clubs = ctx.Clubs.ToList();
+                ViewBag.Clubs = ctx.Clubs.Include(club => club.Address).ToList();
                 ViewBag.Services = ctx.Services.ToList();
                 ViewBag.Categories = ctx.ServiceCategories.ToList();
                 ViewBag.Orders = ctx.Orders.ToList();
