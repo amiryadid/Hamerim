@@ -192,7 +192,7 @@
                             <div class="modal-dialog modalContainer" role="document">
                                 <div class="modal-content myModal">
                                     <div class="flex addModalHeader">
-                                        <div>עריכת קטגוריה</div>
+                                        <div>עריכת תוספת</div>
                                         <i class="material-icons button"  data-dismiss="modal">close</i>   
                                     </div>
                                     @using (Html.BeginForm("EditService", "Admin",  new { id=@service.Id }, FormMethod.Post)){
@@ -235,7 +235,7 @@
                             <div>הוספת תוספת</div>
                             <i class="material-icons button"  data-dismiss="modal">close</i>   
                         </div>
-                        @using (Html.BeginForm("AddCategory", "Admin", FormMethod.Post)){
+                        @using (Html.BeginForm("AddService", "Admin", FormMethod.Post)){
                         <div class="addModalForm">
                             <div class="flex formRow">
                                 <div class="inputLabel">שם</div>
@@ -262,5 +262,43 @@
                 </div>
             </div>
         </div>
+
+        <div class="flexColumn entityColumn">
+            <div class="flex manageEntityHeader">
+                <div>הזמנות</div>
+            </div>
+            <div class="flexColumn manageEntityList">
+                @foreach (var order in ViewBag.Orders as IList<Hamerim.Models.Order>) 
+                    {
+                        string deleteId = "deleteOrder" + order.Id;
+                        string deleteIdTarget = "#deleteOrder" + order.Id;
+
+                        <div class="flex manageEntity">
+                            <div>@order.Id</div>
+                            <i class="material-icons button" data-toggle="modal" data-target="@deleteIdTarget">delete</i>   
+                        </div>
+
+                        <!--Delete Order Modal-->
+                        <div class="modal fade" id="@deleteId" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modalContainer" role="document">
+                                <div class="modal-content myModal">
+                                    <div class="flex addModalHeader">
+                                        <div>מחיקת הזמנה</div>
+                                        <i class="material-icons button"  data-dismiss="modal">close</i>   
+                                    </div>
+                                    @using (Html.BeginForm("DeleteOrder", "Admin",  new { id=@order.Id }, FormMethod.Post)){
+                                    <div class="addModalForm">
+                                        <div>רוצה למחוק את ההזמנה?</div>
+                                        <div>אחרי מחיקת ההזמנה אין דרך להחזיר את המידע שאבד</div>
+                                        <div class="flex buttons">
+                                            <button class="btn btn-primary addButton"  data-dismiss="modal">התחרטתי</button>
+                                            <button type="submit" class="btn btn-primary red">כן, אני רוצה למחוק</button>
+                                        </div>
+                                    </div> }
+                                </div>
+                            </div>
+                        </div>
+                    }
+            </div>
     </div>
 </div>
