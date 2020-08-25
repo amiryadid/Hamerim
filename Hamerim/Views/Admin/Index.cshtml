@@ -206,9 +206,9 @@
                                             <select class="inputField" id="category" name="category">
                                                 @foreach (var category in ViewBag.Categories as IList<Hamerim.Models.ServiceCategory>) {
                                                     if(category.Id == service.Category.Id) {
-                                                        <option selected>@category.Title</option>
+                                                        <option selected value="@category.Id">@category.Title</option>
                                                     } else {
-                                                        <option>@category.Title</option>
+                                                        <option value="@category.Id">@category.Title</option>
                                                     }
                                                 }
                                             </select>
@@ -246,7 +246,7 @@
                                 <select class="inputField" id="category" name="category">
                                     <option selected disabled>בחר קטגוריה</option>
                                     @foreach (var category in ViewBag.Categories as IList<Hamerim.Models.ServiceCategory>) {
-                                        <option>@category.Title</option>
+                                        <option value="@category.Id">@category.Title</option>
                                     }
                                 </select>
                             </div>
