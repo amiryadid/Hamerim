@@ -97,3 +97,11 @@
 .modalContainer {
     width: 400px;
 }
+
+.red {
+    background-color: var(--pink);
+}
+
+.red:hover {
+    background-color: #4b101b;
+}
