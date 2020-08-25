@@ -20,7 +20,7 @@ namespace Hamerim.Controllers
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            User currentUser = (User)this.Session["User"];
+            User currentUser = (User) Session["User"];
 
             // Validate any request to this controller
             if (currentUser == null ||
@@ -34,10 +34,17 @@ namespace Hamerim.Controllers
             using (var ctx = new HamerimDbContext())
             {
                 ViewBag.Clubs = ctx.Clubs.Include(club => club.Address).ToList();
-                ViewBag.Services = ctx.Services.ToList();
+                ViewBag.Services = ctx.Services.Include(service => service.Category).ToList();
                 ViewBag.Categories = ctx.ServiceCategories.ToList();
-                ViewBag.Orders = ctx.Orders.ToList();
+                ViewBag.Orders = ctx.Orders.Include(order => order.Club).ToList();
             }
+
+            return View();
+        }
+
+        public ActionResult Statistics()
+        {
+            ViewBag.MonthlySales = statisticsService.GetMonthlySales();
 
             return View();
         }
@@ -114,7 +121,7 @@ namespace Hamerim.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPut]
+        [HttpPost]
         public ActionResult EditCategory(int id, string title)
         {
             using (var ctx = new HamerimDbContext())
@@ -126,7 +133,7 @@ namespace Hamerim.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPut]
+        [HttpPost]
         public ActionResult EditService(int id, string title, int cost)
         {
             using (var ctx = new HamerimDbContext())
@@ -140,7 +147,7 @@ namespace Hamerim.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpDelete]
+        [HttpPost]
         public ActionResult DeleteOrder(int id)
         {
             using (var ctx = new HamerimDbContext())

@@ -22,5 +22,18 @@ namespace Hamerim.Services
                     .ToList();
             }
         }
+
+        public IEnumerable<dynamic> GetMonthlySales()
+        {
+            using (var ctx = new HamerimDbContext())
+            {
+                return ctx.Orders.GroupBy(order => order.Date.Month).AsEnumerable().Select(group => new
+                {
+                    Month = group.Key,
+                    AmountOfOrders = group.Count(),
+                    Profit = group.Sum(order => order.TotalCost())
+                }).ToList();
+            }
+        }
     }
 }

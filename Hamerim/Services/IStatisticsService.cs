@@ -10,5 +10,7 @@ namespace Hamerim.Services
     public interface IStatisticsService
     {
         IEnumerable<Service> GetMostPopularServices(int month);
+
+        IEnumerable<dynamic> GetMonthlySales();
     }
 }

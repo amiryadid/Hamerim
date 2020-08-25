@@ -30,5 +30,10 @@ namespace Hamerim.Models
         public string ClientPhone { get; set; }
 
         public virtual ICollection<Service> ServicesInOrder { get; set; }
+
+        public int TotalCost()
+        {
+            return Club.Cost + ServicesInOrder.Sum(serviceInOrder => serviceInOrder.Cost);
+        }
     }
 }
