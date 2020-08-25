@@ -18,49 +18,83 @@
                 <i class="material-icons button" data-toggle="modal" data-target="#addClubModal">add_circle</i>   
             </div>
             <div class="flexColumn manageEntityList">
-                @foreach (var club in ViewBag.Clubs as IList<Hamerim.Models.Club>) {
-                    <div class="flex manageEntity">
-                        <div>@club</div>
-                        <i class="material-icons button">edit</i>   
-                    </div>
-                }
-                    <div class="flex manageEntity">
-                    <div>טיילר דרדן</div>
-                    <i class="material-icons button">edit</i>   
-                </div>
-                    <div class="flex manageEntity">
-                    <div>טיילר דרדן</div>
-                    <i class="material-icons button">edit</i>   
-                </div>
-            </div>
-        </div>
-    </div>
+                @foreach (var club in ViewBag.Clubs as IList<Hamerim.Models.Club>) 
+                    {
+                        string editId = "editClub" + club.Id;
+                        string editIdTarget = "#editClub" + club.Id;
 
-    <div class="modal fade" id="addClubModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modalContainer" role="document">
-        <div class="modal-content myModal">
-            <div class="flex addModalHeader">
-                <div>הוספת מועדון</div>
-                <i class="material-icons button"  data-dismiss="modal">close</i>   
+                        <div class="flex manageEntity">
+                            <div>@club.Name</div>
+                            <i class="material-icons button" data-toggle="modal" data-target="@editIdTarget">edit</i>   
+                        </div>
+
+                        <!--Edit Club Modal-->
+                        <div class="modal fade" id="@editId" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modalContainer" role="document">
+                                <div class="modal-content myModal">
+                                    <div class="flex addModalHeader">
+                                        <div>עריכת מועדון</div>
+                                        <i class="material-icons button"  data-dismiss="modal">close</i>   
+                                    </div>
+                                    <form class="addModalForm">
+                                        <div class="flex formRow">
+                                            <div class="inputLabel">שם</div>
+                                            <input class="inputField" type="text" id="name" name="name" value="@club.Name">
+                                        </div>
+                                        @* <div class="flex formRow">
+                                            <div class="inputLabel">עיר</div>
+                                            <input class="inputField" type="text" id="name" name="name" value="@club.Address.City">
+                                        </div>
+                                        <div class="flex formRow">
+                                            <div class="inputLabel">רחוב</div>
+                                            <input class="inputField" type="text" id="name" name="name" value="@club.Address.Street">
+                                        </div>
+                                        <div class="flex formRow">
+                                            <div class="inputLabel">מספר בית</div>
+                                            <input class="inputField" type="text" id="name" name="name" value="@club.Address.HouseNumber">
+                                        </div> *@
+                                        <div class="flex formRow">
+                                            <div class="inputLabel">מחיר</div>
+                                            <input  class="inputField" type="number" id="name" name="name" value="@club.Cost">
+                                        </div>
+                                        <div class="flex buttons">
+                                            <button type="submit" class="btn btn-primary addButton">אישור</button>
+                                            @Html.ActionLink("Submit", "EditClub", "Admin", club, new {method="PUT"})
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
             </div>
-            <form class="addModalForm">
-                <div class="flex formRow">
-                    <div class="inputLabel">שם</div>
-                    <input class="inputField" type="text" id="name" name="name">
+            <!--Add Club Modal -->
+            <div class="modal fade" id="addClubModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modalContainer" role="document">
+                    <div class="modal-content myModal">
+                        <div class="flex addModalHeader">
+                            <div>הוספת מועדון</div>
+                            <i class="material-icons button"  data-dismiss="modal">close</i>   
+                        </div>
+                        <form class="addModalForm">
+                            <div class="flex formRow">
+                                <div class="inputLabel">שם</div>
+                                <input class="inputField" type="text" id="name" name="name">
+                            </div>
+                            <div class="flex formRow">
+                                <div class="inputLabel">מיקום</div>
+                                <input class="inputField" type="text" id="name" name="name">
+                            </div>
+                            <div class="flex formRow">
+                                <div class="inputLabel">מחיר</div>
+                                <input  class="inputField" type="number" id="name" name="name">
+                            </div>
+                            <div class="flex buttons">
+                                <button type="submit" class="btn btn-primary addButton">רוצה להוסיף</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="flex formRow">
-                    <div class="inputLabel">מיקום</div>
-                    <input class="inputField" type="text" id="name" name="name">
-                </div>
-                <div class="flex formRow">
-                    <div class="inputLabel">מחיר</div>
-                    <input  class="inputField" type="number" id="name" name="name">
-                </div>
-                <div class="flex buttons">
-                    <button type="submit" class="btn btn-primary addButton">רוצה להוסיף</button>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
     </div>
 </div>
