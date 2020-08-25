@@ -16,15 +16,15 @@
     flex-basis: 40%;
 }
 
-.card:not(:last-child) {
-    margin-bottom: 2rem;
-}
+    .card:not(:last-child) {
+        margin-bottom: 2rem;
+    }
 
-.card form {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
+    .card form {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
 
 .card-body {
     display: flex;
@@ -61,10 +61,112 @@
     transition: all 0.2s ease;
 }
 
-.card .done-btn:hover {
-    background-color: #e62248;
-    color: white;
+    .card .done-btn:hover {
+        background-color: #e62248;
+        color: white;
+    }
+
+.flex-row {
+    flex-direction: row;
+    justify-content: space-between;
 }
+
+    .flex-row .right {
+        width: 43%;
+    }
+
+.blackCard ul {
+    font-size: 18px;
+    padding: 0px;
+}
+
+.blackCard ul dt {
+    margin-bottom: 7px;
+}
+
+
+.service-item .form-check {
+    
+}
+
+.service-item .service-item-label {
+    width: 47%;
+    margin-right: 7px;
+}
+
+/* Checkbox component */
+
+/* Customize the label (the container) */
+.container {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    padding-right: 30px;
+    font-size: 18px;
+    font-weight: normal;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: black;
+    border: white solid 1px;
+    transition: all 0.1s ease;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #111111;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: var(--purple);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0px 2px 2px 0;
+    transform: rotate(45deg);
+    transition: all 0.1s ease;
+}
+
+/* Switch component */
 
 .switch-container {
     display: flex;
@@ -128,7 +230,6 @@ input:checked + .slider:before {
     transform: translateX(20px);
 }
 
-/* Rounded sliders */
 .slider.round {
     border-radius: 20px;
 }
@@ -136,6 +237,8 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+/* Datepicker component */
 
 .ui-datepicker {
     background: #000000b8;

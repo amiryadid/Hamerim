@@ -52,16 +52,50 @@
     </div>
 </div>
 
-<div class="blackCard">
-    <header class="flex header">
-        <div class="flex headerTitle purple">
-            <div class="title">
-                מתי האירוע?
+<div class="flex flex-row">
+    <div class="blackCard right">
+        <header class="flex header">
+            <div class="flex headerTitle purple">
+                <div class="title">
+                    מתי האירוע?
+                </div>
+                <div class="arrowUp"></div>
             </div>
-            <div class="arrowUp"></div>
+        </header>
+        <div class="flex contenct">
+            <div type="text" id="datepicker"></div>
         </div>
-    </header>
-    <div class="flex contenct">
-        <div type="text" id="datepicker">
+    </div>
+
+    <div class="blackCard leftSide">
+        <header class="flex header">
+            <div class="flex headerTitle purple">
+                <div class="title">
+                    מה נוסיף?
+                </div>
+                <div class="arrowUp"></div>
+            </div>
+        </header>
+        <div class="contenct">
+            <form>
+                <ul>
+                    @*@foreach (var club in ViewBag.Clubs as IList<Hamerim.Models.Club>)
+                    {*@
+                        <dt class="service-cat">משקאות</dt>
+                        @*@foreach (var club in ViewBag.Clubs as IList<Hamerim.Models.Club>)
+                        {*@
+                            <dd class="service-item">
+                                <label class="container">
+                                    <span class="service-item-label">בר משקאות</span>
+                                    <input type="checkbox" value="" id="defaultCheck1">
+                                    <span class="checkmark"></span>
+                                    <span class="">400&#8362;</span>
+                                </label>
+                            </dd>
+                        @*}
+                    }*@
+                </ul>
+            </form>
+        </div>
     </div>
 </div>

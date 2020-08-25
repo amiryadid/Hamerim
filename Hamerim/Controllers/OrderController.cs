@@ -26,7 +26,7 @@ namespace Hamerim.Controllers
         {
             using (var ctx = new HamerimDbContext())
             {
-                ViewBag.Clubs = ctx.Clubs;
+                ViewBag.Clubs = ctx.Clubs.Include(cl => cl.Address).ToList();
             }
 
             return View();
@@ -36,7 +36,7 @@ namespace Hamerim.Controllers
         {
             using (var ctx = new HamerimDbContext())
             {
-                var chosenClub = ctx.Clubs.First(club => club.Id == Id);
+                var chosenClub = ctx.Clubs.Include(cl => cl.Address).First(club => club.Id == Id);
                 ViewBag.ChosenClub = chosenClub;
                 ViewBag.UnavailableDates = chosenClub.ClubOrders.Where(club => club.Date >= DateTime.Today)
                                                                 .Select(order => order.Date).ToList();
