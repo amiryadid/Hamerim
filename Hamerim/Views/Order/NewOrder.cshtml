@@ -30,7 +30,7 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (data) {
-                        alert("sc");
+                        alert("success")
                         //$.each(data, function (i, club) {
                         //    var row =
                         //        "<div class='flex card'>" +
@@ -49,7 +49,7 @@
                         //});
                     },
                     error: function (err) {
-                        console.error(err);
+                        console.log(err);
                     }
                 });
             } else {
@@ -123,7 +123,7 @@
                     </label>
                     <input class="dark-input" type="text" name="filterName" id="filterName" />
                 </div>
-                <button type="submit" id="filter-btn" class="btn form-control btn-primary btn-sm" onclick="filter()">סנן</button>
+                <button type="button" id="filter-btn" class="btn form-control btn-primary btn-sm" onclick="filter()">סנן</button>
             </div>
         </form>
     </div>

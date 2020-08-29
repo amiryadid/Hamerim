@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
@@ -65,9 +66,7 @@ namespace Hamerim.Controllers
         {
             using (var ctx = new HamerimDbContext())
             {
-                ViewBag.Clubs = ctx.Clubs.Include(cl => cl.Address).ToList();
-
-                IEnumerable<Club> filteredClubs = ViewBag.Clubs;
+                IEnumerable<Club> filteredClubs = ctx.Clubs.Include(cl => cl.Address).ToList(); ;
 
                 if (!nameFilter.IsEmpty())
                     filteredClubs = filteredClubs.Where(club => club.Name.Contains(nameFilter));
@@ -75,10 +74,24 @@ namespace Hamerim.Controllers
                 if (!cityFilter.IsEmpty())
                     filteredClubs = filteredClubs.Where(club => club.Address.City == cityFilter);
 
-                ViewBag.Clubs = filteredClubs.Where(club => club.Cost <= maxPriceFilter).ToList();
-            }
+                filteredClubs = filteredClubs.Where(club => club.Cost <= maxPriceFilter);
 
-            return Json(ViewBag.Clubs);
+                // Creating new anonymus type to avoid circular reference in JSON
+                var data = filteredClubs.Select(club => new
+                {
+                    club.Id,
+                    club.Name,
+                    club.Cost,
+                    Address = new
+                    {
+                        club.Address.City,
+                        club.Address.Street,
+                        club.Address.HouseNumber
+                    }
+                });
+
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public ActionResult AfterChooseClub(int Id)
