@@ -6,6 +6,10 @@
     overflow-y: auto;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 .card {
     background-color: rgba(107, 107, 107, 0.35);
     color: white;
@@ -73,7 +77,6 @@
 
 .flex-column {
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .flex.center {
@@ -148,7 +151,7 @@
     margin: 0;
 }
 
-.order-sum .headerLeft {
+.only-title .headerLeft {
     height: 100%;
     margin: auto;
     font-size: 22px;
@@ -176,12 +179,49 @@
 }
 
 #finishedOrder .flex-row-lg {
+    margin-top: 1em;
     justify-content: space-evenly;
-    margin-bottom: 2em;
+}
+
+#finishedOrder .flex-column {
+    flex-basis: 36%;
+    justify-content: start;
+}
+
+#finishedOrder .flex-column .card {
+    margin-bottom: 20px;
+    flex-basis: auto;
 }
 
 #finishedOrder .card {
-    flex-basis: 43%;
+    width: 100%;
+}
+
+#finishedOrder .only-title {
+    flex-basis: auto;
+    padding: 0;
+}
+
+#finishedOrder .service-item {
+    display: flex;
+    align-items: center;
+}
+
+#order-id-card {
+    border: 2px solid var(--purple);
+}
+
+#order-id-card header {
+    background-color: rgba(107, 107, 107, 0.35);
+}
+
+#order-id-card .contenct {
+    padding: 4px;
+}
+
+#order-id-card p {
+    text-align: center;
+    margin: 0;
 }
 
 /* Checkbox component */
