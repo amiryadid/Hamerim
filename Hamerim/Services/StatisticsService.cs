@@ -54,7 +54,7 @@ namespace Hamerim.Services
             {
                 return ctx.Orders.GroupBy(order => order.Club).Select(group => new
                 {
-                    Club = group.Key,
+                    Club = group.Key.Name,
                     AmountOfOrders = group.Count()
                 }).ToList();
             }
