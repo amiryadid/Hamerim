@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -10,6 +14,8 @@ using Hamerim.Data;
 using Hamerim.Models;
 using Hamerim.Services;
 using Microsoft.Ajax.Utilities;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Hamerim.Controllers
 {
@@ -32,6 +38,27 @@ namespace Hamerim.Controllers
             }
 
             return View();
+        }
+
+        public async Task<ActionResult> GetLocations()
+        {
+            using (var ctx = new HamerimDbContext())
+            {
+                List<dynamic> locations = new List<dynamic>();
+                dynamic[] results;
+
+                var tasks = ctx.Clubs.ToList().Select(GetClubLocation);
+                results = await Task.WhenAll(tasks);
+                locations.AddRange(results
+                    .Select(result => new
+                    {
+                        lat = JArray.Parse(result.Data)[0].Value<string>("lat"),
+                        lon = JArray.Parse(result.Data)[0].Value<string>("lon"),
+                        result.Club
+                    }));
+
+                return Json(locations, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public ActionResult FilterClubs(int maxPriceFilter=Int32.MaxValue, string nameFilter = "", string cityFilter = "")
@@ -76,15 +103,28 @@ namespace Hamerim.Controllers
         }
 
         [HttpPost]
-        public ActionResult BookOrder(Order order)
+        public ActionResult BookOrder(DateTime date,
+                                        int clubId,
+                                        string clientName,
+                                        string clientPhone,
+                                        List<int> servicesIds)
         {
             using (HamerimDbContext ctx = new HamerimDbContext())
             {
-                ctx.Orders.Add(order);
-                ctx.SaveChanges();
-            }
+                Order newOrder = new Order
+                {
+                    Date = date,
+                    Club = ctx.Clubs.Find(clubId),
+                    ClientName = clientName,
+                    ClientPhone = clientPhone,
+                    ServicesInOrder = servicesIds.Select(id => ctx.Services.Find(id)).ToList()
+                };
 
-            return RedirectToAction("FinishedOrder", order.Id);
+                ctx.Orders.Add(newOrder);
+                ctx.SaveChanges();
+                
+                return RedirectToAction("FinishedOrder", newOrder.Id);
+            }
         }
 
         public ActionResult FinishedOrder(int orderNumber)
@@ -92,6 +132,30 @@ namespace Hamerim.Controllers
             ViewBag.OrderNumber = orderNumber;
 
             return View();
+        }
+
+        private async Task<dynamic> GetClubLocation(Club club)
+        {
+            using (var client = new HttpClient())
+            {
+                Thread.Sleep(1000); // Because API limits requests per second
+
+                string apiToken = ConfigurationManager.AppSettings["LocationIQApiToken"];
+                string url =
+                    "https://eu1.locationiq.com/v1/search.php?key={0}&country=Israel&city={1}&street={2}&addressdetails=1&format=json";
+                url += club.Address.HouseNumber != 0 ? "&house_number=" + club.Address.HouseNumber.ToString() : "";
+                var uri = new Uri(string.Format(url, apiToken, club.Address.City, club.Address.Street));
+
+                var response = await client.GetAsync(uri);
+
+                string textResult = await response.Content.ReadAsStringAsync();
+
+                return new
+                {
+                    Club = club.Name,
+                    Data = textResult
+                };
+            }
         }
     }
 }

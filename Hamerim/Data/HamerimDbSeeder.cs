@@ -124,7 +124,7 @@ namespace Hamerim.Data
                 {
                     ClubId = 1,
                     City = "Beer-Sheva",
-                    Street = "Kiryat Yehudit IZ",
+                    Street = "Kiryat Yehudit",
                     HouseNumber = 0
                 },
                 new ClubAddress()
