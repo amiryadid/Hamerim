@@ -111,11 +111,11 @@ namespace Hamerim.Controllers
             {
                 Order newOrder = new Order
                 {
-                    Date = date,
+                    Date = DateTime.ParseExact(txtDateTime, "MM/dd/yyyy", null),
                     Club = ctx.Clubs.Find(clubId),
                     ClientName = clientName,
                     ClientPhone = clientPhone,
-                    ServicesInOrder = servicesIds.Select(id => ctx.Services.Find(id)).ToList()
+                    ServicesInOrder = serviceIds.Select(id => ctx.Services.Find(id)).ToList()
                 };
 
                 ctx.Orders.Add(newOrder);
