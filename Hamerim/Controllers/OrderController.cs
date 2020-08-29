@@ -113,13 +113,13 @@ namespace Hamerim.Controllers
                     Club = ctx.Clubs.Find(clubId),
                     ClientName = clientName,
                     ClientPhone = clientPhone,
-                    ServicesInOrder = serviceIds.Select(id => ctx.Services.Find(id)).ToList()
+                    ServicesInOrder = serviceIds != null ? serviceIds.Select(id => ctx.Services.Find(id)).ToList() : null
                 };
 
                 ctx.Orders.Add(newOrder);
                 ctx.SaveChanges();
                 
-                return RedirectToAction("FinishedOrder", newOrder.Id);
+                return RedirectToAction("FinishedOrder", new { orderNumber = newOrder.Id });
             }
         }
 
@@ -127,7 +127,11 @@ namespace Hamerim.Controllers
         {
             using (var ctx = new HamerimDbContext())
             {
-                ViewBag.Order = ctx.Orders.Find(orderNumber);
+                ViewBag.Order = ctx.Orders
+                    .Include(order => order.Club)
+                    .Include(order => order.Club.Address)
+                    //.Include(order => order.ServicesInOrder)
+                    .FirstOrDefault(order => order.Id == orderNumber);
             }
 
             return View();
