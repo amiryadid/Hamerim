@@ -15,10 +15,10 @@
     align-items: center;
     flex-basis: 48%;
 }
-
+/*
 .card:not(:last-child) {
     margin-bottom: 2rem;
-}
+}*/
 
 .card form {
     display: flex;
@@ -68,6 +68,11 @@
 
 .flex-row {
     flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-column {
+    flex-direction: column;
     justify-content: space-between;
 }
 
@@ -168,6 +173,15 @@
 
 #done-btn:disabled {
     opacity: 0.3;
+}
+
+#finishedOrder .flex-row-lg {
+    justify-content: space-evenly;
+    margin-bottom: 2em;
+}
+
+#finishedOrder .card {
+    flex-basis: 43%;
 }
 
 /* Checkbox component */

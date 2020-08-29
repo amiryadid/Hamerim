@@ -73,14 +73,14 @@
     }
 
     function setSumPrice(service) {
-        var hotelCost = @Html.Raw(Json.Encode(ViewBag.chosenClub.Cost));
+        var clubCost = @Html.Raw(Json.Encode(ViewBag.chosenClub.Cost));
         currCost = parseInt($("#sum-cost").html());
 
         if (service) {
             serviceCost = parseInt(service.attributes["cost"].value);
             sumPrice += (service.checked ? serviceCost : serviceCost * (-1));
         } else {
-            sumPrice = hotelCost;
+            sumPrice = clubCost;
         }
 
         $("#sum-cost").html(sumPrice);
