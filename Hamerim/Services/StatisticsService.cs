@@ -47,5 +47,17 @@ namespace Hamerim.Services
                 return data;
             }
         }
+
+        public IEnumerable<dynamic> OrdersByClub()
+        {
+            using (var ctx = new HamerimDbContext())
+            {
+                return ctx.Orders.GroupBy(order => order.Club).Select(group => new
+                {
+                    Club = group.Key,
+                    AmountOfOrders = group.Count()
+                }).ToList();
+            }
+        }
     }
 }

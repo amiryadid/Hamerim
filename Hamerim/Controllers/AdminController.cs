@@ -45,6 +45,7 @@ namespace Hamerim.Controllers
         public ActionResult Statistics()
         {
             ViewBag.MonthlySales = statisticsService.GetMonthlySales();
+            ViewBag.ClubOrders = statisticsService.OrdersByClub();
 
             return View();
         }
@@ -88,7 +89,7 @@ namespace Hamerim.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddService(string title, int cost, int serviceId)
+        public ActionResult AddService(string title, int cost, int category)
         {
             using (var ctx = new HamerimDbContext())
             {
@@ -96,7 +97,7 @@ namespace Hamerim.Controllers
                 {
                     Title = title,
                     Cost = cost,
-                    Category = ctx.ServiceCategories.Find(serviceId)
+                    Category = ctx.ServiceCategories.Find(category)
                 });
                 ctx.SaveChanges();
             }
@@ -134,13 +135,14 @@ namespace Hamerim.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditService(int id, string title, int cost)
+        public ActionResult EditService(int id, string title, int cost, int category)
         {
             using (var ctx = new HamerimDbContext())
             {
                 Service service = ctx.Services.Find(id);
                 service.Title = title;
                 service.Cost = cost;
+                service.Category = ctx.ServiceCategories.Find(category);
                 ctx.SaveChanges();
             }
 
