@@ -1,6 +1,69 @@
 ﻿@{
     ViewBag.Title = "NewOrder";
+    var clubs = ViewBag.Clubs;
+    var cities = ViewBag.Cities;
 }
+
+<script>
+    function filter() {
+        var costCheck = document.forms["filters"]["checkMaxCost"].checked;
+        var cityCheck = document.forms["filters"]["checkCity"].checked;
+        var nameCheck = document.forms["filters"]["checkName"].checked;
+
+        var costValidate = costCheck ? document.forms["filters"]["filterMaxCost"].value != "" : true;
+        var nameValidate = nameCheck ? document.forms["filters"]["filterName"].value != "" : true;
+
+        if (costCheck || cityCheck || nameCheck) {
+            if (costValidate && nameValidate) {
+                var cost = costCheck ? parseInt(document.forms["filters"]["filterMaxCost"].value) : Number.MAX_SAFE_INTEGER;
+                var city = cityCheck ? document.forms["filters"]["filterCity"].value : "";
+                var name = nameCheck ? document.forms["filters"]["filterName"].value : "";
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Order/FilterClubs",
+                    data: {
+                        maxPriceFilter: cost,
+                        nameFilter: name,
+                        cityFilter: city
+                    },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        alert("sc");
+                        //$.each(data, function (i, club) {
+                        //    var row =
+                        //        "<div class='flex card'>" +
+                        //            "<form action='/Order/AfterChooseClub'" +
+                        //                "<div class='card-body'>" +
+                        //                    "<input type='hidden' name='Id' value='" + club.Id + "' id='id' />" + 
+                        //                    "<p class='card-title'>" + club.Name + "</p>" +
+                        //                    //"<p class='card-subtitle'>" + club.PrintAddress() + "</p>" +
+                        //                    "<p class='card-subtitle'>dafna</p>" +
+                        //                    "<p class='card-footer'>&#8362;" + String.Format('{0:n0}', club.Cost) + " לערב</p>" +
+                        //                "</div>" +
+                        //                "<button type='submit' id='choose-club-btn' class='btn'>בחרתי!</button>" + 
+                        //            "</form>" + 
+                        //        "</div>"
+                        //    $('#clubs').append(row);
+                        //});
+                    },
+                    error: function (err) {
+                        console.error(err);
+                    }
+                });
+            } else {
+                return false;
+            }
+        } else {
+            alert("לא סימנת כלום לסנן");
+        }
+    }
+
+    $(document).ready(function () {
+
+    })
+</script>
 
 <div class="fullHeight blackCard">
     <header class="flex header">
@@ -19,12 +82,56 @@
             <label class="switch-text">טבלה</label>
         </div>
     </header>
-    <div class="flex contenct">
-        @foreach (var club in ViewBag.Clubs as IList<Hamerim.Models.Club>)
+
+    <div id="filters-card" class="card">
+        <header class="flex header">
+            <div class="flex headerTitle headerTitle-sm black">
+                <div class="title">
+                    סינונים
+                </div>
+                <div class="arrowUp"></div>
+            </div>
+        </header>
+        <form name="filters">
+            <div class="flex filters">
+                <div class="flex">
+                    <label class="container">
+                        <span class="service-item-label">מחיר מקסימלי:</span>
+                        <input type="checkbox" name="checkMaxCost">
+                        <span class="checkmark"></span>
+                    </label>
+                    <input class="dark-input" type="number" name="filterMaxCost" id="maxCost" />
+                </div>
+                <div class="flex filter">
+                    <label class="container">
+                        <span class="service-item-label">עיר:</span>
+                        <input type="checkbox" name="checkCity">
+                        <span class="checkmark"></span>
+                    </label>
+                    <select class="dark-input" name="filterCity" id="filterCity">
+                        @foreach (var city in cities)
+                        {
+                            <option value="@city">@city</option>
+                        }
+                    </select>
+                </div>
+                <div class="flex">
+                    <label class="container">
+                        <span class="service-item-label">שם המועדון:</span>
+                        <input type="checkbox" name="checkName">
+                        <span class="checkmark"></span>
+                    </label>
+                    <input class="dark-input" type="text" name="filterName" id="filterName" />
+                </div>
+                <button type="submit" id="filter-btn" class="btn form-control btn-primary btn-sm" onclick="filter()">סנן</button>
+            </div>
+        </form>
+    </div>
+    <div class="flex contenct" id="clubs">
+        @foreach (var club in clubs as IList<Hamerim.Models.Club>)
         {
             <div class="flex card">
-                @using (Html.BeginForm("AfterChooseClub", "Order"))
-                {
+                <form action='/Order/AfterChooseClub' method='post'>
                     <div class="card-body">
                         <input type="hidden" name="Id" value="@club.Id" id="id" />
                         <p class="card-title">@club.Name</p>
@@ -32,7 +139,7 @@
                         <p class="card-footer">&#8362;@String.Format("{0:n0}", club.Cost) לערב</p>
                     </div>
                     <button type="submit" id="choose-club-btn" class="btn">בחרתי!</button>
-                }
+                </form>
             </div>
         }
     </div>

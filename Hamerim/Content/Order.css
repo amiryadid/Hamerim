@@ -2,12 +2,66 @@
     padding: 20px;
     flex-wrap: wrap;
     justify-content: space-around;
-    height: 91%;
+    max-height: 91%;
     overflow-y: auto;
 }
 
 .bold {
     font-weight: bold;
+}
+
+
+#filters-card {
+    margin: 20px 20px 0 20px;
+    padding: 0 0 10px 0;
+}
+
+.filters {
+    margin: 10px 10px 0 10px;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.filter {
+    width: 25%;
+}
+
+.filters .checkmark {
+    top: 9px;
+}
+
+.filter {
+    width: 25%;
+}
+
+.filter select {
+    width: 100%;
+}
+
+.filter input[type=number] {
+    width: 7em;
+}
+
+#filter-btn {
+    width: 4em;
+}
+
+.btn-primary {
+    border: 0;
+    background-color: var(--pink);
+    font-size: 20px;
+    height: initial;
+    transition: all 0.1s ease;
+}
+
+.btn-primary:hover {
+    border: 0;
+    background-color: #bf1637;
+}
+
+.btn-primary:disabled {
+    background-color: var(--pink);
+    opacity: 0.3;
 }
 
 .card {
@@ -19,10 +73,6 @@
     align-items: center;
     flex-basis: 48%;
 }
-/*
-.card:not(:last-child) {
-    margin-bottom: 2rem;
-}*/
 
 .card form {
     display: flex;
@@ -104,15 +154,18 @@
     margin-left: 2em;
 }
 
-.client-details input {
+.dark-input {
     background-color: #000000a8;
     outline: none;
     border: 0;
+    color: white;
+    padding: 1px 4px;
 }
 
-.client-details input:-webkit-autofill,
-.client-details input:-webkit-autofill:hover,
-.client-details input:-webkit-autofill:focus {
+.dark-input:-webkit-autofill,
+.dark-input:-webkit-autofill:hover,
+.dark-input:-webkit-autofill:focus {
+    color: white;
     border: 0;
     -webkit-text-fill-color: white;
     -webkit-box-shadow: 0;
@@ -166,16 +219,7 @@
 }
 
 #done-btn {
-    border: 0;
-    background-color: var(--pink);
     width: 44%;
-    font-size: 20px;
-    height: initial;
-    transition: all 0.1s ease;
-}
-
-#done-btn:disabled {
-    opacity: 0.3;
 }
 
 #finishedOrder .flex-row-lg {
@@ -215,6 +259,10 @@
     background-color: rgba(107, 107, 107, 0.35);
 }
 
+#order-id-card span {
+    font-weight: bold;
+}
+
 #order-id-card .contenct {
     padding: 4px;
 }
@@ -234,7 +282,7 @@
     padding-right: 30px;
     font-size: 18px;
     font-weight: normal;
-    width: 100%;
+    width: auto;
     display: flex;
     align-items: center;
 }

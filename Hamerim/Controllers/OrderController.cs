@@ -65,6 +65,8 @@ namespace Hamerim.Controllers
         {
             using (var ctx = new HamerimDbContext())
             {
+                ViewBag.Clubs = ctx.Clubs.Include(cl => cl.Address).ToList();
+
                 IEnumerable<Club> filteredClubs = ViewBag.Clubs;
 
                 if (!nameFilter.IsEmpty())
