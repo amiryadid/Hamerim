@@ -96,9 +96,8 @@ namespace Hamerim.Controllers
 
         public ActionResult GetPopularServices(int month)
         {
-            List<Service> services = 
-                this.statisticsService.GetMostPopularServices(month).ToList();
-
+            List<Service> services = statisticsService.GetMostPopularServices(month).ToList();
+            
             return Json(services);
         }
 
@@ -130,7 +129,7 @@ namespace Hamerim.Controllers
                 ViewBag.Order = ctx.Orders
                     .Include(order => order.Club)
                     .Include(order => order.Club.Address)
-                    //.Include(order => order.ServicesInOrder)
+                    .Include(order => order.ServicesInOrder)
                     .FirstOrDefault(order => order.Id == orderNumber);
             }
 

@@ -1,14 +1,18 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "FinishedOrder";
     var order = ViewBag.Order;
     var club = order.Club;
-    //var services = order.ServicesInOrder;
+    var services = order.ServicesInOrder;
 }
 
-<script>
-    var clubCost = @Html.Raw(Json.Encode(club.Cost));
-    @*//var services = @Html.Raw(Json.Encode(services));*@
+    <script>
+    var clubCost = @club.Cost;
+    var serviceList = [];
+
+    @foreach (var service in services)
+    {
+        @:serviceList.push(@service.Cost);
+    }
 
     $(document).ready(function () {
         setSumPrice();
@@ -21,14 +25,14 @@
     }
 
     function setSumPrice() {
-        sum = clubCost + services.reduce(function (accumulator, currentService) {
-            return accumulator + currentService.Cost
+        sum = clubCost + serviceList.reduce(function (accumulator, currentCost) {
+            return accumulator + currentCost;
         }, 0)
 
         $("#sum-cost").html(sum);
         $("#sum-cost").digits();
     }
-</script>
+    </script>
 <div class="fullHeight blackCard" id="finishedOrder">
     <header class="flex header">
         <div class="flex headerTitle purple">
@@ -55,7 +59,7 @@
                     <div class="arrowUp"></div>
                 </div>
             </header>
-            @*<div class="contenct services-list">
+            <div class="contenct services-list">
                 <ul>
                     <dt class="service-cat">ccc</dt>
                     @foreach (var service in services)
@@ -70,7 +74,7 @@
                         </dd>
                     }
                 </ul>
-            </div>*@
+            </div>
         </div>
     </div>
 
