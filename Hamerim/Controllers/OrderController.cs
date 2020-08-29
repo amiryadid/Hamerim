@@ -127,7 +127,10 @@ namespace Hamerim.Controllers
 
         public ActionResult FinishedOrder(int orderNumber)
         {
-            ViewBag.OrderNumber = orderNumber;
+            using (var ctx = new HamerimDbContext())
+            {
+                ViewBag.Order = ctx.Orders.Find(orderNumber);
+            }
 
             return View();
         }
