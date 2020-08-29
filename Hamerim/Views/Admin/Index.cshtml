@@ -274,7 +274,7 @@
                         string deleteIdTarget = "#deleteOrder" + order.Id;
 
                         <div class="flex manageEntity">
-                            <div>@order.Id</div>
+                            <div>@order.Id @order.ClientName</div>
                             <i class="material-icons button" data-toggle="modal" data-target="@deleteIdTarget">delete</i>   
                         </div>
 

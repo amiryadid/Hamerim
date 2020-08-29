@@ -11,19 +11,18 @@
             </a>
         </div>
     </header>
-    <div class="flex">
-        <div class="flexColumn statisticsContainer">
-            <h4>כמות הזמנות לפי חודשים</h4>
-            <div id="month">
-            </div>
-        </div>
-        <div class="flexColumn statisticsContainer">
-            <h4>כמות הזמנות לפי מועדונים</h4>
-            <div id="club">
-            </div>
+    <div class="flexColumn graphsContainer">
+    <div class="flexColumn statisticsContainer">
+        <h3>כמות הזמנות לפי חודשים</h3>
+        <div id="month">
         </div>
     </div>
-
+    <div class="flexColumn statisticsContainer">
+        <h3>כמות הזמנות לפי מועדונים</h3>
+        <div id="club">
+        </div>
+    </div>
+    </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -32,11 +31,13 @@
 <script type='text/javascript'> 
     var monthlySales = @Html.Raw(Json.Encode(ViewBag.MonthlySales));
     var clubOrders =  @Html.Raw(Json.Encode(ViewBag.ClubOrders));
-createGraph(clubOrders, false, 'club');
-createGraph(monthlySales, true, 'month');
+
+    createGraph(clubOrders, false, 'club');
+    createGraph(monthlySales, true, 'month');
+
     function createGraph(data, isMonth, id) {
-        var margin = { top: 30, right: 40, bottom: 170, left: 40 },
-                width = 500,
+        var margin = { top: 40, right: 40, bottom: 170, left: 40 },
+                width = 800,
                 height = 300;
 
             //set the ranges
@@ -50,14 +51,14 @@ createGraph(monthlySales, true, 'month');
             var yAxis = d3.svg.axis()
                 .scale(y)
                 .orient("left")
-                .tickValues(d3.range(0, maxY + 1, 1))
+                .tickValues(data.map(entry => entry.AmountOfOrders))
                 
 
             // add the SVG element
             var svg = d3.select("#" + id).append("svg")
                 .attr("fill", "white")
                 .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
+                .attr("height", 400)
                 .append("g")
                 .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
@@ -79,7 +80,7 @@ createGraph(monthlySales, true, 'month');
                 .call(xAxis)
                 .selectAll("text")
                 .style("text-anchor", "end")
-                .attr("dx", isMonth ? "1.2em" : "-1em")
+                .attr("dx", isMonth ? "0.8em" : "-3em")
                 .attr("dy", "1em")
 
             svg.append("g")

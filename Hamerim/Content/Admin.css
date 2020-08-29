@@ -24,6 +24,7 @@
 
 .managmentContainer{
     margin: 25px;
+    height: 80%;
 }
 
 .manageEntityHeader{
@@ -39,6 +40,8 @@
     flex-direction: column;
     background-color: rgba(52, 52, 52, 0.86);
     color: white;
+    max-height: 75%;
+    overflow-y: scroll;
 }
 
 .manageEntity{
@@ -118,6 +121,11 @@
 }
 
 .statisticsContainer {
-    margin: 20px;
     color: white;
+}
+
+.graphsContainer {
+    margin-right: 100px;
+    overflow-y: scroll;
+    height: 90%;
 }

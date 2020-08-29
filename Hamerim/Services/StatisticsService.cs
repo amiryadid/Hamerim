@@ -44,6 +44,7 @@ namespace Hamerim.Services
                             Profit = 0
                         });
                 }
+
                 return data;
             }
         }
@@ -52,11 +53,23 @@ namespace Hamerim.Services
         {
             using (var ctx = new HamerimDbContext())
             {
-                return ctx.Orders.GroupBy(order => order.Club).Select(group => new
+                var clubs = ctx.Clubs.ToList();
+
+                var data = ctx.Orders.GroupBy(order => order.Club).AsEnumerable().Select(group => new
                 {
                     Club = group.Key.Name,
                     AmountOfOrders = group.Count()
                 }).ToList();
+
+                clubs = clubs.Where(club => !data.Any(entry => entry.Club == club.Name)).ToList();
+
+                data.AddRange(clubs.Select(club => new
+                {
+                    Club = club.Name,
+                    AmountOfOrders = 0
+                }).ToList());
+
+                return data;
             }
         }
     }
