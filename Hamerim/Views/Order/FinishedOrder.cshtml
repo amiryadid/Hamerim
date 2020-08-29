@@ -42,90 +42,107 @@
             <div class="arrowUp"></div>
         </div>
     </header>
-    <div class="flex flex-column">
-        <div class="card right">
-            <div class="card-body">
-                <p class="card-title">@club.Name</p>
-                <p class="card-subtitle">@club.PrintAddress()</p>
-                <p class="card-footer">@String.Format("{0:n0}", club.Cost)&#8362; לערב</p>
-            </div>
-        </div>
-        <div class="blackCard leftSide">
-            <header class="flex header">
-                <div class="flex headerTitle purple">
-                    <div class="title">
-                        תוספות
-                    </div>
-                    <div class="arrowUp"></div>
+    <div class="flex flex-row flex-row-lg">
+        <div class="flex flex-column">
+            <div class="card right">
+                <div class="card-body">
+                    <p class="card-title">@club.Name</p>
+                    <p class="card-subtitle">@club.PrintAddress()</p>
+                    <p class="card-footer">&#8362;@String.Format("{0:n0}", club.Cost) לערב</p>
                 </div>
-            </header>
-            <div class="contenct services-list">
-                <ul>
-                    <dt class="service-cat">ccc</dt>
-                    @foreach (var service in services)
-                    {
+            </div>
+            <div class="blackCard">
+                <header class="flex header">
+                    <div class="flex headerTitle purple">
+                        <div class="title">
+                            תוספות
+                        </div>
+                        <div class="arrowUp"></div>
+                    </div>
+                </header>
+                <div class="contenct services-list">
+                    <ul>
+                        <dt class="service-cat">ccc</dt>
+                        @*@foreach (var service in services)
+                            {
+                                <dd class="service-item">
+                                    <label class="container">
+                                        <span class="service-item-label">@service.Title</span>
+                                        <input type="checkbox" name="serviceIds" value="@service.Id" cost=@service.Cost id="serviceId" onclick="setSumPrice(this)">
+                                        <span class="checkmark"></span>
+                                        <span class="">@String.Format("{0:n0}", service.Cost)&#8362;</span>
+                                    </label>
+                                </dd>
+                            }*@
                         <dd class="service-item">
-                            <label class="container">
-                                <span class="service-item-label">@service.Title</span>
-                                <input type="checkbox" name="serviceIds" value="@service.Id" cost=@service.Cost id="serviceId" onclick="setSumPrice(this)">
-                                <span class="checkmark"></span>
-                                <span class="">@String.Format("{0:n0}", service.Cost)&#8362;</span>
-                            </label>
+                            <span class="service-item-label">בר קוקטיילים</span>
+                            <span class="">&#8362;@String.Format("{0:n0}", 4200)</span>
+                        </dd>
+                        <dd class="service-item">
+                            <span class="service-item-label">בר קוקטיילים</span>
+                            <span class="">&#8362;@String.Format("{0:n0}", 4200)</span>
                         </dd>
                     }
                 </ul>
             </div>
         </div>
-    </div>
 
-    <div class="flex flex-column">
-        <div class="blackCard card only-title">
-            <header class="flex header">
-                <div class="flex headerTitle black">
-                    <div class="title">
-                        תאריך
+        <div class="flex flex-column">
+            <div class="blackCard card only-title">
+                <header class="flex header">
+                    <div class="flex headerTitle black">
+                        <div class="title">
+                            תאריך
+                        </div>
+                        <div class="arrowUp"></div>
                     </div>
-                    <div class="arrowUp"></div>
-                </div>
-                <div class="headerLeft">
-                    <span>@order.Date</span>
-                </div>
-            </header>
-        </div>
-        <div class="blackCard card only-title">
-            <header class="flex header">
-                <div class="flex headerTitle black">
-                    <div class="title">
-                        עלות כוללת
+                    <div class="headerLeft">
+                        <span>@order.Date.ToShortDateString()</span>
                     </div>
-                    <div class="arrowUp"></div>
-                </div>
-                <div class="headerLeft">
-                    <span id="sum-cost"></span><span>&#8362;</span>
-                </div>
-            </header>
-        </div>
-    </div>
-    <div class="flex flex-row-lg">
-        <div class="card right">
-            <div class="card-body">
-                <p class="card-title">@order.Club.Name</p>
-                <p class="card-subtitle">@order.Club.PrintAddress()</p>
-                <p class="card-footer">@String.Format("{0:n0}", order.Club.Cost)&#8362; לערב</p>
+                </header>
             </div>
-        </div>
-        <div class="card leftSide">
-            <div class="flex client-details-card">
-                <div class="client-details">
-                    <div class="flex flex-row">
-                        <span>שם</span><span name="clientName" id="clientName" />@order.ClientName</span>
+            <div class="blackCard card only-title">
+                <header class="flex header">
+                    <div class="flex headerTitle black">
+                        <div class="title">
+                            עלות כוללת
+                        </div>
+                        <div class="arrowUp"></div>
                     </div>
-                    <div class="flex flex-row">
-                        <span>טלפון</span><span name="clientPhone" id="clientPhone" />@order.ClientPhone</span>
+                    <div class="headerLeft">
+                        <span>&#8362;</span><span id="sum-cost"></span>
+                    </div>
+                </header>
+            </div>
+            <div class="flex center">
+                <div class="flex card client-details-card">
+                    <div class="card-body client-details">
+                        <div class="flex flex-row">
+                            <span class="bold">שם</span><span>@order.ClientName</span>
+                        </div>
+                        <div class="flex flex-row">
+                            <span class="bold">טלפון</span><span>@order.ClientPhone</span>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="blackCard" id="order-id-card">
+                <header class="flex header only-title">
+                    <div class="flex headerTitle purple">
+                        <div class="title">
+                            קוד הזמנה
+                        </div>
+                        <div class="arrowUp"></div>
+                    </div>
+                    <div class="headerLeft">
+                        <span id="order-id">@order.Id</span>
+                    </div>
+                </header>
+                <div class="contenct">
+                    <p>לגזור ולשמור! </br>
+                    תצטרכו את קוד ההזמנה כדי לחזור לכאן</p>
+                </div>
+            </div>
         </div>
     </div>
-    
 </div>

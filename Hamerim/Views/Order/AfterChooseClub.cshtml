@@ -107,7 +107,7 @@
                         <input type="hidden" name="clubId" value="@chosenClub.Id" id="id" />
                         <p class="card-title">@chosenClub.Name</p>
                         <p class="card-subtitle">@chosenClub.PrintAddress()</p>
-                        <p class="card-footer">@String.Format("{0:n0}", chosenClub.Cost)&#8362; לערב</p>
+                        <p class="card-footer">&#8362;@String.Format("{0:n0}", chosenClub.Cost) לערב</p>
                     </div>
                 </div>
             </div>
@@ -125,10 +125,10 @@
                 <div class="flex card client-details-card">
                     <div class="card-body client-details">
                         <div class="flex flex-row">
-                            <span>שם</span><input type="text" name="clientName" id="clientName" onkeyup="validateInputs();" />
+                            <span>שם</span><input class="dark-input" type="text" name="clientName" id="clientName" onkeyup="validateInputs();" />
                         </div>
                         <div class="flex flex-row">
-                            <span>טלפון</span><input type="text" name="clientPhone" id="clientPhone" maxlength="10" onkeyup="validateInputs();" />
+                            <span>טלפון</span><input  class="dark-input" type="text" name="clientPhone" id="clientPhone" maxlength="10" onkeyup="validateInputs();" />
                         </div>
                         <p class="">כדי שאם משהו משתנה, נוכל להישאר בקשר</p>
                     </div>
@@ -174,7 +174,7 @@
                                     <span class="service-item-label">@service.Title</span>
                                     <input type="checkbox" name="serviceIds" value="@service.Id" cost=@service.Cost id="serviceId" onclick="setSumPrice(this)">
                                     <span class="checkmark"></span>
-                                    <span class="">@String.Format("{0:n0}", service.Cost)&#8362;</span>
+                                    <span class="">&#8362;@String.Format("{0:n0}", service.Cost)</span>
                                 </label>
                             </dd>
                         }
@@ -186,7 +186,7 @@
     <div class="flex flex-row order-sum">
         <div class="right">
             <div class="blackCard">
-                <header class="flex header">
+                <header class="flex header only-title">
                     <div class="flex headerTitle black">
                         <div class="title">
                             עלות כוללת
@@ -194,7 +194,7 @@
                         <div class="arrowUp"></div>
                     </div>
                     <div class="headerLeft">
-                        <span id="sum-cost">123</span><span>&#8362; </span><span class="mini-text">(מועדון + תוספות) </span>
+                        <span>&#8362;</span><span id="sum-cost">123</span><span class="mini-text"> (מועדון + תוספות)</span>
                     </div>
                 </header>
             </div>
