@@ -15,6 +15,11 @@
 
 .adminTitle{
     width: 180px;
+    color: white;
+}
+
+.adminTitle:hover{
+    color: white;
 }
 
 .managmentContainer{
@@ -104,4 +109,15 @@
 
 .red:hover {
     background-color: #4b101b;
+}
+
+.yaxis path,
+.yaxis line {
+  fill: white;
+  stroke-width: 10px;
+}
+
+.statisticsContainer {
+    margin: 20px;
+    color: white;
 }

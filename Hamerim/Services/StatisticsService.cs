@@ -27,12 +27,24 @@ namespace Hamerim.Services
         {
             using (var ctx = new HamerimDbContext())
             {
-                return ctx.Orders.GroupBy(order => order.Date.Month).AsEnumerable().Select(group => new
+                var data = ctx.Orders.GroupBy(order => order.Date.Month).AsEnumerable().Select(group => new
                 {
                     Month = group.Key,
                     AmountOfOrders = group.Count(),
                     Profit = group.Sum(order => order.TotalCost())
                 }).ToList();
+
+                for(int month=1; month<=12; month++)
+                {
+                    if (!data.Any(entry => entry.Month == month))
+                        data.Add(new
+                        {
+                            Month = month,
+                            AmountOfOrders = 0,
+                            Profit = 0
+                        });
+                }
+                return data;
             }
         }
     }
