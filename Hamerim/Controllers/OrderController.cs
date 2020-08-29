@@ -56,15 +56,18 @@ namespace Hamerim.Controllers
         }
 
         [HttpPost]
-        public ActionResult BookOrder(Order order)
+        public ActionResult BookOrder(int clubId, String clientName, String clientPhone, String txtDateTime, List<int> serviceIds)
         {
+            DateTime.ParseExact(txtDateTime, "MM/dd/yyyy", null);
+
             using (HamerimDbContext ctx = new HamerimDbContext())
             {
-                ctx.Orders.Add(order);
-                ctx.SaveChanges();
+                //ctx.Orders.Add(order);
+                //ctx.SaveChanges();
             }
 
-            return RedirectToAction("FinishedOrder", order.Id);
+            return RedirectToAction("FinishedOrder", 6);
+            //return RedirectToAction("FinishedOrder", order.Id);
         }
 
         public ActionResult FinishedOrder(int orderNumber)
