@@ -196,6 +196,10 @@
     height: 256.76px;
 }
 
+.services-list p {
+    text-align: center;
+}
+
 .order-sum {
     align-items: center;
 }

@@ -5,7 +5,7 @@
     var services = order.ServicesInOrder;
 }
 
-    <script>
+<script>
     var clubCost = @club.Cost;
     var serviceList = [];
 
@@ -32,7 +32,7 @@
         $("#sum-cost").html(sum);
         $("#sum-cost").digits();
     }
-    </script>
+</script>
 <div class="fullHeight blackCard" id="finishedOrder">
     <header class="flex header">
         <div class="flex headerTitle purple">
@@ -61,29 +61,23 @@
                     </div>
                 </header>
                 <div class="contenct services-list">
-                    <ul>
-                        <dt class="service-cat">ccc</dt>
-                        @*@foreach (var service in services)
+                    @if (services.Count == 0)
+                    {
+                        <p> אין תוספות במסיבה הזאת</p>
+                    }
+                    else
+                    {
+                        <ul>
+                            @foreach (var service in services)
                             {
                                 <dd class="service-item">
-                                    <label class="container">
-                                        <span class="service-item-label">@service.Title</span>
-                                        <input type="checkbox" name="serviceIds" value="@service.Id" cost=@service.Cost id="serviceId" onclick="setSumPrice(this)">
-                                        <span class="checkmark"></span>
-                                        <span class="">@String.Format("{0:n0}", service.Cost)&#8362;</span>
-                                    </label>
+                                    <span class="service-item-label">@service.Title</span>
+                                    <span class="">&#8362;@String.Format("{0:n0}", service.Cost)</span>
                                 </dd>
-                            }*@
-                        <dd class="service-item">
-                            <span class="service-item-label">בר קוקטיילים</span>
-                            <span class="">&#8362;@String.Format("{0:n0}", 4200)</span>
-                        </dd>
-                        <dd class="service-item">
-                            <span class="service-item-label">בר קוקטיילים</span>
-                            <span class="">&#8362;@String.Format("{0:n0}", 4200)</span>
-                        </dd>
+                            }
+                        </ul>
                     }
-                </ul>
+                </div>
             </div>
         </div>
 
@@ -139,8 +133,10 @@
                     </div>
                 </header>
                 <div class="contenct">
-                    <p>לגזור ולשמור! </br>
-                    תצטרכו את קוד ההזמנה כדי לחזור לכאן</p>
+                    <p>
+                        לגזור ולשמור! </br>
+                        תצטרכו את קוד ההזמנה כדי לחזור לכאן
+                    </p>
                 </div>
             </div>
         </div>
