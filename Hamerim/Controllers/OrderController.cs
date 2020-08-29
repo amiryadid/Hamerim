@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hamerim.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -30,6 +31,25 @@ namespace Hamerim.Controllers
         public ActionResult AfterChooseClub(int Id)
         {
             ViewBag.chosenClub = allClubs.Where(cl => cl.Id == Id).First();
+            return View();
+        }
+
+        public ActionResult ViewOrder()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ViewOrder(int orderNumber)
+        {
+            using(var ctx = new HamerimDbContext())
+            {
+                if (ctx.Orders.Any(order => order.Id == orderNumber))
+                    return RedirectToAction("FinishedOrder", new { orderNumber });
+                else
+                    ViewBag.ErrorMessage = "לא נמצאה הזמנה בעלת מספר הזיהוי שצויין";
+            }
+
             return View();
         }
     }

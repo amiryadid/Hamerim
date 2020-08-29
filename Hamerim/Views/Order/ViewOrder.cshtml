@@ -1,0 +1,16 @@
+﻿<div class="loginContainer">
+    <form class="formLogin" asp-controller="Order" asp-action="ViewOrder" method="POST">
+        <div class="flex formInput">
+            <div class="inputContainer">
+                <div class="inputLabel">מספר הזמנה</div>
+                <div class="inputBox">
+                    <input class="input" type="number" id="orderNumber" name="orderNumber">
+                </div>
+            </div>
+        </div>
+            @if(ViewBag.ErrorMessage != null) {
+                <div class="errorMessage">@ViewBag.ErrorMessage</div>
+            }
+        <button type="submit" class="loginButton">אישור</button>
+    </form>
+</div>
