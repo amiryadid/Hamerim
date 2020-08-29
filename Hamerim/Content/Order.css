@@ -13,18 +13,18 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    flex-basis: 40%;
+    flex-basis: 48%;
 }
 
-    .card:not(:last-child) {
-        margin-bottom: 2rem;
-    }
+.card:not(:last-child) {
+    margin-bottom: 2rem;
+}
 
-    .card form {
-        display: flex;
-        align-items: center;
-        width: 100%;
-    }
+.card form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
 
 .card-body {
     display: flex;
@@ -48,7 +48,7 @@
     color: #c4c4c4;
 }
 
-.card .done-btn {
+#choose-club-btn {
     color: var(--pink);
     background-color: white;
     filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.8));
@@ -61,19 +61,61 @@
     transition: all 0.2s ease;
 }
 
-    .card .done-btn:hover {
-        background-color: #e62248;
-        color: white;
-    }
+#choose-club-btn:hover {
+    background-color: #e62248;
+    color: white;
+}
 
 .flex-row {
     flex-direction: row;
     justify-content: space-between;
 }
 
-    .flex-row .right {
-        width: 43%;
-    }
+.flex.center {
+    justify-content: center;
+}
+
+.flex-row .right {
+    width: 43%;
+}
+
+.details-card-row .card {
+    justify-content: center;
+    flex-basis: 80%;
+}
+
+.client-details {
+    font-size: 18px;
+}
+
+.client-details .flex-row {
+    margin-bottom: 6px;
+}
+
+.client-details span {
+    margin-left: 2em;
+}
+
+.client-details input {
+    background-color: #000000a8;
+    outline: none;
+    border: 0;
+}
+
+.client-details input:-webkit-autofill,
+.client-details input:-webkit-autofill:hover,
+.client-details input:-webkit-autofill:focus {
+    border: 0;
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.client-details p {
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+}
 
 .blackCard ul {
     font-size: 18px;
@@ -84,18 +126,51 @@
     margin-bottom: 7px;
 }
 
-
-.service-item .form-check {
-    
-}
-
 .service-item .service-item-label {
     width: 47%;
     margin-right: 7px;
 }
 
-/* Checkbox component */
+.services-list {
+    height: 256.76px;
+}
 
+.order-sum {
+    align-items: center;
+}
+
+.order-sum .blackCard {
+    margin: 0;
+}
+
+.order-sum .headerLeft {
+    height: 100%;
+    margin: auto;
+    font-size: 22px;
+}
+
+.order-sum .mini-text {
+    font-size: 0.7em;
+}
+
+.order-sum .leftSide {
+    align-items: center;
+}
+
+#done-btn {
+    border: 0;
+    background-color: var(--pink);
+    width: 44%;
+    font-size: 20px;
+    height: initial;
+    transition: all 0.1s ease;
+}
+
+#done-btn:disabled {
+    opacity: 0.3;
+}
+
+/* Checkbox component */
 /* Customize the label (the container) */
 .container {
     position: relative;

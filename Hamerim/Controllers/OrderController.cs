@@ -103,12 +103,10 @@ namespace Hamerim.Controllers
         }
 
         [HttpPost]
-        public ActionResult BookOrder(DateTime date,
-                                        int clubId,
-                                        string clientName,
-                                        string clientPhone,
-                                        List<int> servicesIds)
+        public ActionResult BookOrder(int clubId, String clientName, String clientPhone, String txtDateTime, List<int> serviceIds)
         {
+            DateTime.ParseExact(txtDateTime, "MM/dd/yyyy", null);
+
             using (HamerimDbContext ctx = new HamerimDbContext())
             {
                 Order newOrder = new Order

@@ -1,101 +1,206 @@
 ﻿
 @{
     ViewBag.Title = "AfterChooseClub";
-
-    //ViewBag.occupiedDates = new List<java.time.LocalDate>() {
-    //        new java.time.LocalDate(2010, 0, 1),
-    //        new java.time.LocalDate(2010, 0, 1),
-    //        new java.time.LocalDate(2010, 0, 1),
-    //        new java.time.LocalDate(2010, 0, 1)
-    //        };
+    var chosenClub = ViewBag.chosenClub;
+    List<Hamerim.Models.ServiceCategory> serviceCategories = ViewBag.ServiceCategories;
 }
 
 <script>
-    var occupiedDates = ["8-25-2020", "8-30-2020", "9-1-2020", "9-2-2020"];
+    var numberPattern = /\d+/g;
+    occupiedDates = @Html.Raw(Json.Encode(ViewBag.UnavailableDates));
+    occupiedDatesTimes = occupiedDates.map(d => parseInt(d.match(numberPattern)[0]));
+
 
     function noOccupiedDates(date) {
-        var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
-        for (i = 0; i < occupiedDates.length; i++) {
-            if ($.inArray((m + 1) + '-' + d + '-' + y, occupiedDates) != -1 || new Date() > date) {
-                return [false, "occupied", "occ"];
-            }
+        if (occupiedDatesTimes.includes(date.getTime()) || new Date() > date) {
+            return [false, "occupied", "occ"];
         }
 
         return [true, "", ""];
     }
 
+    (function ($) {
+        $.fn.inputFilter = function (inputFilter) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                } else {
+                    this.value = "";
+                }
+            });
+        };
+    }(jQuery));
+
     $(document).ready(function () {
+        $("#clientPhone").inputFilter(function (value) {
+            return /^\d*$/.test(value);    // Allow digits only, using a RegExp
+        });
+
         $("#datepicker").datepicker({
             beforeShowDay: noOccupiedDates,
-            minDate: new Date()
+            minDate: new Date(),
+            onSelect: function () {
+                $("#txtDateTime").val($(this).datepicker({ dateFormat: "mm/dd/yy" }).val());
+                validateInputs();
+            }
         });
+
+        validateInputs();
+        setSumPrice();
     });
+
+    function validateInputs() {
+        var clientName = $('#clientName').val();
+        var clientPhone = $('#clientPhone').val();
+        var txtDateTime = $('#txtDateTime').val();
+
+        if (clientName != "" && clientPhone != "" && clientPhone.length == 10 && txtDateTime != "") {
+            $('#done-btn').attr("disabled", false);
+        } else {
+            $('#done-btn').attr("disabled", true);
+        }
+    }
+
+    $.fn.digits = function () {
+        return this.each(function () {
+            $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+        })
+    }
+
+    function setSumPrice(service) {
+        var hotelCost = @Html.Raw(Json.Encode(ViewBag.chosenClub.Cost));
+        currCost = parseInt($("#sum-cost").html());
+
+        if (service) {
+            serviceCost = parseInt(service.attributes["cost"].value);
+            sumPrice += (service.checked ? serviceCost : serviceCost * (-1));
+        } else {
+            sumPrice = hotelCost;
+        }
+
+        $("#sum-cost").html(sumPrice);
+        $("#sum-cost").digits();
+    }
 </script>
 
-<div class="blackCard">
-    <header class="flex header">
-        <div class="flex headerTitle black">
-            <div class="title">
-                המועדון שלי
+
+@using (Html.BeginForm("BookOrder", "Order"))
+{
+    <div class="flex flex-row details-card-row">
+        <div class="blackCard right">
+            <header class="flex header">
+                <div class="flex headerTitle black">
+                    <div class="title">
+                        המועדון שבחרת
+                    </div>
+                    <div class="arrowUp"></div>
+                </div>
+            </header>
+            <div class="flex center">
+                <div class="flex card">
+                    <div class="card-body">
+                        <input type="hidden" name="clubId" value="@chosenClub.Id" id="id" />
+                        <p class="card-title">@chosenClub.Name</p>
+                        <p class="card-subtitle">@chosenClub.PrintAddress()</p>
+                        <p class="card-footer">@String.Format("{0:n0}", chosenClub.Cost)&#8362; לערב</p>
+                    </div>
+                </div>
             </div>
-            <div class="arrowUp"></div>
         </div>
-    </header>
-    <div class="flex contenct">
-        <div class="flex card">
-            <div class="card-body">
-                <p class="card-title">@ViewBag.chosenClub.Name</p>
-                <p class="card-subtitle">@ViewBag.chosenClub.PrintAddress()</p>
-                <p class="card-footer">@String.Format("{0:n0}", ViewBag.chosenClub.Cost)&#8362; לערב</p>
+        <div class="blackCard leftSide">
+            <header class="flex header">
+                <div class="flex headerTitle purple">
+                    <div class="title">
+                        קצת פרטים עליך
+                    </div>
+                    <div class="arrowUp"></div>
+                </div>
+            </header>
+            <div class="flex center">
+                <div class="flex card client-details-card">
+                    <div class="card-body client-details">
+                        <div class="flex flex-row">
+                            <span>שם</span><input type="text" name="clientName" id="clientName" onkeyup="validateInputs();" />
+                        </div>
+                        <div class="flex flex-row">
+                            <span>טלפון</span><input type="text" name="clientPhone" id="clientPhone" maxlength="10" onkeyup="validateInputs();" />
+                        </div>
+                        <p class="">כדי שאם משהו משתנה, נוכל להישאר בקשר</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="flex flex-row">
-    <div class="blackCard right">
-        <header class="flex header">
-            <div class="flex headerTitle purple">
-                <div class="title">
-                    מתי האירוע?
+    <div class="flex flex-row">
+        <div class="blackCard right">
+            <header class="flex header">
+                <div class="flex headerTitle purple">
+                    <div class="title">
+                        מתי האירוע?
+                    </div>
+                    <div class="arrowUp"></div>
                 </div>
-                <div class="arrowUp"></div>
+            </header>
+            <div class="flex contenct">
+                <input type="hidden" id="txtDateTime" name="txtDateTime"></input>
+                <div type="text" id="datepicker"></div>
             </div>
-        </header>
-        <div class="flex contenct">
-            <div type="text" id="datepicker"></div>
         </div>
-    </div>
 
-    <div class="blackCard leftSide">
-        <header class="flex header">
-            <div class="flex headerTitle purple">
-                <div class="title">
-                    מה נוסיף?
+        <div class="blackCard leftSide">
+            <header class="flex header">
+                <div class="flex headerTitle purple">
+                    <div class="title">
+                        מה נוסיף?
+                    </div>
+                    <div class="arrowUp"></div>
                 </div>
-                <div class="arrowUp"></div>
-            </div>
-        </header>
-        <div class="contenct">
-            <form>
+            </header>
+            <div class="contenct services-list">
                 <ul>
-                    @*@foreach (var club in ViewBag.Clubs as IList<Hamerim.Models.Club>)
-                    {*@
-                        <dt class="service-cat">משקאות</dt>
-                        @*@foreach (var club in ViewBag.Clubs as IList<Hamerim.Models.Club>)
-                        {*@
+                    @foreach (var cat in serviceCategories)
+                    {
+                        <dt class="service-cat">@cat.Title</dt>
+                        foreach (var service in cat.ServicesInCategory)
+                        {
                             <dd class="service-item">
                                 <label class="container">
-                                    <span class="service-item-label">בר משקאות</span>
-                                    <input type="checkbox" value="" id="defaultCheck1">
+                                    <span class="service-item-label">@service.Title</span>
+                                    <input type="checkbox" name="serviceIds" value="@service.Id" cost=@service.Cost id="serviceId" onclick="setSumPrice(this)">
                                     <span class="checkmark"></span>
-                                    <span class="">400&#8362;</span>
+                                    <span class="">@String.Format("{0:n0}", service.Cost)&#8362;</span>
                                 </label>
                             </dd>
-                        @*}
-                    }*@
+                        }
+                    }
                 </ul>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+    <div class="flex flex-row order-sum">
+        <div class="right">
+            <div class="blackCard">
+                <header class="flex header">
+                    <div class="flex headerTitle black">
+                        <div class="title">
+                            עלות כוללת
+                        </div>
+                        <div class="arrowUp"></div>
+                    </div>
+                    <div class="headerLeft">
+                        <span id="sum-cost">123</span><span>&#8362; </span><span class="mini-text">(מועדון + תוספות) </span>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div class="flex leftSide">
+            <input type="submit" id="done-btn" class="btn form-control btn-primary btn-sm" value="סיימתי!">
+        </div>
+    </div>
+}
