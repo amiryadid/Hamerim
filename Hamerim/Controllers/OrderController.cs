@@ -118,12 +118,16 @@ namespace Hamerim.Controllers
         [HttpPost]
         public ActionResult ViewOrder(int orderNumber)
         {
-            using(var ctx = new HamerimDbContext())
+            using (var ctx = new HamerimDbContext())
             {
                 if (ctx.Orders.Any(order => order.Id == orderNumber))
-                    return RedirectToAction("FinishedOrder", new { orderNumber });
-                else
-                    ViewBag.ErrorMessage = "לא נמצאה הזמנה בעלת מספר הזיהוי שצויין";
+                    return RedirectToAction("FinishedOrder", new {orderNumber});
+                
+                ViewBag.ErrorMessage = "לא נמצאה הזמנה בעלת מספר הזיהוי שצויין";
+                return View();
+            }
+        }
+
         public ActionResult GetPopularServices(int month)
         {
             List<Service> services = statisticsService.GetMostPopularServices(month).ToList();
