@@ -3,9 +3,16 @@
     var order = ViewBag.Order;
     var club = order.Club;
     var services = order.ServicesInOrder;
+    var date = order.Date;
 }
 
 <script>
+    var twitterText = `בואו לחגוג איתי במסיבה!
+    איפה? @club.Name
+    מתי? @date.Day/@date.Month/@date.Year
+    רוצים לדעת עוד? לחצו על הלינק פה למטה!
+    יאללה נתראה
+    `
     var clubCost = @club.Cost;
     var servicesJsons = [];
     var servicesCostList = [];
@@ -37,6 +44,7 @@
     }, [])
 
     $(document).ready(function () {
+        $("#tweetButton").attr("data-text", twitterText);
         setSumPrice();
     });
 
@@ -158,6 +166,9 @@
                     <p>
                         לגזור ולשמור! </br>
                         תצטרכו את קוד ההזמנה כדי לחזור לכאן
+                    </p>
+                    <p>
+                        <a id="tweetButton" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="" data-lang="he" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </p>
                 </div>
             </div>
