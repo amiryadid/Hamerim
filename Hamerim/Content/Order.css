@@ -2,7 +2,7 @@
     padding: 20px;
     flex-wrap: wrap;
     justify-content: space-around;
-    max-height: 91%;
+    max-height: 71%;
     overflow-y: auto;
 }
 
@@ -100,6 +100,10 @@
     font-size: 16px;
     margin: 0;
     color: #c4c4c4;
+}
+
+#clubs .card {
+    margin-bottom: 1.2em;
 }
 
 #choose-club-btn {

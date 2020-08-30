@@ -5,6 +5,12 @@
 }
 
 <script>
+    $.fn.digits = function () {
+        return this.each(function () {
+            $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+        })
+    }
+
     function filter() {
         var costCheck = document.forms["filters"]["checkMaxCost"].checked;
         var cityCheck = document.forms["filters"]["checkCity"].checked;
@@ -13,56 +19,49 @@
         var costValidate = costCheck ? document.forms["filters"]["filterMaxCost"].value != "" : true;
         var nameValidate = nameCheck ? document.forms["filters"]["filterName"].value != "" : true;
 
-        if (costCheck || cityCheck || nameCheck) {
-            if (costValidate && nameValidate) {
-                var cost = costCheck ? parseInt(document.forms["filters"]["filterMaxCost"].value) : Number.MAX_SAFE_INTEGER;
-                var city = cityCheck ? document.forms["filters"]["filterCity"].value : "";
-                var name = nameCheck ? document.forms["filters"]["filterName"].value : "";
+        if (costValidate && nameValidate) {
+            var cost = costCheck ? parseInt(document.forms["filters"]["filterMaxCost"].value) : Number.MAX_SAFE_INTEGER;
+            var city = cityCheck ? document.forms["filters"]["filterCity"].value : "";
+            var name = nameCheck ? document.forms["filters"]["filterName"].value : "";
 
-                $.ajax({
-                    type: "GET",
-                    url: "/Order/FilterClubs",
-                    data: {
-                        maxPriceFilter: cost,
-                        nameFilter: name,
-                        cityFilter: city
-                    },
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (data) {
-                        alert("success")
-                        //$.each(data, function (i, club) {
-                        //    var row =
-                        //        "<div class='flex card'>" +
-                        //            "<form action='/Order/AfterChooseClub'" +
-                        //                "<div class='card-body'>" +
-                        //                    "<input type='hidden' name='Id' value='" + club.Id + "' id='id' />" + 
-                        //                    "<p class='card-title'>" + club.Name + "</p>" +
-                        //                    //"<p class='card-subtitle'>" + club.PrintAddress() + "</p>" +
-                        //                    "<p class='card-subtitle'>dafna</p>" +
-                        //                    "<p class='card-footer'>&#8362;" + String.Format('{0:n0}', club.Cost) + " לערב</p>" +
-                        //                "</div>" +
-                        //                "<button type='submit' id='choose-club-btn' class='btn'>בחרתי!</button>" + 
-                        //            "</form>" + 
-                        //        "</div>"
-                        //    $('#clubs').append(row);
-                        //});
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
-            } else {
-                return false;
-            }
+            $.ajax({
+                type: "GET",
+                url: "/Order/FilterClubs",
+                data: {
+                    maxPriceFilter: cost,
+                    nameFilter: name,
+                    cityFilter: city
+                },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $('#clubs').html("");
+                    $.each(data, function (i, club) {
+                        var row =
+                            "<div class='flex card'>" +
+                            "<form action='/Order/AfterChooseClub' method='post'>" +
+                            "<div class='card-body'>" +
+                            "<input type='hidden' name='Id' value='" + club.Id + "' id='id' />" +
+                            "<p class='card-title'>" + club.Name + "</p>" +
+                            //"<p class='card-subtitle'>" + club.PrintAddress() + "</p>" +
+                            "<p class='card-subtitle'>dafna</p>" +
+                            "<p class='card-footer' id='club-cost-" + club.Id + "'>&#8362;" + club.Cost + " לערב</p>" +
+                            "</div>" +
+                            "<button type='submit' id='choose-club-btn' class='btn'>בחרתי!</button>" +
+                            "</form>" +
+                            "</div>"
+                        $('#clubs').append(row);
+                        $("#club-cost-" + club.Id).digits();
+                    });
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
         } else {
-            alert("לא סימנת כלום לסנן");
+            return false;
         }
     }
-
-    $(document).ready(function () {
-
-    })
 </script>
 
 <div class="fullHeight blackCard">
