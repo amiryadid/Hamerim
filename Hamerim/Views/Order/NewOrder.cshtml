@@ -37,14 +37,15 @@
                 success: function (data) {
                     $('#clubs').html("");
                     $.each(data, function (i, club) {
+                        var houseText = club.Address.HouseNumber > 0 ? club.Address.HouseNumber : ""
+                        var address = `${club.Address.City}, ${club.Address.Street} ${houseText}`
                         var row =
                             "<div class='flex card'>" +
                             "<form action='/Order/AfterChooseClub' method='post'>" +
                             "<div class='card-body'>" +
                             "<input type='hidden' name='Id' value='" + club.Id + "' id='id' />" +
                             "<p class='card-title'>" + club.Name + "</p>" +
-                            //"<p class='card-subtitle'>" + club.PrintAddress() + "</p>" +
-                            "<p class='card-subtitle'>dafna</p>" +
+                            "<p class='card-subtitle'>" + address + "</p>" +
                             "<p class='card-footer' id='club-cost-" + club.Id + "'>&#8362;" + club.Cost + " לערב</p>" +
                             "</div>" +
                             "<button type='submit' id='choose-club-btn' class='btn'>בחרתי!</button>" +
