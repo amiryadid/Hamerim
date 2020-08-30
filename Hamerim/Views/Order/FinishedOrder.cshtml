@@ -7,12 +7,34 @@
 
 <script>
     var clubCost = @club.Cost;
-    var serviceList = [];
+    var servicesJsons = [];
+    var servicesCostList = [];
 
     @foreach (var service in services)
     {
-        @:serviceList.push(@service.Cost);
+        @:servicesCostList.push(@service.Cost);
+        @:servicesJsons.push({
+            @:id:@service.Id,
+            @:title:"@service.Title",
+            @:cost:@service.Cost,
+            @:category: {
+                @:id:@service.Category.Id,
+                @:name:"@service.Category.Title"
+            @:}
+        @:})
     }
+
+    var groupedServices = servicesJsons.reduce((groupsList, service) => {
+        if(groupsList[service.category.id] != null)
+            groupsList[service.category.id].services.push(service)
+        else
+            groupsList[service.category.id] = { 
+                category: service.category,
+                services: [service]
+            }
+        
+        return groupsList
+    }, [])
 
     $(document).ready(function () {
         setSumPrice();
@@ -25,7 +47,7 @@
     }
 
     function setSumPrice() {
-        sum = clubCost + serviceList.reduce(function (accumulator, currentCost) {
+        sum = clubCost + servicesCostList.reduce(function (accumulator, currentCost) {
             return accumulator + currentCost;
         }, 0)
 

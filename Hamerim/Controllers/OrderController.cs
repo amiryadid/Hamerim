@@ -145,7 +145,7 @@ namespace Hamerim.Controllers
                     .Include(order => order.Club)
                     .Include(order => order.Club.Address)
                     .Include(order => order.ServicesInOrder)
-                    //.Include("Order.ServicesInOrder.Category")
+                    .Include(order => order.ServicesInOrder.Select(service => service.Category))
                     .FirstOrDefault(order => order.Id == orderNumber);
             }
 
