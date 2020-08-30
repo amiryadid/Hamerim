@@ -1,4 +1,7 @@
-﻿<div class="adminContainer blackCard">
+﻿
+
+
+<div class="adminContainer blackCard">
    <header class="flex header">
         <div class="flex headerTitle purple adminHeaderTitle">
             <a class="title adminTitle" href="/Admin/Index">
@@ -15,7 +18,7 @@
         <div class="flexColumn entityColumn">
             <div class="flex manageEntityHeader">
                 <div>מועדונים</div>
-                <i class="material-icons button" data-toggle="modal" data-target="#addClubModal">add_circle</i>   
+                <i class="material-icons button" onclick="validateAddClub();" data-toggle="modal" data-target="#addClubModal">add_circle</i>   
             </div>
             <div class="flexColumn manageEntityList">
                 @foreach (var club in ViewBag.Clubs as IList<Hamerim.Models.Club>) 
@@ -40,26 +43,27 @@
                                     <div class="addModalForm">
                                         <div class="flex formRow">
                                             <div class="inputLabel">שם</div>
-                                            <input class="inputField" type="text" id="name" name="name" value="@club.Name">
+                                            <input class="inputField" type="text" id="clubName" name="name" value="@club.Name" onkeyup="validateEditClub();">
                                         </div>
                                         <div class="flex formRow">
                                             <div class="inputLabel">עיר (באנגלית)</div>
-                                            <input class="inputField" type="text" id="city" name="city" value="@club.Address.City">
+                                            <input class="inputField" type="text" id="clubCity" name="city" value="@club.Address.City" onkeyup="validateEditClub();">
                                         </div>
                                         <div class="flex formRow">
                                             <div class="inputLabel">רחוב (באנגלית)</div>
-                                            <input class="inputField" type="text" id="street" name="street" value="@club.Address.Street">
+                                            <input class="inputField" type="text" id="clubStreet" name="street" value="@club.Address.Street" onkeyup="validateEditClub();">
                                         </div>
                                         <div class="flex formRow">
                                             <div class="inputLabel">מספר בית</div>
-                                            <input class="inputField" type="number" id="houseNumber" name="houseNumber" value="@club.Address.HouseNumber">
+                                            <input class="inputField" type="number" id="clubHouseNumber" name="houseNumber" value="@club.Address.HouseNumber">
                                         </div>
                                         <div class="flex formRow">
                                             <div class="inputLabel">מחיר</div>
-                                            <input  class="inputField" type="number" id="cost" name="cost" value="@club.Cost">
+                                            <input  class="inputField" type="number" id="clubCost" name="cost" value="@club.Cost" onkeyup="validateEditClub();">
                                         </div>
                                         <div class="flex buttons">
-                                            <button type="submit" class="btn btn-primary addButton">אישור</button>
+                                            <span id="editClubError" class="errorFormText"></span>
+                                            <button type="submit" id="editClubBtn" class="btn btn-primary addButton">אישור</button>
                                         </div>
                                     </div>
                                     }
@@ -74,32 +78,33 @@
                     <div class="modal-content myModal">
                         <div class="flex addModalHeader">
                             <div>הוספת מועדון</div>
-                            <i class="material-icons button"  data-dismiss="modal">close</i>   
+                            <i class="material-icons button" onclick="cleanClubValues()" data-dismiss="modal">close</i>   
                         </div>
                         @using (Html.BeginForm("AddClub", "Admin", FormMethod.Post)){
                         <div class="addModalForm">
                             <div class="flex formRow">
                                 <div class="inputLabel">שם</div>
-                                <input class="inputField" type="text" id="addName" name="name">
+                                <input class="inputField" type="text" id="addClubName" name="name" onkeyup="validateAddClub()">
                             </div>
                             <div class="flex formRow">
                                 <div class="inputLabel">עיר (באנגלית)</div>
-                                <input class="inputField" type="text" id="addCity" name="city">
+                                <input class="inputField" type="text" id="addClubCity" name="city" onkeyup="validateAddClub()">
                             </div>
                             <div class="flex formRow">
                                 <div class="inputLabel">רחוב (באנגלית)</div>
-                                <input class="inputField" type="text" id="addStreet" name="street">
+                                <input class="inputField" type="text" id="addClubStreet" name="street" onkeyup="validateAddClub()">
                             </div>
                             <div class="flex formRow">
                                 <div class="inputLabel">מספר בית</div>
-                                <input class="inputField" type="number" id="addHouseNumber" name="houseNumber">
+                                <input class="inputField" type="number" id="addClubHouseNumber" name="houseNumber">
                             </div>
                             <div class="flex formRow">
                                 <div class="inputLabel">מחיר</div>
-                                <input  class="inputField" type="number" id="addCost" name="cost">
+                                <input  class="inputField" type="number" id="addClubCost" name="cost" onkeyup="validateAddClub()">
                             </div>
                             <div class="flex buttons">
-                                <button type="submit" class="btn btn-primary addButton">רוצה להוסיף</button>
+                                <span class="errorFormText" id="addClubError"></span>
+                                <button type="submit" id="addClubBtn" class="btn btn-primary addButton">רוצה להוסיף</button>
                             </div>
                         </div>
                         }
@@ -111,7 +116,7 @@
         <div class="flexColumn entityColumn">
             <div class="flex manageEntityHeader">
                 <div>קטגוריות</div>
-                <i class="material-icons button" data-toggle="modal" data-target="#addCategoryModal">add_circle</i>   
+                <i class="material-icons button" onclick="validateAddCategory();" data-toggle="modal" data-target="#addCategoryModal">add_circle</i>   
             </div>
             <div class="flexColumn manageEntityList">
                 @foreach (var category in ViewBag.Categories as IList<Hamerim.Models.ServiceCategory>) 
@@ -136,10 +141,11 @@
                                     <div class="addModalForm">
                                         <div class="flex formRow">
                                             <div class="inputLabel">שם</div>
-                                            <input class="inputField" type="text" id="title" name="title" value="@category.Title">
+                                            <input class="inputField" type="text" id="editCategoryTitle" name="title" value="@category.Title"  onkeyup="validateEditCategory()">
                                         </div>
                                         <div class="flex buttons">
-                                            <button type="submit" class="btn btn-primary addButton">אישור</button>
+                                            <span class="errorFormText" id="editCategoryError"></span>
+                                            <button id="editCategoryBtn" type="submit" class="btn btn-primary addButton">אישור</button>
                                         </div>
                                     </div> }
                                 </div>
@@ -154,16 +160,17 @@
                     <div class="modal-content myModal">
                         <div class="flex addModalHeader">
                             <div>הוספת קטגוריה</div>
-                            <i class="material-icons button"  data-dismiss="modal">close</i>   
+                            <i class="material-icons button" onclick="cleanCategoryValues()" data-dismiss="modal">close</i>   
                         </div>
                         @using (Html.BeginForm("AddCategory", "Admin", FormMethod.Post)){
                         <div class="addModalForm">
                             <div class="flex formRow">
                                 <div class="inputLabel">שם</div>
-                                <input class="inputField" type="text" id="addTitle" name="title">
+                                <input class="inputField" type="text" id="addCategoryTitle" name="title" onkeyup="validateAddCategory()">
                             </div>
                             <div class="flex buttons">
-                                <button type="submit" class="btn btn-primary addButton">רוצה להוסיף</button>
+                                <span class="errorFormText" id="addCategoryError"></span>
+                                <button id="addCategoryBtn" type="submit" class="btn btn-primary addButton">רוצה להוסיף</button>
                             </div>
                         </div> }
                     </div>
@@ -174,7 +181,7 @@
         <div class="flexColumn entityColumn">
             <div class="flex manageEntityHeader">
                 <div>תוספות</div>
-                <i class="material-icons button" data-toggle="modal" data-target="#addServiceModal">add_circle</i>   
+                <i class="material-icons button" onclick="validateAddService();" data-toggle="modal" data-target="#addServiceModal">add_circle</i>   
             </div>
             <div class="flexColumn manageEntityList">
                 @foreach (var service in ViewBag.Services as IList<Hamerim.Models.Service>) 
@@ -193,17 +200,17 @@
                                 <div class="modal-content myModal">
                                     <div class="flex addModalHeader">
                                         <div>עריכת תוספת</div>
-                                        <i class="material-icons button"  data-dismiss="modal">close</i>   
+                                        <i class="material-icons button" data-dismiss="modal">close</i>   
                                     </div>
                                     @using (Html.BeginForm("EditService", "Admin",  new { id=@service.Id }, FormMethod.Post)){
                                     <div class="addModalForm">
                                         <div class="flex formRow">
                                             <div class="inputLabel">שם</div>
-                                            <input class="inputField" type="text" id="title" name="title" value="@service.Title">
+                                            <input class="inputField" type="text" id="editServiceTitle" name="title" value="@service.Title" onkeyup="validateEditService()">
                                         </div>
                                         <div class="flex formRow">
                                             <div class="inputLabel">קטגוריה</div>
-                                            <select class="inputField" id="category" name="category">
+                                            <select class="inputField" id="editServiceCategory" name="category">
                                                 @foreach (var category in ViewBag.Categories as IList<Hamerim.Models.ServiceCategory>) {
                                                     if(category.Id == service.Category.Id) {
                                                         <option selected value="@category.Id">@category.Title</option>
@@ -215,10 +222,11 @@
                                         </div>
                                         <div class="flex formRow">
                                             <div class="inputLabel">מחיר</div>
-                                            <input  class="inputField" type="number" id="cost" name="cost" value="@service.Cost">
+                                            <input class="inputField" type="number" id="editServiceCost" name="cost" value="@service.Cost" onkeyup="validateEditService()">
                                         </div>
                                         <div class="flex buttons">
-                                            <button type="submit" class="btn btn-primary addButton">אישור</button>
+                                            <span class="errorFormText" id="editServiceError"></span>
+                                            <button id="editServiceBtn" type="submit" class="btn btn-primary addButton">אישור</button>
                                         </div>
                                     </div> }
                                 </div>
@@ -233,29 +241,30 @@
                     <div class="modal-content myModal">
                         <div class="flex addModalHeader">
                             <div>הוספת תוספת</div>
-                            <i class="material-icons button"  data-dismiss="modal">close</i>   
+                            <i class="material-icons button" onclick="cleanServiceValues()" data-dismiss="modal">close</i>   
                         </div>
                         @using (Html.BeginForm("AddService", "Admin", FormMethod.Post)){
                         <div class="addModalForm">
                             <div class="flex formRow">
                                 <div class="inputLabel">שם</div>
-                                <input class="inputField" type="text" id="addTitle" name="title">
+                                <input class="inputField" type="text" id="addServiceTitle" name="title" onkeyup="validateAddService()">
                             </div>
                             <div class="flex formRow">
                                 <div class="inputLabel">קטגוריה</div>
-                                <select class="inputField" id="category" name="category">
-                                    <option selected disabled>בחר קטגוריה</option>
+                                <select class="inputField" id="addServiceCategory" name="category">
+                                    <option selected disabled id="chooseCategoryOption">בחר קטגוריה</option>
                                     @foreach (var category in ViewBag.Categories as IList<Hamerim.Models.ServiceCategory>) {
-                                        <option value="@category.Id">@category.Title</option>
+                                        <option value="@category.Id" onclick="validateAddService()">@category.Title</option>
                                     }
                                 </select>
                             </div>
                             <div class="flex formRow">
                                 <div class="inputLabel">מחיר</div>
-                                <input  class="inputField" type="number" id="addCost" name="cost">
+                                <input  class="inputField" type="number" id="addServiceCost" name="cost" onkeyup="validateAddService()">
                             </div>
                             <div class="flex buttons">
-                                <button type="submit" class="btn btn-primary addButton">רוצה להוסיף</button>
+                                <span class="errorFormText" id="addServiceError"></span>
+                                <button id="addServiceBtn" type="submit" class="btn btn-primary addButton">רוצה להוסיף</button>
                             </div>
                         </div> }
                     </div>
@@ -277,8 +286,6 @@
                             <div>@order.Id @order.ClientName</div>
                             <i class="material-icons button" data-toggle="modal" data-target="@deleteIdTarget">delete</i>   
                         </div>
-
-                        <!--Delete Order Modal-->
                         <div class="modal fade" id="@deleteId" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modalContainer" role="document">
                                 <div class="modal-content myModal">
@@ -300,5 +307,131 @@
                         </div>
                     }
             </div>
-    </div>
+        </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+ <script>
+        $(document).ready(function () {
+           validateEditClub();
+           validateAddClub();
+           validateAddCategory();
+           validateEditCategory();
+           validateAddService();
+           validateEditService();
+        });
+
+    function validateEditClub(){
+        var clubName = $('#clubName').val();
+        var clubCost = $('#clubCost').val();
+        var clubCity = $('#clubCity').val();
+        var clubStreet = $('#clubStreet').val();
+
+        if (clubName != "" && clubCity != "" && clubStreet != "" && clubCost > 0) {
+            $('#editClubBtn').attr("disabled", false);
+            $('#editClubError').text("");
+        } else {
+            $('#editClubBtn').attr("disabled", true);
+            $('#editClubError').text("לא מילאת את כל השדות");
+        }
+    }
+
+    function validateAddClub(){
+        var clubName = $('#addClubName').val();
+        var clubCost = $('#addClubCost').val();
+        var clubCity = $('#addClubCity').val();
+        var clubStreet = $('#addClubStreet').val();
+
+        if (clubName != "" && clubCity != "" && clubStreet != "" && clubCost > 0) {
+            $('#addClubBtn').attr("disabled", false);
+            $('#addClubError').text("");
+        } else {
+            $('#addClubBtn').attr("disabled", true);
+            $('#addClubError').text("לא מילאת את כל השדות");
+        }
+    }
+
+    function validateAddCategory(){
+        var categoryTitle = $('#addCategoryTitle').val();
+    
+        if (categoryTitle != "") {
+            $('#addCategoryBtn').attr("disabled", false);
+            $('#addCategoryError').text("");
+        } else {
+            $('#addCategoryBtn').attr("disabled", true);
+            $('#addCategoryError').text("לא מילאת את כותרת הקטגוריה");
+        }
+    }
+
+    function validateEditCategory(){
+        var categoryTitle = $('#editCategoryTitle').val();
+    
+        if (categoryTitle != "") {
+            $('#editCategoryBtn').attr("disabled", false);
+            $('#editCategoryError').text("");
+        } else {
+            $('#editCategoryBtn').attr("disabled", true);
+            $('#editCategoryError').text("לא מילאת את כותרת הקטגוריה");
+        }
+    }
+
+    function validateAddService(){
+        var serviceTitle = $('#addServiceTitle').val();
+        var serviceCost = $('#addServiceCost').val();
+        var serviceCategory = $('#addServiceCategory').children("option:selected").val();
+
+        if (serviceTitle != "" && serviceCost > 0 && serviceCategory != "בחר קטגוריה") {
+            $('#addServiceBtn').attr("disabled", false);
+            $('#addServiceError').text("");
+        } else {
+            $('#addServiceBtn').attr("disabled", true);
+            $('#addServiceError').text("לא מילאת את כל השדות");
+        }
+    }
+
+    function validateEditService(){
+        var serviceTitle = $('#editServiceTitle').val();
+        var serviceCost = $('#editServiceCost').val();
+
+        if (serviceTitle != "" && serviceCost > 0) {
+            $('#editServiceBtn').attr("disabled", false);
+            $('#editServiceError').text("");
+        } else {
+            $('#editServiceBtn').attr("disabled", true);
+            $('#editServiceError').text("לא מילאת את כל השדות");
+        }
+    }
+
+    function cleanServiceValues(){
+        $('#addServiceTitle').val("");
+        $('#addServiceCost').val("");
+        $('#chooseCategoryOption').attr("selected", true);
+    }
+
+     function cleanClubValues(){
+        $('#addClubName').val("");
+        $('#addClubCost').val(null);
+        $('#addClubCity').val("");
+        $('#addClubStreet').val("");
+        $('#addClubHouseNumber').val(null);
+    }
+
+    function cleanCategoryValues(){
+        $('#addCategoryTitle').val("");
+    }
+
+    function cleanServiceValues(){
+        $('#addServiceTitle').val("");
+        $('#addServiceCost').val("");
+        $('#chooseCategoryOption').attr("selected", true);
+    }
+
+     function cleanClubValues(){
+        $('#addClubName').val("");
+        $('#addClubCost').val(null);
+        $('#addClubCity').val("");
+        $('#addClubStreet').val("");
+        $('#addClubHouseNumber').val(null);
+    }
+
+</script>

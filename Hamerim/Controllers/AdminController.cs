@@ -51,7 +51,7 @@ namespace Hamerim.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddClub(string name, int cost, string city, string street, int houseNumber)
+        public ActionResult AddClub(string name, int cost, string city, string street, int houseNumber = 0)
         {
             using (var ctx = new HamerimDbContext())
             {
@@ -106,7 +106,7 @@ namespace Hamerim.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditClub(int id, string name, int cost, string city, string street, int houseNumber)
+        public ActionResult EditClub(int id, string name, int cost, string city, string street, int houseNumber = 0)
         {
             using (var ctx = new HamerimDbContext())
             {
