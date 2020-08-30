@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 using Hamerim.Models;
 
 namespace Hamerim.Data
@@ -12,13 +8,7 @@ namespace Hamerim.Data
     {
         public HamerimDbContext() : base("HamerimDB")
         {
-            bool shouldInitialize = bool.Parse(ConfigurationManager.AppSettings["InitializeDatabase"]);
-            IDatabaseInitializer<HamerimDbContext> initializer = shouldInitialize
-                ? new MigrateDatabaseToLatestVersion<HamerimDbContext, Migrations.Configuration>()
-                : null;
-
-
-            Database.SetInitializer<HamerimDbContext>(initializer);
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<HamerimDbContext, Migrations.Configuration>());
         }
 
         public DbSet<Service> Services { get; set; }

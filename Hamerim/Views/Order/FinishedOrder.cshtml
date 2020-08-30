@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "FinishedOrder";
+    var order = ViewBag.Order;
+    var club = order.Club;
+    var services = order.ServicesInOrder;
+    var date = order.Date;
+}
+
+<script>
+    var twitterText = `בואו לחגוג איתי במסיבה!
+    איפה? @club.Name
+    מתי? @date.Day/@date.Month/@date.Year
+    רוצים לדעת עוד? לחצו על הלינק פה למטה!
+    יאללה נתראה
+    `
+    var clubCost = @club.Cost;
+    var servicesJsons = [];
+    var servicesCostList = [];
+
+    @foreach (var service in services)
+    {
+        @:servicesCostList.push(@service.Cost);
+        @:servicesJsons.push({
+            @:id:@service.Id,
+            @:title:"@service.Title",
+            @:cost:@service.Cost,
+            @:category: {
+                @:id:@service.Category.Id,
+                @:name:"@service.Category.Title"
+            @:}
+        @:})
+    }
+
+    var groupedServices = servicesJsons.reduce((groupsList, service) => {
+        if(groupsList[service.category.id] != null)
+            groupsList[service.category.id].services.push(service)
+        else
+            groupsList[service.category.id] = { 
+                category: service.category,
+                services: [service]
+            }
+        
+        return groupsList
+    }, [])
+
+    $(document).ready(function () {
+        $("#tweetButton").attr("data-text", twitterText);
+        setSumPrice();
+    });
+
+    $.fn.digits = function () {
+        return this.each(function () {
+            $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+        })
+    }
+
+    function setSumPrice() {
+        sum = clubCost + servicesCostList.reduce(function (accumulator, currentCost) {
+            return accumulator + currentCost;
+        }, 0)
+
+        $("#sum-cost").html(sum);
+        $("#sum-cost").digits();
+    }
+</script>
+<div class="fullHeight blackCard" id="finishedOrder">
+    <header class="flex header">
+        <div class="flex headerTitle purple">
+            <div class="title">
+                סיכום ההזמנה
+            </div>
+            <div class="arrowUp"></div>
+        </div>
+    </header>
+    <div class="flex flex-row flex-row-lg">
+        <div class="flex flex-column">
+            <div class="card right">
+                <div class="card-body">
+                    <p class="card-title">@club.Name</p>
+                    <p class="card-subtitle">@club.PrintAddress()</p>
+                    <p class="card-footer">&#8362;@String.Format("{0:n0}", club.Cost) לערב</p>
+                </div>
+            </div>
+            <div class="blackCard">
+                <header class="flex header">
+                    <div class="flex headerTitle purple">
+                        <div class="title">
+                            תוספות
+                        </div>
+                        <div class="arrowUp"></div>
+                    </div>
+                </header>
+                <div class="contenct services-list">
+                    @if (services.Count == 0)
+                    {
+                        <p> אין תוספות במסיבה הזאת</p>
+                    }
+                    else
+                    {
+                        <ul>
+                            @foreach (var service in services)
+                            {
+                                <dd class="service-item">
+                                    <span class="service-item-label">@service.Title</span>
+                                    <span class="">&#8362;@String.Format("{0:n0}", service.Cost)</span>
+                                </dd>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-column">
+            <div class="blackCard card only-title">
+                <header class="flex header">
+                    <div class="flex headerTitle black">
+                        <div class="title">
+                            תאריך
+                        </div>
+                        <div class="arrowUp"></div>
+                    </div>
+                    <div class="headerLeft">
+                        <span>@order.Date.ToShortDateString()</span>
+                    </div>
+                </header>
+            </div>
+            <div class="blackCard card only-title">
+                <header class="flex header">
+                    <div class="flex headerTitle black">
+                        <div class="title">
+                            עלות כוללת
+                        </div>
+                        <div class="arrowUp"></div>
+                    </div>
+                    <div class="headerLeft">
+                        <span>&#8362;</span><span id="sum-cost"></span>
+                    </div>
+                </header>
+            </div>
+            <div class="flex center">
+                <div class="flex card client-details-card">
+                    <div class="card-body client-details">
+                        <div class="flex flex-row">
+                            <span class="bold">שם</span><span>@order.ClientName</span>
+                        </div>
+                        <div class="flex flex-row">
+                            <span class="bold">טלפון</span><span>@order.ClientPhone</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="blackCard" id="order-id-card">
+                <header class="flex header only-title">
+                    <div class="flex headerTitle purple">
+                        <div class="title">
+                            קוד הזמנה
+                        </div>
+                        <div class="arrowUp"></div>
+                    </div>
+                    <div class="headerLeft">
+                        <span id="order-id">@order.Id</span>
+                    </div>
+                </header>
+                <div class="contenct">
+                    <p>
+                        לגזור ולשמור! </br>
+                        תצטרכו את קוד ההזמנה כדי לחזור לכאן
+                    </p>
+                    <p>
+                        <a id="tweetButton" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="" data-lang="he" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

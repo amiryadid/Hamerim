@@ -2,8 +2,66 @@
     padding: 20px;
     flex-wrap: wrap;
     justify-content: space-around;
-    height: 91%;
+    max-height: 71%;
     overflow-y: auto;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+
+#filters-card {
+    margin: 20px 20px 0 20px;
+    padding: 0 0 10px 0;
+}
+
+.filters {
+    margin: 10px 10px 0 10px;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.filter {
+    width: 25%;
+}
+
+.filters .checkmark {
+    top: 9px;
+}
+
+.filter {
+    width: 25%;
+}
+
+.filter select {
+    width: 100%;
+}
+
+.filter input[type=number] {
+    width: 7em;
+}
+
+#filter-btn {
+    width: 4em;
+}
+
+.btn-primary {
+    border: 0;
+    background-color: var(--pink);
+    font-size: 20px;
+    height: initial;
+    transition: all 0.1s ease;
+}
+
+.btn-primary:hover {
+    border: 0;
+    background-color: #bf1637;
+}
+
+.btn-primary:disabled {
+    background-color: var(--pink);
+    opacity: 0.3;
 }
 
 .card {
@@ -13,11 +71,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    flex-basis: 40%;
-}
-
-.card:not(:last-child) {
-    margin-bottom: 2rem;
+    flex-basis: 48%;
 }
 
 .card form {
@@ -48,7 +102,11 @@
     color: #c4c4c4;
 }
 
-.card .done-btn {
+#clubs .card {
+    margin-bottom: 1.2em;
+}
+
+#choose-club-btn {
     color: var(--pink);
     background-color: white;
     filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.8));
@@ -61,10 +119,239 @@
     transition: all 0.2s ease;
 }
 
-    .card .done-btn:hover {
-        background-color: #e62248;
-        color: white;
-    }
+#choose-club-btn:hover {
+    background-color: #e62248;
+    color: white;
+}
+
+.flex-row {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex.center {
+    justify-content: center;
+}
+
+.flex-row .right {
+    width: 43%;
+}
+
+.details-card-row .card {
+    justify-content: center;
+    flex-basis: 80%;
+}
+
+.client-details {
+    font-size: 18px;
+}
+
+.client-details .flex-row {
+    margin-bottom: 6px;
+}
+
+.client-details span {
+    margin-left: 2em;
+}
+
+.dark-input {
+    background-color: #000000a8;
+    outline: none;
+    border: 0;
+    color: white;
+    padding: 1px 4px;
+}
+
+.dark-input:-webkit-autofill,
+.dark-input:-webkit-autofill:hover,
+.dark-input:-webkit-autofill:focus {
+    color: white;
+    border: 0;
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.client-details p {
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+}
+
+.blackCard ul {
+    font-size: 18px;
+    padding: 0px;
+}
+
+.blackCard ul dt {
+    margin-bottom: 7px;
+}
+
+.service-item .service-item-label {
+    width: 47%;
+    margin-right: 7px;
+}
+
+.services-list {
+    height: 256.76px;
+}
+
+.services-list p {
+    text-align: center;
+}
+
+.order-sum {
+    align-items: center;
+}
+
+.order-sum .blackCard {
+    margin: 0;
+}
+
+.only-title .headerLeft {
+    height: 100%;
+    margin: auto;
+    font-size: 22px;
+}
+
+.order-sum .mini-text {
+    font-size: 0.7em;
+}
+
+.order-sum .leftSide {
+    align-items: center;
+}
+
+#done-btn {
+    width: 44%;
+}
+
+#finishedOrder .flex-row-lg {
+    margin-top: 1em;
+    justify-content: space-evenly;
+}
+
+#finishedOrder .flex-column {
+    flex-basis: 36%;
+    justify-content: start;
+}
+
+#finishedOrder .flex-column .card {
+    margin-bottom: 20px;
+    flex-basis: auto;
+}
+
+#finishedOrder .card {
+    width: 100%;
+}
+
+#finishedOrder .only-title {
+    flex-basis: auto;
+    padding: 0;
+}
+
+#finishedOrder .service-item {
+    display: flex;
+    align-items: center;
+}
+
+#order-id-card {
+    border: 2px solid var(--purple);
+}
+
+#order-id-card header {
+    background-color: rgba(107, 107, 107, 0.35);
+}
+
+#order-id-card span {
+    font-weight: bold;
+}
+
+#order-id-card .contenct {
+    padding: 4px;
+}
+
+#order-id-card p {
+    text-align: center;
+    margin: 0;
+}
+
+/* Checkbox component */
+/* Customize the label (the container) */
+.container {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    padding-right: 30px;
+    font-size: 18px;
+    font-weight: normal;
+    width: auto;
+    display: flex;
+    align-items: center;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: black;
+    border: white solid 1px;
+    transition: all 0.1s ease;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #111111;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: var(--purple);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0px 2px 2px 0;
+    transform: rotate(45deg);
+    transition: all 0.1s ease;
+}
+
+/* Switch component */
 
 .switch-container {
     display: flex;
@@ -85,11 +372,11 @@
     margin: auto 0.8rem auto 0.8rem;
 }
 
-    .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
 
 .slider {
     position: absolute;
@@ -104,17 +391,17 @@
     transition: .4s;
 }
 
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 13px;
-        width: 13px;
-        left: 3px;
-        bottom: 3px;
-        background-color: white;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
 
 input:checked + .slider {
     background-color: var(--purple);
@@ -128,11 +415,57 @@ input:checked + .slider:before {
     transform: translateX(20px);
 }
 
-/* Rounded sliders */
 .slider.round {
     border-radius: 20px;
 }
 
-    .slider.round:before {
-        border-radius: 50%;
-    }
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Datepicker component */
+
+.ui-datepicker {
+    background: #000000b8;
+    border: 0 !important;
+}
+
+.ui-datepicker-header {
+    background: rgb(255, 255, 255, 12%);
+    color: white;
+    font-weight: normal;
+    border: 0;
+}
+
+.ui-datepicker-header a:hover {
+    background: transparent;
+    border: 0;
+}
+
+.ui-datepicker-header a :hover {
+    background: transparent;
+    border: 0;
+}
+
+.ui-state-default {
+    border: 0 !important;
+    text-align: center !important;
+    transition: all 0.2s ease;
+}
+
+.ui-state-default:hover {
+    background: #ec4d6c !important;
+    color: white !important;
+}
+
+.occupied {
+    opacity: 1 !important;
+}
+
+.occupied span {
+    background: rgb(255, 255, 255, 12%) !important;
+}
+
+.ui-datepicker .ui-state-active {
+    background: var(--pink) !important;
+}

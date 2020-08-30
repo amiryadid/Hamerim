@@ -43,7 +43,9 @@
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Clubs", t => t.Club_Id, cascadeDelete: true)
                 .Index(t => t.Club_Id);
-            
+
+            Sql("DBCC CHECKIDENT ('dbo.Orders', RESEED, 100000);");
+
             CreateTable(
                 "dbo.Services",
                 c => new

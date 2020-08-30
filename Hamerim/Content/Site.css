@@ -71,6 +71,8 @@ a:hover {
 
 .blackCard {
     background-color: rgba(18, 18, 18, 0.8);
+    margin-bottom: 20px;
+    color: white;
 }
 
 .flex {
@@ -103,6 +105,18 @@ a:hover {
     height: 0px;
     border-left: 50px solid transparent;
     border-bottom: 50px solid;
+}
+
+.headerTitle-sm {
+    height: 40px;
+    font-size: 20px;
+}
+
+.headerTitle-sm .arrowUp {
+    width: 0px;
+    height: 0px;
+    border-left: 40px solid transparent;
+    border-bottom: 40px solid;
 }
 
 .headerTitle.purple .title {
