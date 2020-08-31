@@ -237,6 +237,10 @@
     font-size: 22px;
 }
 
+.headerLeft .material-icons {
+    font-size: inherit;
+}
+
 .order-sum .mini-text {
     font-size: 0.7em;
 }
