@@ -190,7 +190,7 @@
                         foreach (var service in cat.ServicesInCategory)
                         {
                             <dd class="service-item">
-                                <i class="material-icons managerIcon">star</i>
+                                <i class="material-icons managerIcon" id="popular-@service.Id">star</i>
                                 <label class="container">
                                     <span class="service-item-label">@service.Title</span>
                                     <input type="checkbox" name="serviceIds" value="@service.Id" cost=@service.Cost id="serviceId" onclick="setSumPrice(this)">
