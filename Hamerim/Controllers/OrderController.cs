@@ -189,7 +189,13 @@ namespace Hamerim.Controllers
 
                 return new
                 {
-                    Club = club.Name,
+                    Club = new
+                    {
+                        club.Id,
+                        club.Name,
+                        Address= club.Address.ToString(),
+
+                    },
                     Data = textResult
                 };
             }

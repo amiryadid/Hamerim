@@ -7,7 +7,7 @@ namespace Hamerim.Services
 {
     public class StatisticsService : IStatisticsService
     {
-        public IEnumerable<Service> GetMostPopularServices(int month)
+        public IEnumerable<int> GetMostPopularServices(int month)
         {
             using (var ctx = new HamerimDbContext())
             {
@@ -18,7 +18,7 @@ namespace Hamerim.Services
 
                 return groupedServices.Where(group => group.Count() ==
                                                       groupedServices.Max(groupsToCount => groupsToCount.Count()))
-                    .Select(group => ctx.Services.FirstOrDefault(service => service.Id == group.Key))
+                    .Select(group => ctx.Services.FirstOrDefault(service => service.Id == group.Key).Id)
                     .ToList();
             }
         }
