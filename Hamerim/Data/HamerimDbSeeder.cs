@@ -143,7 +143,7 @@ namespace Hamerim.Data
                 {
                     Id = 3,
                     Cost = 1100,
-                    Name = "הוואנה מיוזיק קלאב",
+                    Name = "הוואנה קלאב",
                     Address = new ClubAddress()
                     {
                         ClubId = 3,
@@ -156,7 +156,7 @@ namespace Hamerim.Data
                 {
                     Id = 4,
                     Cost = 1000,
-                    Name = "דוקטור גונזו",
+                    Name = "דר. גונזו",
                     Address = new ClubAddress()
                     {
                         ClubId = 4,
@@ -277,7 +277,7 @@ namespace Hamerim.Data
                 new Order()
                 {
                     Id = 100006,
-                    Club = clubs.First(club => club.Name=="הוואנה מיוזיק קלאב"),
+                    Club = clubs.First(club => club.Name=="הוואנה קלאב"),
                     ClientName = "ביבי נתניהו",
                     ClientPhone = "052-3349511",
                     Date = new DateTime(2020,10,20),

@@ -130,7 +130,7 @@ namespace Hamerim.Controllers
 
         public ActionResult GetPopularServices(int month)
         {
-            List<Service> services = statisticsService.GetMostPopularServices(month).ToList();
+            var services = statisticsService.GetMostPopularServices(month).ToList();
             
             return Json(services);
         }
@@ -189,7 +189,13 @@ namespace Hamerim.Controllers
 
                 return new
                 {
-                    Club = club.Name,
+                    Club = new
+                    {
+                        club.Id,
+                        club.Name,
+                        Address= club.Address.ToString(),
+
+                    },
                     Data = textResult
                 };
             }
