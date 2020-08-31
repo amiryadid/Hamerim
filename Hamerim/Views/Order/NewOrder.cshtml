@@ -76,26 +76,6 @@
         }
     }
 
-    function getAllLocations() {
-        $.ajax({
-            type: "GET",
-            url: "/Order/GetLocations",
-            data: {},
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (locations) {
-                $.each(locations, function (i, loc) {
-                    console.log(loc);
-                });
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    getAllLocations();
-     
 </script>
 
 <div class="fullHeight blackCard">
@@ -177,6 +157,59 @@
         }
     </div>
     <div class="flex contenct" id="map-display">
-        ---MAPA
+        <div id="myMap"></div>
     </div>
 </div>
+
+<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+<script type='text/javascript'>
+
+    function GetMap() {
+        var map = new Microsoft.Maps.Map('#myMap', {
+            credentials: "Amuv-QddrSbgxMj4guhoyXTaBtVQgNZ-101KMfJ1zeesZFdLTsIOVO3N1n7OS5J8"
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "/Order/GetLocations",
+            data: {},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (locations) {
+                fillLocations(map, locations);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    function fillLocations(map, locations) {
+        var clubLocations = locations
+        var locationArray = clubLocations.map(location => new Microsoft.Maps.Location(location.lat, location.lon))
+        var rect = Microsoft.Maps.LocationRect.fromLocations(locationArray);
+
+        map.setView({ bounds: rect, padding: 80 });
+
+        //Create custom Pushpin
+        var pins = clubLocations.map((location, index) => {
+            return {
+                pushpin: new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(location.lat, location.lon), {
+                    title: location.Club.Name,
+                    subTitle: location.Club.Address,
+                    text: `${index + 1}`
+                }),
+                clubId: location.Club.Id
+            }
+        });
+
+        map.entities.push(pins.map(pin => pin.pushpin));
+
+        pins.forEach(pin => Microsoft.Maps.Events.addHandler(pin.pushpin, 'click', function () { chooseClub(pin.clubId) }))
+
+        function chooseClub(clubId) {
+            // Redirect to club with this id instead
+            window.location.replace('/Order/AfterChooseClub/' + clubId)
+        }
+    }
+</script>
