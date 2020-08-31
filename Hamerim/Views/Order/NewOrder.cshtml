@@ -43,7 +43,7 @@
                             "<div class='flex card'>" +
                             "<form action='/Order/AfterChooseClub' method='post'>" +
                             "<div class='card-body'>" +
-                            "<input type='hidden' name='Id' value='" + club.Id + "' id='id' />" +
+                            "<input type='hidden' name='Id' value='" + club.Id + "' />" +
                             "<p class='card-title'>" + club.Name + "</p>" +
                             "<p class='card-subtitle'>" + address + "</p>" +
                             "<p class='card-footer' id='club-cost-" + club.Id + "'>&#8362;" + club.Cost + " לערב</p>" +
@@ -63,6 +63,20 @@
             return false;
         }
     }
+
+    $(document).ready(function () {
+        $("#switcher-display").click(function () {
+            if ($("#switcher-display")[0].checked == true) {
+                $("#map-display")[0].style.display = "flex";
+                $("#table-display")[0].style.display = "none";
+            } else {
+                $("#map-display")[0].style.display = "none";
+                $("#table-display")[0].style.display = "flex";
+            }
+        });
+    })
+    
+
 </script>
 
 <div class="fullHeight blackCard">
@@ -76,7 +90,7 @@
         <div class="headerLeft switch-container">
             <label class="switch-text">מפה</label>
             <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" id="switcher-display">
                 <span class="slider round"></span>
             </label>
             <label class="switch-text">טבלה</label>
@@ -127,20 +141,23 @@
             </div>
         </form>
     </div>
-    <div class="flex contenct" id="clubs">
+    <div class="flex contenct" id="table-display">
         @foreach (var club in clubs as IList<Hamerim.Models.Club>)
         {
             <div class="flex card">
                 <form action='/Order/AfterChooseClub' method='post'>
                     <div class="card-body">
-                        <input type="hidden" name="Id" value="@club.Id" id="id" />
+                        <input type="hidden" name="Id" value="@club.Id" />
                         <p class="card-title">@club.Name</p>
                         <p class="card-subtitle">@club.PrintAddress()</p>
                         <p class="card-footer">&#8362;@String.Format("{0:n0}", club.Cost) לערב</p>
                     </div>
-                    <button type="submit" id="choose-club-btn" class="btn">בחרתי!</button>
+                    <button type="submit" class="btn choose-club-btn">בחרתי!</button>
                 </form>
             </div>
         }
+    </div>
+    <div class="flex contenct" id="map-display">
+        ---MAPA
     </div>
 </div>
