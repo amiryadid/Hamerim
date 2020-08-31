@@ -38,15 +38,21 @@
 
     // Set popular services
     function getPopularServices(orderMonth) {
+        var popularOpacity = 1;
+        var unpopularOpacity = 0.1;
         $.ajax({
             type: "GET",
             url: "/Order/GetPopularServices",
             data: { month: orderMonth},
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (services) {
-                $.each(services, function (i, service) {
-                    console.log(service);
+            success: function (serviceIds) {
+                $(".popular-services").each(function () {
+                    $(this).css("opacity", unpopularOpacity);
+                })
+
+                $.each(serviceIds, function (i, serviceId) {
+                    $("#popular-" + serviceId).css("opacity", popularOpacity);
                 });
             },
             error: function (err) {
@@ -190,7 +196,7 @@
                         foreach (var service in cat.ServicesInCategory)
                         {
                             <dd class="service-item">
-                                <i class="material-icons managerIcon" id="popular-@service.Id">star</i>
+                                <i class="material-icons managerIcon popular-services" id="popular-@service.Id">star</i>
                                 <label class="container">
                                     <span class="service-item-label">@service.Title</span>
                                     <input type="checkbox" name="serviceIds" value="@service.Id" cost=@service.Cost id="serviceId" onclick="setSumPrice(this)">

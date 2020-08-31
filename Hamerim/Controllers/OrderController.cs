@@ -132,7 +132,7 @@ namespace Hamerim.Controllers
         {
             var services = statisticsService.GetMostPopularServices(month).ToList();
             
-            return Json(services);
+            return Json(services, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

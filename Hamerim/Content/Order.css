@@ -203,8 +203,10 @@
     margin-right: 15px;
 }
 
-.service-item .managerIcon {
+.service-item .popular-services {
     margin-left: 10px;
+    opacity: 0.1;
+    transition: opacity 0.2s ease;
 }
 
 .service-item .service-item-label {
