@@ -5,6 +5,18 @@
 }
 
 <script>
+    $(document).ready(function () {
+        $("#switcher-display").click(function () {
+            if ($("#switcher-display")[0].checked == true) {
+                $("#map-display")[0].style.display = "flex";
+                $("#table-display")[0].style.display = "none";
+            } else {
+                $("#map-display")[0].style.display = "none";
+                $("#table-display")[0].style.display = "flex";
+            }
+        });
+    })
+
     $.fn.digits = function () {
         return this.each(function () {
             $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
@@ -64,19 +76,26 @@
         }
     }
 
-    $(document).ready(function () {
-        $("#switcher-display").click(function () {
-            if ($("#switcher-display")[0].checked == true) {
-                $("#map-display")[0].style.display = "flex";
-                $("#table-display")[0].style.display = "none";
-            } else {
-                $("#map-display")[0].style.display = "none";
-                $("#table-display")[0].style.display = "flex";
+    function getAllLocations() {
+        $.ajax({
+            type: "GET",
+            url: "/Order/GetLocations",
+            data: {},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (locations) {
+                $.each(locations, function (i, loc) {
+                    console.log(loc);
+                });
+            },
+            error: function (err) {
+                console.log(err);
             }
         });
-    })
-    
+    }
 
+    getAllLocations();
+     
 </script>
 
 <div class="fullHeight blackCard">

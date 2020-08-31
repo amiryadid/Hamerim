@@ -2,7 +2,6 @@
     padding: 20px;
     flex-wrap: wrap;
     justify-content: space-around;
-    max-height: 71%;
     overflow-y: auto;
 }
 
@@ -22,12 +21,16 @@
     justify-content: space-evenly;
 }
 
-.filter {
-    width: 25%;
+.filters .container {
+    width: auto;
 }
 
 .filters .checkmark {
     top: 9px;
+}
+
+.filter {
+    width: 25%;
 }
 
 .filter {
@@ -62,6 +65,10 @@
 .btn-primary:disabled {
     background-color: var(--pink);
     opacity: 0.3;
+}
+
+#table-display { 
+    max-height: 71%;
 }
 
 .card {
@@ -191,9 +198,19 @@
     margin-bottom: 7px;
 }
 
+.service-item {
+    display: flex;
+    margin-right: 15px;
+}
+
+.service-item .managerIcon {
+    margin-left: 10px;
+}
+
 .service-item .service-item-label {
     width: 47%;
     margin-right: 7px;
+    margin-left: 1.5em;
 }
 
 .services-list {
@@ -294,7 +311,6 @@
     padding-right: 30px;
     font-size: 18px;
     font-weight: normal;
-    width: auto;
     display: flex;
     align-items: center;
 }
