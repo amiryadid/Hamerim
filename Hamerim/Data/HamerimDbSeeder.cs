@@ -143,7 +143,7 @@ namespace Hamerim.Data
                 {
                     Id = 3,
                     Cost = 1100,
-                    Name = "הוואנה מיוזיק קלאב",
+                    Name = "הוואנה קלאב",
                     Address = new ClubAddress()
                     {
                         ClubId = 3,
@@ -156,7 +156,7 @@ namespace Hamerim.Data
                 {
                     Id = 4,
                     Cost = 1000,
-                    Name = "דוקטור גונזו",
+                    Name = "דר. גונזו",
                     Address = new ClubAddress()
                     {
                         ClubId = 4,
