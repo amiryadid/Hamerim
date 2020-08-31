@@ -277,7 +277,7 @@ namespace Hamerim.Data
                 new Order()
                 {
                     Id = 100006,
-                    Club = clubs.First(club => club.Name=="הוואנה מיוזיק קלאב"),
+                    Club = clubs.First(club => club.Name=="הוואנה קלאב"),
                     ClientName = "ביבי נתניהו",
                     ClientPhone = "052-3349511",
                     Date = new DateTime(2020,10,20),
