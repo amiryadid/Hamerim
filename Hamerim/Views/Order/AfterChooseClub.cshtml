@@ -10,7 +10,6 @@
     occupiedDates = @Html.Raw(Json.Encode(ViewBag.UnavailableDates));
     occupiedDatesTimes = occupiedDates.map(d => parseInt(d.match(numberPattern)[0]));
 
-
     function noOccupiedDates(date) {
         if (occupiedDatesTimes.includes(date.getTime()) || new Date() > date) {
             return [false, "occupied", "occ"];
@@ -19,6 +18,7 @@
         return [true, "", ""];
     }
 
+    // Allow only numbers in phone num
     (function ($) {
         $.fn.inputFilter = function (inputFilter) {
             return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
@@ -36,6 +36,31 @@
         };
     }(jQuery));
 
+    // Set popular services
+    function getPopularServices(orderMonth) {
+        var popularOpacity = 1;
+        var unpopularOpacity = 0.1;
+        $.ajax({
+            type: "GET",
+            url: "/Order/GetPopularServices",
+            data: { month: orderMonth},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (serviceIds) {
+                $(".popular-services").each(function () {
+                    $(this).css("opacity", unpopularOpacity);
+                })
+
+                $.each(serviceIds, function (i, serviceId) {
+                    $("#popular-" + serviceId).css("opacity", popularOpacity);
+                });
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
     $(document).ready(function () {
         $("#clientPhone").inputFilter(function (value) {
             return /^\d*$/.test(value);    // Allow digits only, using a RegExp
@@ -47,6 +72,7 @@
             onSelect: function () {
                 $("#txtDateTime").val($(this).datepicker({ dateFormat: "mm/dd/yy" }).val());
                 validateInputs();
+                getPopularServices($(this).datepicker('getDate').getMonth() + 1);
             }
         });
 
@@ -128,7 +154,7 @@
                             <span>שם</span><input class="dark-input" type="text" name="clientName" id="clientName" onkeyup="validateInputs();" />
                         </div>
                         <div class="flex flex-row">
-                            <span>טלפון</span><input  class="dark-input" type="text" name="clientPhone" id="clientPhone" maxlength="10" onkeyup="validateInputs();" />
+                            <span>טלפון</span><input class="dark-input" type="text" name="clientPhone" id="clientPhone" maxlength="10" onkeyup="validateInputs();" />
                         </div>
                         <p class="">כדי שאם משהו משתנה, נוכל להישאר בקשר</p>
                     </div>
@@ -148,7 +174,7 @@
                 </div>
             </header>
             <div class="flex contenct">
-                <input type="hidden" id="txtDateTime" name="txtDateTime"/>
+                <input type="hidden" id="txtDateTime" name="txtDateTime" />
                 <div type="text" id="datepicker"></div>
             </div>
         </div>
@@ -161,6 +187,9 @@
                     </div>
                     <div class="arrowUp"></div>
                 </div>
+                <div class="headerLeft">
+                    <span><i class="material-icons managerIcon">star</i>המסומנים בכוכב נבחרו הכי הרבה באותו חודש</span>
+                </div>
             </header>
             <div class="contenct services-list">
                 <ul>
@@ -170,6 +199,7 @@
                         foreach (var service in cat.ServicesInCategory)
                         {
                             <dd class="service-item">
+                                <i class="material-icons managerIcon popular-services" id="popular-@service.Id">star</i>
                                 <label class="container">
                                     <span class="service-item-label">@service.Title</span>
                                     <input type="checkbox" name="serviceIds" value="@service.Id" cost=@service.Cost id="serviceId" onclick="setSumPrice(this)">

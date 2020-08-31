@@ -2,7 +2,6 @@
     padding: 20px;
     flex-wrap: wrap;
     justify-content: space-around;
-    max-height: 71%;
     overflow-y: auto;
 }
 
@@ -22,12 +21,16 @@
     justify-content: space-evenly;
 }
 
-.filter {
-    width: 25%;
+.filters .container {
+    width: auto;
 }
 
 .filters .checkmark {
     top: 9px;
+}
+
+.filter {
+    width: 25%;
 }
 
 .filter {
@@ -68,6 +71,10 @@
     opacity: 0.3;
 }
 
+#table-display { 
+    max-height: 71%;
+}
+
 .card {
     background-color: rgba(107, 107, 107, 0.35);
     color: white;
@@ -106,11 +113,11 @@
     color: #c4c4c4;
 }
 
-#clubs .card {
+#table-display .card {
     margin-bottom: 1.2em;
 }
 
-#choose-club-btn {
+.choose-club-btn {
     color: var(--pink);
     background-color: white;
     filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.8));
@@ -123,9 +130,15 @@
     transition: all 0.2s ease;
 }
 
-#choose-club-btn:hover {
+.choose-club-btn:hover {
     background-color: #e62248;
     color: white;
+}
+
+#myMap {
+    position: relative;
+    width: 100%;
+    height: 375px;
 }
 
 .flex-row {
@@ -195,9 +208,21 @@
     margin-bottom: 7px;
 }
 
+.service-item {
+    display: flex;
+    margin-right: 15px;
+}
+
+.service-item .popular-services {
+    margin-left: 10px;
+    opacity: 0.1;
+    transition: opacity 0.2s ease;
+}
+
 .service-item .service-item-label {
     width: 47%;
     margin-right: 7px;
+    margin-left: 1.5em;
 }
 
 .services-list {
@@ -220,6 +245,10 @@
     height: 100%;
     margin: auto;
     font-size: 22px;
+}
+
+.headerLeft .material-icons {
+    font-size: inherit;
 }
 
 .order-sum .mini-text {
@@ -284,6 +313,10 @@
     margin: 0;
 }
 
+.share p {
+    text-align: center;
+}
+
 /* Checkbox component */
 /* Customize the label (the container) */
 .container {
@@ -294,7 +327,6 @@
     padding-right: 30px;
     font-size: 18px;
     font-weight: normal;
-    width: auto;
     display: flex;
     align-items: center;
 }
