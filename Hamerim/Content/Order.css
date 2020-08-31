@@ -45,7 +45,7 @@
     width: 7em;
 }
 
-#filter-btn {
+#filter-clubs-btn {
     width: 4em;
 }
 
@@ -208,6 +208,29 @@
     margin-bottom: 7px;
 }
 
+#filter-services-row {
+    justify-content: center;
+    margin: 0.7em 0;
+    font-size: 16px;
+}
+
+#filter-services-row span {
+    margin-left: 1em;
+}
+
+.filter-services-btn {
+    width: 45px;
+    height: 24px;
+    margin-right: 1em;
+    font-size: 16px;
+}
+
+.filter-services-btn i {
+    font-size: 18px;
+    position: relative;
+    left: calc(50% - 13.5px);
+}
+
 .service-item {
     display: flex;
     margin-right: 15px;
@@ -226,7 +249,8 @@
 }
 
 .services-list {
-    height: 256.76px;
+    height: 226.76px;
+    padding-top: 0;
 }
 
 .services-list p {

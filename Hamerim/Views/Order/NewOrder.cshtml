@@ -66,24 +66,29 @@
                 success: function (data) {
                     setToTable();
                     $('#table-display').html("");
-                    $.each(data, function (i, club) {
-                        var houseText = club.Address.HouseNumber > 0 ? club.Address.HouseNumber : ""
-                        var address = `${club.Address.City}, ${club.Address.Street} ${houseText}`
-                        var row =
-                            "<div class='flex card'>" +
-                            "<form action='/Order/AfterChooseClub' method='post'>" +
-                            "<div class='card-body'>" +
-                            "<input type='hidden' name='Id' value='" + club.Id + "' />" +
-                            "<p class='card-title'>" + club.Name + "</p>" +
-                            "<p class='card-subtitle'>" + address + "</p>" +
-                            "<p class='card-footer' id='club-cost-" + club.Id + "'>&#8362;" + club.Cost + " לערב</p>" +
-                            "</div>" +
-                            "<button type='submit' class='btn choose-club-btn'>בחרתי!</button>" +
-                            "</form>" +
-                            "</div>"
+                    if (data.length == 0) {
+                        row = "<p>לא נמצאו מועדונים בסינון הזה :(   אולי תנסו משהו אחר</p>"
                         $('#table-display').append(row);
-                        $("#club-cost-" + club.Id).digits();
-                    });
+                    } else {
+                        $.each(data, function (i, club) {
+                            var houseText = club.Address.HouseNumber > 0 ? club.Address.HouseNumber : ""
+                            var address = `${club.Address.City}, ${club.Address.Street} ${houseText}`
+                            var row =
+                                "<div class='flex card'>" +
+                                "<form action='/Order/AfterChooseClub' method='post'>" +
+                                "<div class='card-body'>" +
+                                "<input type='hidden' name='Id' value='" + club.Id + "' />" +
+                                "<p class='card-title'>" + club.Name + "</p>" +
+                                "<p class='card-subtitle'>" + address + "</p>" +
+                                "<p class='card-footer' id='club-cost-" + club.Id + "'>&#8362;" + club.Cost + " לערב</p>" +
+                                "</div>" +
+                                "<button type='submit' class='btn choose-club-btn'>בחרתי!</button>" +
+                                "</form>" +
+                                "</div>"
+                            $('#table-display').append(row);
+                            $("#club-cost-" + club.Id).digits();
+                        });
+                    }
                 },
                 error: function (err) {
                     console.log(err);
@@ -154,7 +159,7 @@
                     </label>
                     <input class="dark-input" type="text" name="filterName" id="filterName" />
                 </div>
-                <button type="button" id="filter-btn" class="btn form-control btn-primary btn-sm" onclick="filter()">סנן</button>
+                <button type="button" id="filter-clubs-btn" class="btn form-control btn-primary btn-sm" onclick="filter()">סנן</button>
             </div>
         </form>
     </div>

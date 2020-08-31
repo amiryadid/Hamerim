@@ -3,9 +3,40 @@
     ViewBag.Title = "AfterChooseClub";
     var chosenClub = ViewBag.chosenClub;
     List<Hamerim.Models.ServiceCategory> serviceCategories = ViewBag.ServiceCategories;
+    var servicesList = new List<Hamerim.Models.Service>();
+
+    foreach (var cat in serviceCategories)
+    {
+        servicesList.AddRange(cat.ServicesInCategory);
+    }
 }
 
 <script>
+    $.fn.digits = function () {
+        return this.each(function () {
+            $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+        })
+    }
+
+    $(document).ready(function () {
+        $("#clientPhone").inputFilter(function (value) {
+            return /^\d*$/.test(value);    // Allow digits only, using a RegExp
+        });
+
+        $("#datepicker").datepicker({
+            beforeShowDay: noOccupiedDates,
+            minDate: new Date(),
+            onSelect: function () {
+                $("#txtDateTime").val($(this).datepicker({ dateFormat: "mm/dd/yy" }).val());
+                validateInputs();
+                getPopularServices($(this).datepicker('getDate').getMonth() + 1);
+            }
+        });
+
+        validateInputs();
+        setSumPrice();
+    });
+
     var numberPattern = /\d+/g;
     occupiedDates = @Html.Raw(Json.Encode(ViewBag.UnavailableDates));
     occupiedDatesTimes = occupiedDates.map(d => parseInt(d.match(numberPattern)[0]));
@@ -36,50 +67,6 @@
         };
     }(jQuery));
 
-    // Set popular services
-    function getPopularServices(orderMonth) {
-        var popularOpacity = 1;
-        var unpopularOpacity = 0.1;
-        $.ajax({
-            type: "GET",
-            url: "/Order/GetPopularServices",
-            data: { month: orderMonth},
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (serviceIds) {
-                $(".popular-services").each(function () {
-                    $(this).css("opacity", unpopularOpacity);
-                })
-
-                $.each(serviceIds, function (i, serviceId) {
-                    $("#popular-" + serviceId).css("opacity", popularOpacity);
-                });
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    $(document).ready(function () {
-        $("#clientPhone").inputFilter(function (value) {
-            return /^\d*$/.test(value);    // Allow digits only, using a RegExp
-        });
-
-        $("#datepicker").datepicker({
-            beforeShowDay: noOccupiedDates,
-            minDate: new Date(),
-            onSelect: function () {
-                $("#txtDateTime").val($(this).datepicker({ dateFormat: "mm/dd/yy" }).val());
-                validateInputs();
-                getPopularServices($(this).datepicker('getDate').getMonth() + 1);
-            }
-        });
-
-        validateInputs();
-        setSumPrice();
-    });
-
     function validateInputs() {
         var clientName = $('#clientName').val();
         var clientPhone = $('#clientPhone').val();
@@ -90,12 +77,6 @@
         } else {
             $('#done-btn').attr("disabled", true);
         }
-    }
-
-    $.fn.digits = function () {
-        return this.each(function () {
-            $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-        })
     }
 
     function setSumPrice(service) {
@@ -111,6 +92,124 @@
 
         $("#sum-cost").html(sumPrice);
         $("#sum-cost").digits();
+    }
+
+    var popularServicesIds = []
+
+    // Get popular services from server
+    function getPopularServices(orderMonth) {
+        $.ajax({
+            type: "GET",
+            url: "/Order/GetPopularServices",
+            data: { month: orderMonth },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (serviceIds) {
+                popularServicesIds = serviceIds;
+                setPopularServices();
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    function setPopularServices() {
+        var popularOpacity = 1;
+        var unpopularOpacity = 0.1;
+
+        $(".popular-services").each(function () {
+            $(this).css("opacity", unpopularOpacity);
+        })
+
+        $.each(popularServicesIds, function (i, serviceId) {
+            $("#popular-" + serviceId).css("opacity", popularOpacity);
+        });
+    }
+
+    // Filter services
+
+    var servicesJsons = [];
+
+    @foreach (var service in servicesList)
+    {
+        @:servicesJsons.push({
+            @:id:@service.Id,
+            @:title:"@service.Title",
+            @:cost:@service.Cost,
+            @:category: {
+                @:id:@service.Category.Id,
+                @:name:"@service.Category.Title"
+            @:}
+        @:})
+    }
+
+    var groupedServices = servicesJsons.reduce((groupsList, service) => {
+        if(groupsList[service.category.id] != null)
+            groupsList[service.category.id].services.push(service)
+        else
+            groupsList[service.category.id] = {
+                category: service.category,
+                services: [service]
+            }
+
+        return groupsList
+    }, [])
+
+    function filterServices() {
+        var filter = $('#filter-services')[0].value;
+
+        $('#services-list').html("");
+
+        $.each(groupedServices, function (index, cat) {
+            if (cat) {
+                var catHtml = '<dt class="service-cat">' + cat.category.name + '</dt>';
+                var servicesInCatHtml = '';
+                $.each(cat.services, function (index, service) {
+                    if (service.title.indexOf(filter) >= 0) {
+                        servicesInCatHtml = servicesInCatHtml + '<dd class="service-item">' +
+                            '<i class="material-icons managerIcon popular-services" id="popular-' + service.id + '">star</i>' +
+                            '<label class="container">' +
+                            '<span class="service-item-label">' + service.title + '</span>' +
+                            '<input type="checkbox" name="serviceIds" value="' + service.id + '" cost=' + service.cost + ' id="service-' + service.id + '" onclick="setSumPrice(this); updateMarkedServices(this);">' +
+                            '<span class="checkmark"></span>' +
+                            '<span class="service-cost">&#8362;' + service.cost + '</span>' +
+                            '</label>' +
+                            '</dd>'
+                    }
+                });
+
+                $('#services-list').append(catHtml);
+                $('#services-list').append(servicesInCatHtml);
+            }
+        });
+
+        $(".service-cost").digits();
+        setPopularServices();
+        restoreMarkedServices();
+    }
+
+    function stopFilterServices() {
+        $('#filter-services')[0].value = "";
+        filterServices();
+    }
+
+    var markedServices = [];
+
+    function updateMarkedServices(service) {
+        if (markedServices.indexOf(service.value) >= 0) {
+            markedServices.splice(markedServices.indexOf(service.value), 1);
+        } else {
+            markedServices.push(service.value);
+        }
+    }
+
+    function restoreMarkedServices() {
+        $.each(markedServices, function (index, serviceId) {
+            if ($("#service-" + serviceId)[0]) {
+                $("#service-" + serviceId)[0].checked = true;
+            }
+        });
     }
 </script>
 
@@ -151,10 +250,10 @@
                 <div class="flex card client-details-card">
                     <div class="card-body client-details">
                         <div class="flex flex-row">
-                            <span>שם</span><input class="dark-input" type="text" name="clientName" id="clientName" onkeyup="validateInputs();" />
+                            <span>*שם</span><input class="dark-input" type="text" name="clientName" id="clientName" onkeyup="validateInputs();" />
                         </div>
                         <div class="flex flex-row">
-                            <span>טלפון</span><input class="dark-input" type="text" name="clientPhone" id="clientPhone" maxlength="10" onkeyup="validateInputs();" />
+                            <span>*טלפון</span><input class="dark-input" type="text" name="clientPhone" id="clientPhone" maxlength="10" onkeyup="validateInputs();" />
                         </div>
                         <p class="">כדי שאם משהו משתנה, נוכל להישאר בקשר</p>
                     </div>
@@ -191,8 +290,18 @@
                     <span><i class="material-icons managerIcon">star</i>המסומנים בכוכב נבחרו הכי הרבה באותו חודש</span>
                 </div>
             </header>
+            <div class="flex flex-row" id="filter-services-row">
+                <span>סינון לפי שם</span>
+                <input class="dark-input" type="text" id="filter-services" />
+                <button type="button" class="btn form-control btn-primary btn-sm filter-services-btn" onclick="filterServices()">
+                    <i class="material-icons managerIcon">arrow_back_ios</i>
+                </button>
+                <button type="button" class="btn form-control btn-primary btn-sm filter-services-btn" onclick="stopFilterServices()">
+                    <i class="material-icons managerIcon">clear</i>
+                </button>
+            </div>
             <div class="contenct services-list">
-                <ul>
+                <ul id="services-list">
                     @foreach (var cat in serviceCategories)
                     {
                         <dt class="service-cat">@cat.Title</dt>
@@ -202,7 +311,7 @@
                                 <i class="material-icons managerIcon popular-services" id="popular-@service.Id">star</i>
                                 <label class="container">
                                     <span class="service-item-label">@service.Title</span>
-                                    <input type="checkbox" name="serviceIds" value="@service.Id" cost=@service.Cost id="serviceId" onclick="setSumPrice(this)">
+                                    <input type="checkbox" name="serviceIds" value="@service.Id" cost=@service.Cost id="service-@service.Id" onclick="setSumPrice(this); updateMarkedServices(this);">
                                     <span class="checkmark"></span>
                                     <span class="">&#8362;@String.Format("{0:n0}", service.Cost)</span>
                                 </label>
