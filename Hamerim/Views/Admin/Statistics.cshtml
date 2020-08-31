@@ -37,11 +37,11 @@
 
     function createGraph(data, isMonth, id) {
         var margin = { top: 40, right: 40, bottom: 170, left: 40 },
-                width = 800,
+                width = 1000,
                 height = 300;
 
             //set the ranges
-            var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+            var x = d3.scale.ordinal().rangePoints([0, width]);
             var y = d3.scale.linear().range([height, 0, 1]);
             var maxY = d3.max(data, function (d) { return d.AmountOfOrders; });
             var xAxis = d3.svg.axis()

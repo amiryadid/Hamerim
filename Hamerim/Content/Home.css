@@ -51,6 +51,7 @@
 
 .roundedImg {
     border-radius: 96.5px 96.5px 96.5px 0px;
+    object-fit: cover;
 }
 
 .imgContainer {

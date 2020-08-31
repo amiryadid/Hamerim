@@ -11,14 +11,15 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body onload="draw()">
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
     <nav class="mynavbar">
         <a href="/Home/Index" class="mytab">
-            <img class="logoImg" src="~/Content/logo.png" />
+            <canvas id="myCanvas" width="120" height="80"></canvas>
+            @* <img class="logoImg" src="~/Content/logo.png" /> *@
         </a>
         <a href="/Order/NewOrder" class="mytab">הזמן מקום</a>
         <a href="/Order/ViewOrder" class="mytab">ההזמנות שלי</a>
@@ -31,4 +32,16 @@
         @RenderBody()
     </div>
 </body>
+<script>
+    function draw() {
+        var ctx = document.getElementById('myCanvas').getContext('2d');
+        var img = new Image();
+        img.src = "/Content/logo.png";
+        img.setAttribute("class","logoImg");
+        img.onload = function() {
+            ctx.drawImage(img, 0, 0, 120, 80);
+                ctx.stroke();
+        };
+}
+</script>
 </html>

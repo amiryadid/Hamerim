@@ -59,6 +59,10 @@
     background-color: #bf1637;
 }
 
+.btn-primary:focus {
+    background-color: #bf1637;
+}
+
 .btn-primary:disabled {
     background-color: var(--pink);
     opacity: 0.3;
