@@ -5,12 +5,29 @@
 }
 
 <script>
+    function setToTable() {
+        $("#map-display")[0].style.display = "none";
+        $("#table-display")[0].style.display = "flex";
+        $("#switcher-display")[0].checked = false;
+    }
+
+    function removeAllFilters() {
+        document.forms["filters"]["checkMaxCost"].checked = false;
+        document.forms["filters"]["checkCity"].checked = false;
+        document.forms["filters"]["checkName"].checked = false;
+    }
+
     $(document).ready(function () {
+        setToTable();
+
         $("#switcher-display").click(function () {
             if ($("#switcher-display")[0].checked == true) {
+                // To map
                 $("#map-display")[0].style.display = "flex";
                 $("#table-display")[0].style.display = "none";
+                removeAllFilters();
             } else {
+                // To table
                 $("#map-display")[0].style.display = "none";
                 $("#table-display")[0].style.display = "flex";
             }
@@ -47,7 +64,8 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                    $('#clubs').html("");
+                    setToTable();
+                    $('#table-display').html("");
                     $.each(data, function (i, club) {
                         var houseText = club.Address.HouseNumber > 0 ? club.Address.HouseNumber : ""
                         var address = `${club.Address.City}, ${club.Address.Street} ${houseText}`
@@ -60,10 +78,10 @@
                             "<p class='card-subtitle'>" + address + "</p>" +
                             "<p class='card-footer' id='club-cost-" + club.Id + "'>&#8362;" + club.Cost + " לערב</p>" +
                             "</div>" +
-                            "<button type='submit' id='choose-club-btn' class='btn'>בחרתי!</button>" +
+                            "<button type='submit' class='btn choose-club-btn'>בחרתי!</button>" +
                             "</form>" +
                             "</div>"
-                        $('#clubs').append(row);
+                        $('#table-display').append(row);
                         $("#club-cost-" + club.Id).digits();
                     });
                 },
