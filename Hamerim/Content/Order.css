@@ -280,6 +280,10 @@
     margin: 0;
 }
 
+.share p {
+    text-align: center;
+}
+
 /* Checkbox component */
 /* Customize the label (the container) */
 .container {

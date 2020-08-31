@@ -35,17 +35,34 @@
         if(groupsList[service.category.id] != null)
             groupsList[service.category.id].services.push(service)
         else
-            groupsList[service.category.id] = { 
+            groupsList[service.category.id] = {
                 category: service.category,
                 services: [service]
             }
-        
+
         return groupsList
     }, [])
 
     $(document).ready(function () {
         $("#tweetButton").attr("data-text", twitterText);
         setSumPrice();
+        $.each(groupedServices, function (index, cat) {
+            if (cat) {
+                var catHtml = '<dt class="service-cat">' + cat.category.name + '</dt>';
+                var servicesInCatHtml = '';
+                $.each(cat.services, function (index, service) {
+                    servicesInCatHtml = servicesInCatHtml + '<dd class="service-item">' +
+                        '<span class="service-item-label">' + service.title + '</span>' +
+                        '<span class="service-cost">&#8362;' + service.cost + '</span>' +
+                        '</dd>';
+
+                });
+
+                $('#services-list').append(catHtml);
+                $('#services-list').append(servicesInCatHtml);
+                $(".service-cost").digits();
+            }
+        });
     });
 
     $.fn.digits = function () {
@@ -93,18 +110,12 @@
                 <div class="contenct services-list">
                     @if (services.Count == 0)
                     {
-                        <p> אין תוספות במסיבה הזאת</p>
+                        <p> אין תוספות במסיבה הזאת :(</p>
                     }
                     else
                     {
-                        <ul>
-                            @foreach (var service in services)
-                            {
-                                <dd class="service-item">
-                                    <span class="service-item-label">@service.Title</span>
-                                    <span class="">&#8362;@String.Format("{0:n0}", service.Cost)</span>
-                                </dd>
-                            }
+                        <ul id="services-list">
+                            @* Add categories and services in JQuery *@
                         </ul>
                     }
                 </div>
@@ -167,10 +178,14 @@
                         לגזור ולשמור! </br>
                         תצטרכו את קוד ההזמנה כדי לחזור לכאן
                     </p>
-                    <p>
-                        <a id="tweetButton" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="" data-lang="he" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    </p>
                 </div>
+            </div>
+            <div class="share">
+                <p>מוזמנים לשתף!</p>
+                <p>
+                    <a id="tweetButton" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="" data-lang="he" data-show-count="false">Tweet</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </p>
             </div>
         </div>
     </div>
