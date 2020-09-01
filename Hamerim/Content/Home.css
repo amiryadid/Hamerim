@@ -10,6 +10,9 @@
     font-size: 49px;
     line-height: 1;
     text-shadow: black 2px 2px;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 
 .homeContainer {
