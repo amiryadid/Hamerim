@@ -9,6 +9,7 @@
     height: 200px;
     font-size: 49px;
     line-height: 1;
+    text-shadow: black 2px 2px;
 }
 
 .homeContainer {
@@ -71,4 +72,10 @@
 
 .images {
     justify-content: space-around;
+}
+
+.multipleCoulmn { 
+    column-count: 2;
+    column-rule-style: solid;
+    column-rule-width: 1px;
 }
